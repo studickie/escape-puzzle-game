@@ -1,0 +1,34 @@
+html {
+    font-size: 125%;
+    // 1rem = 20px
+}
+
+.game-board {
+    width: 45rem;
+    height: 45rem;
+    border: 2px solid red;
+    position: relative;
+}
+
+.game-board-block {
+    background-color: #DDD;
+    border: 1px dashed rgba(0,0,0,0.25);
+    width: 5rem;
+    height: 5rem;
+    position: absolute;
+}
+
+.game-board-border {
+    background-color: #343434;
+    border: 1px solid rgb(0,0,0);
+    width: 5rem;
+    height: 5rem;
+    position: absolute;
+}
+
+.player {
+    background-color: #00F;
+    width: 5rem;
+    height: 5rem;
+    position: absolute;
+}
