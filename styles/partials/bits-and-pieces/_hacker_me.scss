@@ -1,0 +1,29 @@
+// Pixel art examples explored at https://css-tricks.com/fun-times-css-pixel-art/ -> author credit: Geoff Graham
+
+.player-container {
+    width: 20rem;
+    height: 20rem;
+    background-color: lightgrey;
+    position: relative;
+    top: 50px;
+    left: 40%;
+}
+
+// each pixel takes up 1.5rem
+
+.player {
+    position: absolute;
+    top: 0;
+    // determines dimensions of pixels
+    // percentage based so it changes with container dimensions
+    height: 7.5%;
+    width: 7.5%;
+
+    box-shadow:
+        7.75rem 1rem 0 green,
+        9.25rem 1rem 0 red,
+        10.75rem 1rem 0 green
+        
+
+    ;
+}

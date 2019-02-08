@@ -14,7 +14,6 @@ let gameGrid =
     ];
 
 $(document).keydown(function(event){
-
     // pass event to directionSelection() whcih determines movement direction
     directionSelection(event.which);
     // after player position value has been modified, render gameGrid in DOM

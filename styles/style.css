@@ -196,11 +196,22 @@ html {
   position: absolute;
 }
 
+.player-container {
+  width: 20rem;
+  height: 20rem;
+  background-color: lightgrey;
+  position: relative;
+  top: 50px;
+  left: 40%;
+}
+
 .player {
-  background-color: #00F;
-  width: 5rem;
-  height: 5rem;
   position: absolute;
+  top: 0;
+  height: 7.5%;
+  width: 7.5%;
+  -webkit-box-shadow: 7.75rem 1rem 0 green, 9.25rem 1rem 0 red, 10.75rem 1rem 0 green;
+          box-shadow: 7.75rem 1rem 0 green, 9.25rem 1rem 0 red, 10.75rem 1rem 0 green;
 }
 
 .hacker-chip-container {
