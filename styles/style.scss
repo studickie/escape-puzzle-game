@@ -1,5 +1,9 @@
 // Global Styles
 @import "partials/globals/setup.scss";
+@import "partials/globals/global.scss";
 
 // Page Styles
 @import "partials/site-pages/index.scss";
+
+// Bits & Pieces Styles
+@import "partials/bits-and-pieces/hacker-chip.scss";

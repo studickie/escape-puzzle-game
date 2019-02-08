@@ -17,13 +17,14 @@ $(document).keydown(function(event){
 
     // pass event to directionSelection() whcih determines movement direction
     directionSelection(event.which);
-    // after player position value has been modified, render gameGrid to DOM
+    // after player position value has been modified, render gameGrid in DOM
     renderGameBoard(gameGrid);
 });
 
+// receive event.which, route direction value accordingly
 const directionSelection = function(direction) {
 
-    //  pass the direction value to movePlayer() according to keypress
+    // pass the direction value to movePlayer() according to keypress
     if(direction === 38){
         movePlayer("up");
 
@@ -41,19 +42,15 @@ const directionSelection = function(direction) {
 // locate the player value in gameGrid
 const findPlayerPosition = function() {
 
-    const indexY = gameGrid.findIndex(function(spaceY){
-        return spaceY.includes("player");
-    });
+    const indexY = gameGrid.findIndex(spaceY => spaceY.includes("player"));
 
-    const indexX = gameGrid[indexY].findIndex(function(spaceX){
-        return spaceX.includes("player");
-    });
+    const indexX = gameGrid[indexY].findIndex(spaceX => spaceX.includes("player"));
 
-    // return player position to caller in the form of co-ordinates
+    // return player position to caller in the form of co-ordinates; Y, X
     return [indexY, indexX];
 };
 
-
+// move player value in gameGrid 
 const movePlayer = function(direction) {
 
     const index = findPlayerPosition();
@@ -93,13 +90,13 @@ const renderGameBoard = function(array) {
                 $("<div/>").addClass("game-board-border")
                 .css(`left`, `${5 * indexX}rem`)
                 .css(`top`, `${5 * indexY}rem`)
-                .appendTo(".gameBoard")
+                .appendTo(".game-board")
 
             } else if (spaceX === "-"){
                 $("<div/>").addClass("game-board-block")
                 .css(`left`, `${5 * indexX}rem`)
                 .css(`top`, `${5 * indexY}rem`)
-                .appendTo(".gameBoard")
+                .appendTo(".game-board")
 
             } else if (spaceX === "player"){
                 $("<div/>").addClass("player")
@@ -109,5 +106,4 @@ const renderGameBoard = function(array) {
             }
         })
     });
-
 }

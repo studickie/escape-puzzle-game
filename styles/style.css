@@ -169,14 +169,22 @@ html {
   font-size: 125%;
 }
 
-.gameBoard {
+body {
+  background-color: aqua;
+}
+
+html {
+  font-size: 125%;
+}
+
+.game-board {
   width: 45rem;
   height: 45rem;
   border: 2px solid red;
   position: relative;
 }
 
-.gameBoardBlock {
+.game-board-block {
   background-color: #DDD;
   border: 1px dashed rgba(0, 0, 0, 0.25);
   width: 5rem;
@@ -184,7 +192,7 @@ html {
   position: absolute;
 }
 
-.gameBoardBorder {
+.game-board-border {
   background-color: #343434;
   border: 1px solid black;
   width: 5rem;
@@ -197,5 +205,67 @@ html {
   width: 5rem;
   height: 5rem;
   position: absolute;
+}
+
+.hacker-chip-container {
+  width: 10.5rem;
+  height: 10.5rem;
+  background-color: #E20016;
+  position: relative;
+  top: 50px;
+  left: 40%;
+  -webkit-animation: hacker-chip-bounce 1.6s ease-in-out infinite;
+          animation: hacker-chip-bounce 1.6s ease-in-out infinite;
+}
+
+.hacker-chip {
+  position: absolute;
+  top: 0;
+  height: 14.3%;
+  width: 14.3%;
+  -webkit-box-shadow: 1.5rem 1.5rem 0 #FCFCFC, 3rem 3rem 0 #FCFCFC, 4.5rem 4.5rem 0 #FCFCFC, 3rem 6rem 0 #FCFCFC, 1.5rem 7.5rem 0 #FCFCFC, 4.5rem 6.25rem 0 #E20016, 6rem 6.25rem 0 #E20016, 7.5rem 6.25rem 0 #E20016, 4.5rem 7.5rem 0 #FCFCFC, 6rem 7.5rem 0 #FCFCFC, 7.5rem 7.5rem 0 #FCFCFC;
+          box-shadow: 1.5rem 1.5rem 0 #FCFCFC, 3rem 3rem 0 #FCFCFC, 4.5rem 4.5rem 0 #FCFCFC, 3rem 6rem 0 #FCFCFC, 1.5rem 7.5rem 0 #FCFCFC, 4.5rem 6.25rem 0 #E20016, 6rem 6.25rem 0 #E20016, 7.5rem 6.25rem 0 #E20016, 4.5rem 7.5rem 0 #FCFCFC, 6rem 7.5rem 0 #FCFCFC, 7.5rem 7.5rem 0 #FCFCFC;
+}
+
+@-webkit-keyframes hacker-chip-bounce {
+  0% {
+    -webkit-transform: translateY(0rem);
+            transform: translateY(0rem);
+    -webkit-box-shadow: 0 0 1.5rem 1rem #eee;
+            box-shadow: 0 0 1.5rem 1rem #eee;
+  }
+  50% {
+    -webkit-transform: translateY(-1rem);
+            transform: translateY(-1rem);
+    -webkit-box-shadow: 0 0 2rem 1.5rem #eee;
+            box-shadow: 0 0 2rem 1.5rem #eee;
+  }
+  100% {
+    -webkit-transform: translateY(0rem);
+            transform: translateY(0rem);
+    -webkit-box-shadow: 0 0 1.5rem 1rem #eee;
+            box-shadow: 0 0 1.5rem 1rem #eee;
+  }
+}
+
+@keyframes hacker-chip-bounce {
+  0% {
+    -webkit-transform: translateY(0rem);
+            transform: translateY(0rem);
+    -webkit-box-shadow: 0 0 1.5rem 1rem #eee;
+            box-shadow: 0 0 1.5rem 1rem #eee;
+  }
+  50% {
+    -webkit-transform: translateY(-1rem);
+            transform: translateY(-1rem);
+    -webkit-box-shadow: 0 0 2rem 1.5rem #eee;
+            box-shadow: 0 0 2rem 1.5rem #eee;
+  }
+  100% {
+    -webkit-transform: translateY(0rem);
+            transform: translateY(0rem);
+    -webkit-box-shadow: 0 0 1.5rem 1rem #eee;
+            box-shadow: 0 0 1.5rem 1rem #eee;
+  }
 }
 /*# sourceMappingURL=style.css.map */

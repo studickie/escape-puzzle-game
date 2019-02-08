@@ -1,0 +1,56 @@
+// Pixel art examples explored at https://css-tricks.com/fun-times-css-pixel-art/ -> author credit: Geoff Graham
+
+// HackerYou red -> #E20016 , rgb(226,0,22);
+
+$hacker-red: #E20016;
+$hacker-white: #FCFCFC;
+
+.hacker-chip-container {
+    width: 10.5rem;
+    height: 10.5rem;
+    background-color: $hacker-red;
+    position: relative;
+    top: 50px;
+    left: 40%;
+    animation: hacker-chip-bounce 1.6s ease-in-out infinite;
+}
+
+// SIZING //
+// ------ //
+
+// container sizing: 10.5rem -> 210px
+// pixel sizing: 14.3% size of container
+
+.hacker-chip {
+    position: absolute;
+    top: 0;
+    // determins dimensions of pixels
+    height: 14.3%;
+    width: 14.3%;
+
+    box-shadow: 
+        // arrow head
+        1.5rem 1.5rem 0 $hacker-white,
+        3rem 3rem 0 $hacker-white,
+        4.5rem 4.5rem 0 $hacker-white,
+        3rem 6rem 0 $hacker-white,
+        1.5rem 7.5rem 0 $hacker-white,
+        // bottom line mask
+        4.5rem 6.25rem 0 $hacker-red,
+        6rem 6.25rem 0 $hacker-red,
+        7.5rem 6.25rem 0 $hacker-red,
+        // bottom line
+        4.5rem 7.5rem 0 $hacker-white,
+        6rem 7.5rem 0 $hacker-white,
+        7.5rem 7.5rem 0 $hacker-white;
+}
+
+// hacker-chip animation
+@keyframes hacker-chip-bounce {
+    0%{ transform: translateY(0rem);
+        box-shadow: 0 0 1.5rem 1rem #eee}
+    50%{ transform: translateY(-1rem);
+        box-shadow: 0 0 2rem 1.5rem #eee}
+    100%{ transform: translateY(0rem);
+        box-shadow: 0 0 1.5rem 1rem #eee}
+}
