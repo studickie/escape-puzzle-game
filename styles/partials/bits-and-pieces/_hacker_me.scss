@@ -1,17 +1,15 @@
 // Pixel art examples explored at https://css-tricks.com/fun-times-css-pixel-art/ -> author credit: Geoff Graham
 
+// a way to remove container and use just .player class??
 .player-container {
     // sets proper font size for accurate game piece rendering 
     // change piece size here if needed
-    font-size: 0.21rem;
-    width: 24em;
-    height: 24em;
+    font-size: 0.2rem;
+    width: 25em;
+    height: 25em;
     position: relative;
     background-color: $hacker-empty-block;
 }
-
-// at 24 x 24em each pixel is 1.5 x 1.5em 
-// creates 16 x 16 pixel grid
 
 .player {
     position: absolute;
@@ -22,7 +20,7 @@
     width: 6.25%;
 
     box-shadow:
-    // layers run horizontal, left to right, top to bottom
+    // layers lay horizontal, run left to right, stack top to bottom
     // values must be "em" for proper piece resizing
 
     // layer 1 - start head

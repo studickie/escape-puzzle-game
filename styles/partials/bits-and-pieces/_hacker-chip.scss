@@ -3,18 +3,13 @@
 .hacker-chip-container {
     // sets proper font size for accurate game piece rendering 
     // change piece size here if needed
-    font-size: 1rem;
-    width: 24rem;
-    height: 24rem;
+    font-size: 0.1rem;
+    width: 25em;
+    height: 25em;
     background-color: $hacker-red;
     position: relative;
-    top: 150px;
-    left: 40%;
     // animation: hacker-chip-bounce 1.6s ease-in-out infinite;
 }
-
-// at 24 x 24rem each pixel is 3 x 3rem 
-// creates 8 x 8 pixel grid
 
 .hacker-chip {
     position: absolute;
@@ -25,20 +20,25 @@
     width: 12.5%;
 
     box-shadow: 
-        // arrow head
-        1.5em 1.5em 0 $hacker-white,
-        3em 3em 0 $hacker-white,
+    // layers lay horizontal, run left to right, stack top to bottom
+    // values must be "em" for proper piece resizing
+
+    // arrow head
         4.5em 4.5em 0 $hacker-white,
-        3em 6em 0 $hacker-white,
-        1.5em 7.5em 0 $hacker-white,
-        // bottom line mask
-        4.5em 6.25em 0 $hacker-red,
-        6em 6.25em 0 $hacker-red,
-        7.5em 6.25em 0 $hacker-red,
-        // bottom line
-        4.5em 7.5em 0 $hacker-white,
-        6em 7.5em 0 $hacker-white,
-        7.5em 7.5em 0 $hacker-white;
+        7.5em 7.5em 0 $hacker-white,
+        10.5em 10.5em 0 $hacker-white,
+        7.5em 13.5em 0 $hacker-white,
+        4.5em 16.5em 0 $hacker-white,
+
+    // bottom line mask
+        10.5em 14em 0 $hacker-red,
+        13.5em 14em 0 $hacker-red,
+        16.5em 14em 0 $hacker-red,
+
+    // bottom line
+        10.5em 16.5em 0 $hacker-white,
+        13.5em 16.5em 0 $hacker-white,
+        16.5em 16.5em 0 $hacker-white;
 }
 
 // hacker-chip animation

@@ -98,13 +98,13 @@ const renderGameBoard = function(array) {
                 .appendTo(".game-board")
 
             } else if (spaceX === "player"){
-                let $newPlayerDiv = $("<div/>").addClass("player-container")
+                let $playerDiv = $("<div/>").addClass("player-container")
                     .css(`left`, `${5 * indexX}rem`)
                     .css(`top`, `${5 * indexY}rem`)
 
-                $("<div/>").addClass("player").appendTo($newPlayerDiv);
+                $("<div/>").addClass("player").appendTo($playerDiv);
 
-                $newPlayerDiv.appendTo(".game-board")
+                $playerDiv.appendTo(".game-board")
             }
         })
     });

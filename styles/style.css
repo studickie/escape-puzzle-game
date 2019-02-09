@@ -197,9 +197,9 @@ html {
 }
 
 .player-container {
-  font-size: 0.21rem;
-  width: 24em;
-  height: 24em;
+  font-size: 0.2rem;
+  width: 25em;
+  height: 25em;
   position: relative;
   background-color: #DDD;
 }
@@ -214,13 +214,11 @@ html {
 }
 
 .hacker-chip-container {
-  font-size: 1rem;
-  width: 24rem;
-  height: 24rem;
+  font-size: 0.1rem;
+  width: 25em;
+  height: 25em;
   background-color: #E20016;
   position: relative;
-  top: 150px;
-  left: 40%;
 }
 
 .hacker-chip {
@@ -228,8 +226,8 @@ html {
   top: 0;
   height: 12.5%;
   width: 12.5%;
-  -webkit-box-shadow: 1.5em 1.5em 0 #FCFCFC, 3em 3em 0 #FCFCFC, 4.5em 4.5em 0 #FCFCFC, 3em 6em 0 #FCFCFC, 1.5em 7.5em 0 #FCFCFC, 4.5em 6.25em 0 #E20016, 6em 6.25em 0 #E20016, 7.5em 6.25em 0 #E20016, 4.5em 7.5em 0 #FCFCFC, 6em 7.5em 0 #FCFCFC, 7.5em 7.5em 0 #FCFCFC;
-          box-shadow: 1.5em 1.5em 0 #FCFCFC, 3em 3em 0 #FCFCFC, 4.5em 4.5em 0 #FCFCFC, 3em 6em 0 #FCFCFC, 1.5em 7.5em 0 #FCFCFC, 4.5em 6.25em 0 #E20016, 6em 6.25em 0 #E20016, 7.5em 6.25em 0 #E20016, 4.5em 7.5em 0 #FCFCFC, 6em 7.5em 0 #FCFCFC, 7.5em 7.5em 0 #FCFCFC;
+  -webkit-box-shadow: 4.5em 4.5em 0 #FCFCFC, 7.5em 7.5em 0 #FCFCFC, 10.5em 10.5em 0 #FCFCFC, 7.5em 13.5em 0 #FCFCFC, 4.5em 16.5em 0 #FCFCFC, 10.5em 14em 0 #E20016, 13.5em 14em 0 #E20016, 16.5em 14em 0 #E20016, 10.5em 16.5em 0 #FCFCFC, 13.5em 16.5em 0 #FCFCFC, 16.5em 16.5em 0 #FCFCFC;
+          box-shadow: 4.5em 4.5em 0 #FCFCFC, 7.5em 7.5em 0 #FCFCFC, 10.5em 10.5em 0 #FCFCFC, 7.5em 13.5em 0 #FCFCFC, 4.5em 16.5em 0 #FCFCFC, 10.5em 14em 0 #E20016, 13.5em 14em 0 #E20016, 16.5em 14em 0 #E20016, 10.5em 16.5em 0 #FCFCFC, 13.5em 16.5em 0 #FCFCFC, 16.5em 16.5em 0 #FCFCFC;
 }
 
 @-webkit-keyframes hacker-chip-bounce {
