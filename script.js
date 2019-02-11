@@ -1,23 +1,34 @@
 // keycodes -> up: 38; down: 40; left: 37; right: 39
 
-let gameGrid = 
-    [
-        ["/","/","/","/","/","/","/","/","/"],
-        ["/","-","-","-","-","-","-","-","/"],
-        ["/","-","-","-","-","-","-","-","/"],
-        ["/","-","-","-","-","-","-","-","/"],
-        ["/","-","-","-","player","-","-","-","/"],
-        ["/","-","-","-","-","-","-","-","/"],
-        ["/","-","-","-","-","-","-","-","/"],
-        ["/","-","hkrchp","-","-","-","-","-","/"],
-        ["/","/","/","/","/","/","/","/","/"],
-    ];
+let game = {
+    gameGrid:
+        [
+            ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
+            ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
+            ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
+            ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
+            ["/", "-", "-", "-", "player", "-", "-", "-", "/"],
+            ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
+            ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
+            ["/", "-", "hkrchp", "-", "-", "-", "-", "-", "/"],
+            ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
+        ],
+
+    player: {
+        hackerChips: 0,
+        keys: {
+            red: false,
+            green: false,
+            blue: false
+        }
+    }
+};
 
 $(document).keydown(function(event){
     // pass event to directionSelection() whcih determines movement direction
     directionSelection(event.which);
     // after player position value has been modified, render gameGrid in DOM
-    renderGameBoard(gameGrid);
+    renderGameBoard(game["gameGrid"]);
 });
 
 // receive event.which, route direction value accordingly
@@ -25,21 +36,21 @@ const directionSelection = function(direction) {
 
     // pass the direction value to movePlayer() according to keypress
     if(direction === 38){
-        movePlayer("up");
+        movePlayer("up", game["gameGrid"]);
 
     } else if (direction === 40){
-        movePlayer("down");
+        movePlayer("down", game["gameGrid"]);
 
     } else if (direction === 37){
-        movePlayer("left");
+        movePlayer("left", game["gameGrid"]);
             
     } else if (direction === 39){
-        movePlayer("right");
+        movePlayer("right", game["gameGrid"]);
     };
 }
 
 // locate the player value in gameGrid
-const findPlayerPosition = function() {
+const findPlayerPosition = function(gameGrid) {
 
     const indexY = gameGrid.findIndex(spaceY => spaceY.includes("player"));
 
@@ -50,9 +61,9 @@ const findPlayerPosition = function() {
 };
 
 // move player value in gameGrid 
-const movePlayer = function(direction) {
+const movePlayer = function(direction, gameGrid) {
 
-    const index = findPlayerPosition();
+    const index = findPlayerPosition(gameGrid);
 
     const indexY = index[0];
     const indexX = index[1];
