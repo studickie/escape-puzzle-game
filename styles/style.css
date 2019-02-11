@@ -218,7 +218,10 @@ html {
   width: 25em;
   height: 25em;
   background-color: #E20016;
-  position: relative;
+  position: absolute;
+  margin: 2.75%;
+  -webkit-box-shadow: -1.25rem 1.25rem 0 #DDD, 1.25rem 1.25rem 0 #DDD, 1.25rem -1.25rem 0 #DDD, -1.25rem -1.25rem 0 #DDD;
+          box-shadow: -1.25rem 1.25rem 0 #DDD, 1.25rem 1.25rem 0 #DDD, 1.25rem -1.25rem 0 #DDD, -1.25rem -1.25rem 0 #DDD;
 }
 
 .hacker-chip {

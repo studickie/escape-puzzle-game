@@ -7,8 +7,13 @@
     width: 25em;
     height: 25em;
     background-color: $hacker-red;
-    position: relative;
+    position: absolute;
     // animation: hacker-chip-bounce 1.6s ease-in-out infinite;
+    margin: 2.75%; 
+    box-shadow: -1.25rem 1.25rem 0 $hacker-empty-block,
+        1.25rem 1.25rem 0 $hacker-empty-block,
+        1.25rem -1.25rem 0 $hacker-empty-block,
+        -1.25rem -1.25rem 0 $hacker-empty-block;
 }
 
 .hacker-chip {

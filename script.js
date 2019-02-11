@@ -9,7 +9,7 @@ let gameGrid =
         ["/","-","-","-","player","-","-","-","/"],
         ["/","-","-","-","-","-","-","-","/"],
         ["/","-","-","-","-","-","-","-","/"],
-        ["/","-","-","-","-","-","-","-","/"],
+        ["/","-","hkrchp","-","-","-","-","-","/"],
         ["/","/","/","/","/","/","/","/","/"],
     ];
 
@@ -105,6 +105,15 @@ const renderGameBoard = function(array) {
                 $("<div/>").addClass("player").appendTo($playerDiv);
 
                 $playerDiv.appendTo(".game-board")
+
+            } else if (spaceX === "hkrchp"){
+                let $hackerChipDiv = $("<div/>").addClass("hacker-chip-container")
+                .css("left", `${5 * indexX}rem`)
+                .css("top", `${5 * indexY}rem`)
+
+                $("<div/>").addClass("hacker-chip").appendTo($hackerChipDiv);
+
+                $hackerChipDiv.appendTo(".game-board")
             }
         })
     });
