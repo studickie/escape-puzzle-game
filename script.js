@@ -69,21 +69,55 @@ const movePlayer = function(direction, gameGrid) {
     const indexX = index[1];
 
     if (direction === "up" && gameGrid[indexY - 1][indexX] != "/"){
+        updateState(gameGrid[indexY - 1][indexX], game["player"]["keys"])
+
         gameGrid[indexY].splice(indexX, 1, "-");
         gameGrid[indexY - 1].splice(indexX, 1, "player");
 
     } else if (direction === "down" && gameGrid[indexY + 1][indexX] != "/"){
+        updateState(gameGrid[indexY + 1][indexX], game["player"]["keys"])
+
         gameGrid[indexY].splice(indexX, 1, "-");
         gameGrid[indexY + 1].splice(indexX, 1, "player");
 
     } else if (direction === "left" && gameGrid[indexY][indexX - 1] != "/"){
+        updateState(gameGrid[indexY][indexX - 1], game["player"]["keys"])
+
         gameGrid[indexY].splice(indexX, 1, "-");
         gameGrid[indexY].splice(indexX - 1, 1, "player");
 
     } else if (direction === "right" && gameGrid[indexY][indexX + 1] != "/"){
+        updateState(gameGrid[indexY][indexX + 1], game["player"]["keys"])
+
         gameGrid[indexY].splice(indexX, 1, "-");
         gameGrid[indexY].splice(indexX + 1, 1, "player");
     };
+};
+
+const updateState = function(gameSpace, keys) {
+
+    gameSpace.includes("key") ? updatePlayerKeys(gameSpace, keys) : null;
+
+    gameSpace.includes("hkrchp") ? updatePlayerChips(game["player"]["hackerChips"]) : null;
+        
+};
+
+const updatePlayerKeys = function(gameSpace, keys) {
+
+    if (gameSpace.includes("red")) {
+        keys["red"] = true;
+
+    } else if (gameSpace.includes("grn")) {
+        keys["green"] = true
+
+    } else if (gameSpace.includes("blu")) {
+        keys["blue"] = true
+    }
+};
+
+const updatePlayerChips = function() {
+
+    game["player"]["hackerChips"] += 1;
 };
 
 // render gameGrid to DOM
@@ -109,12 +143,13 @@ const renderGameBoard = function(array) {
                         .css(`top`, `${5 * indexY}rem`)
 
                     if (spaceX.includes("red")){
+
                         $("<div/>").addClass("hacker-key-red").appendTo($keyDiv);
 
                     } else if (spaceX.includes("blu")){
                         $("<div/>").addClass("hacker-key-blue").appendTo($keyDiv);
                         
-                    }else if (spaceX.includes("grn")){
+                    } else if (spaceX.includes("grn")){
                         $("<div/>").addClass("hacker-key-green").appendTo($keyDiv);
                     }
 
@@ -148,3 +183,4 @@ const renderGameBoard = function(array) {
         })
     });
 }
+
