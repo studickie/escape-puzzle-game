@@ -274,4 +274,39 @@ html {
             box-shadow: 0 0 1.5rem 1rem #eee;
   }
 }
+
+.hacker-key-container {
+  font-size: 0.2rem;
+  background-color: #DDD;
+  width: 25em;
+  height: 25em;
+  position: absolute;
+}
+
+.hacker-key-red {
+  position: absolute;
+  top: 0;
+  height: 6.25%;
+  width: 6.25%;
+  -webkit-box-shadow: 9em 1.5em 0 #E20016, 10.5em 1.5em 0 #E20016, 12em 1.5em 0 #E20016, 13.5em 1.5em 0 #E20016, 7.5em 3em 0 #E20016, 9em 3em 0 #E20016, 10.5em 3em 0 #E20016, 12em 3em 0 #E20016, 13.5em 3em 0 #E20016, 15em 3em 0 #E20016, 6em 4.5em 0 #E20016, 7.5em 4.5em 0 #E20016, 15em 4.5em 0 #E20016, 16.5em 4.5em 0 #E20016, 6em 6em 0 #E20016, 7.5em 6em 0 #E20016, 15em 6em 0 #E20016, 16.5em 6em 0 #E20016, 6em 7.5em 0 #E20016, 7.5em 7.5em 0 #E20016, 15em 7.5em 0 #E20016, 16.5em 7.5em 0 #E20016, 7.5em 9em 0 #E20016, 9em 9em 0 #E20016, 10.5em 9em 0 #E20016, 12em 9em 0 #E20016, 13.5em 9em 0 #E20016, 15em 9em 0 #E20016, 9em 10.5em 0 #E20016, 10.5em 10.5em 0 #E20016, 12em 10.5em 0 #E20016, 13.5em 10.5em 0 #E20016, 10.5em 12em 0 #E20016, 12em 12em 0 #E20016, 10.5em 13.5em 0 #E20016, 12em 13.5em 0 #E20016, 10.5em 15em 0 #E20016, 12em 15em 0 #E20016, 13.5em 15em 0 #E20016, 10.5em 16.5em 0 #E20016, 12em 16.5em 0 #E20016, 13.5em 16.5em 0 #E20016, 10.5em 18em 0 #E20016, 12em 18em 0 #E20016, 10.5em 19.5em 0 #E20016, 12em 19.5em 0 #E20016, 13.5em 19.5em 0 #E20016, 15em 19.5em 0 #E20016, 10.5em 21em 0 #E20016, 12em 21em 0 #E20016, 13.5em 21em 0 #E20016, 15em 21em 0 #E20016, 10.5em 22.5em 0 #E20016, 12em 22.5em 0 #E20016;
+          box-shadow: 9em 1.5em 0 #E20016, 10.5em 1.5em 0 #E20016, 12em 1.5em 0 #E20016, 13.5em 1.5em 0 #E20016, 7.5em 3em 0 #E20016, 9em 3em 0 #E20016, 10.5em 3em 0 #E20016, 12em 3em 0 #E20016, 13.5em 3em 0 #E20016, 15em 3em 0 #E20016, 6em 4.5em 0 #E20016, 7.5em 4.5em 0 #E20016, 15em 4.5em 0 #E20016, 16.5em 4.5em 0 #E20016, 6em 6em 0 #E20016, 7.5em 6em 0 #E20016, 15em 6em 0 #E20016, 16.5em 6em 0 #E20016, 6em 7.5em 0 #E20016, 7.5em 7.5em 0 #E20016, 15em 7.5em 0 #E20016, 16.5em 7.5em 0 #E20016, 7.5em 9em 0 #E20016, 9em 9em 0 #E20016, 10.5em 9em 0 #E20016, 12em 9em 0 #E20016, 13.5em 9em 0 #E20016, 15em 9em 0 #E20016, 9em 10.5em 0 #E20016, 10.5em 10.5em 0 #E20016, 12em 10.5em 0 #E20016, 13.5em 10.5em 0 #E20016, 10.5em 12em 0 #E20016, 12em 12em 0 #E20016, 10.5em 13.5em 0 #E20016, 12em 13.5em 0 #E20016, 10.5em 15em 0 #E20016, 12em 15em 0 #E20016, 13.5em 15em 0 #E20016, 10.5em 16.5em 0 #E20016, 12em 16.5em 0 #E20016, 13.5em 16.5em 0 #E20016, 10.5em 18em 0 #E20016, 12em 18em 0 #E20016, 10.5em 19.5em 0 #E20016, 12em 19.5em 0 #E20016, 13.5em 19.5em 0 #E20016, 15em 19.5em 0 #E20016, 10.5em 21em 0 #E20016, 12em 21em 0 #E20016, 13.5em 21em 0 #E20016, 15em 21em 0 #E20016, 10.5em 22.5em 0 #E20016, 12em 22.5em 0 #E20016;
+}
+
+.hacker-key-green {
+  position: absolute;
+  top: 0;
+  height: 6.25%;
+  width: 6.25%;
+  -webkit-box-shadow: 9em 1.5em 0 green, 10.5em 1.5em 0 green, 12em 1.5em 0 green, 13.5em 1.5em 0 green, 7.5em 3em 0 green, 9em 3em 0 green, 10.5em 3em 0 green, 12em 3em 0 green, 13.5em 3em 0 green, 15em 3em 0 green, 6em 4.5em 0 green, 7.5em 4.5em 0 green, 15em 4.5em 0 green, 16.5em 4.5em 0 green, 6em 6em 0 green, 7.5em 6em 0 green, 15em 6em 0 green, 16.5em 6em 0 green, 6em 7.5em 0 green, 7.5em 7.5em 0 green, 15em 7.5em 0 green, 16.5em 7.5em 0 green, 7.5em 9em 0 green, 9em 9em 0 green, 10.5em 9em 0 green, 12em 9em 0 green, 13.5em 9em 0 green, 15em 9em 0 green, 9em 10.5em 0 green, 10.5em 10.5em 0 green, 12em 10.5em 0 green, 13.5em 10.5em 0 green, 10.5em 12em 0 green, 12em 12em 0 green, 10.5em 13.5em 0 green, 12em 13.5em 0 green, 10.5em 15em 0 green, 12em 15em 0 green, 13.5em 15em 0 green, 10.5em 16.5em 0 green, 12em 16.5em 0 green, 13.5em 16.5em 0 green, 10.5em 18em 0 green, 12em 18em 0 green, 10.5em 19.5em 0 green, 12em 19.5em 0 green, 13.5em 19.5em 0 green, 15em 19.5em 0 green, 10.5em 21em 0 green, 12em 21em 0 green, 13.5em 21em 0 green, 15em 21em 0 green, 10.5em 22.5em 0 green, 12em 22.5em 0 green;
+          box-shadow: 9em 1.5em 0 green, 10.5em 1.5em 0 green, 12em 1.5em 0 green, 13.5em 1.5em 0 green, 7.5em 3em 0 green, 9em 3em 0 green, 10.5em 3em 0 green, 12em 3em 0 green, 13.5em 3em 0 green, 15em 3em 0 green, 6em 4.5em 0 green, 7.5em 4.5em 0 green, 15em 4.5em 0 green, 16.5em 4.5em 0 green, 6em 6em 0 green, 7.5em 6em 0 green, 15em 6em 0 green, 16.5em 6em 0 green, 6em 7.5em 0 green, 7.5em 7.5em 0 green, 15em 7.5em 0 green, 16.5em 7.5em 0 green, 7.5em 9em 0 green, 9em 9em 0 green, 10.5em 9em 0 green, 12em 9em 0 green, 13.5em 9em 0 green, 15em 9em 0 green, 9em 10.5em 0 green, 10.5em 10.5em 0 green, 12em 10.5em 0 green, 13.5em 10.5em 0 green, 10.5em 12em 0 green, 12em 12em 0 green, 10.5em 13.5em 0 green, 12em 13.5em 0 green, 10.5em 15em 0 green, 12em 15em 0 green, 13.5em 15em 0 green, 10.5em 16.5em 0 green, 12em 16.5em 0 green, 13.5em 16.5em 0 green, 10.5em 18em 0 green, 12em 18em 0 green, 10.5em 19.5em 0 green, 12em 19.5em 0 green, 13.5em 19.5em 0 green, 15em 19.5em 0 green, 10.5em 21em 0 green, 12em 21em 0 green, 13.5em 21em 0 green, 15em 21em 0 green, 10.5em 22.5em 0 green, 12em 22.5em 0 green;
+}
+
+.hacker-key-blue {
+  position: absolute;
+  top: 0;
+  height: 6.25%;
+  width: 6.25%;
+  -webkit-box-shadow: 9em 1.5em 0 blue, 10.5em 1.5em 0 blue, 12em 1.5em 0 blue, 13.5em 1.5em 0 blue, 7.5em 3em 0 blue, 9em 3em 0 blue, 10.5em 3em 0 blue, 12em 3em 0 blue, 13.5em 3em 0 blue, 15em 3em 0 blue, 6em 4.5em 0 blue, 7.5em 4.5em 0 blue, 15em 4.5em 0 blue, 16.5em 4.5em 0 blue, 6em 6em 0 blue, 7.5em 6em 0 blue, 15em 6em 0 blue, 16.5em 6em 0 blue, 6em 7.5em 0 blue, 7.5em 7.5em 0 blue, 15em 7.5em 0 blue, 16.5em 7.5em 0 blue, 7.5em 9em 0 blue, 9em 9em 0 blue, 10.5em 9em 0 blue, 12em 9em 0 blue, 13.5em 9em 0 blue, 15em 9em 0 blue, 9em 10.5em 0 blue, 10.5em 10.5em 0 blue, 12em 10.5em 0 blue, 13.5em 10.5em 0 blue, 10.5em 12em 0 blue, 12em 12em 0 blue, 10.5em 13.5em 0 blue, 12em 13.5em 0 blue, 10.5em 15em 0 blue, 12em 15em 0 blue, 13.5em 15em 0 blue, 10.5em 16.5em 0 blue, 12em 16.5em 0 blue, 13.5em 16.5em 0 blue, 10.5em 18em 0 blue, 12em 18em 0 blue, 10.5em 19.5em 0 blue, 12em 19.5em 0 blue, 13.5em 19.5em 0 blue, 15em 19.5em 0 blue, 10.5em 21em 0 blue, 12em 21em 0 blue, 13.5em 21em 0 blue, 15em 21em 0 blue, 10.5em 22.5em 0 blue, 12em 22.5em 0 blue;
+          box-shadow: 9em 1.5em 0 blue, 10.5em 1.5em 0 blue, 12em 1.5em 0 blue, 13.5em 1.5em 0 blue, 7.5em 3em 0 blue, 9em 3em 0 blue, 10.5em 3em 0 blue, 12em 3em 0 blue, 13.5em 3em 0 blue, 15em 3em 0 blue, 6em 4.5em 0 blue, 7.5em 4.5em 0 blue, 15em 4.5em 0 blue, 16.5em 4.5em 0 blue, 6em 6em 0 blue, 7.5em 6em 0 blue, 15em 6em 0 blue, 16.5em 6em 0 blue, 6em 7.5em 0 blue, 7.5em 7.5em 0 blue, 15em 7.5em 0 blue, 16.5em 7.5em 0 blue, 7.5em 9em 0 blue, 9em 9em 0 blue, 10.5em 9em 0 blue, 12em 9em 0 blue, 13.5em 9em 0 blue, 15em 9em 0 blue, 9em 10.5em 0 blue, 10.5em 10.5em 0 blue, 12em 10.5em 0 blue, 13.5em 10.5em 0 blue, 10.5em 12em 0 blue, 12em 12em 0 blue, 10.5em 13.5em 0 blue, 12em 13.5em 0 blue, 10.5em 15em 0 blue, 12em 15em 0 blue, 13.5em 15em 0 blue, 10.5em 16.5em 0 blue, 12em 16.5em 0 blue, 13.5em 16.5em 0 blue, 10.5em 18em 0 blue, 12em 18em 0 blue, 10.5em 19.5em 0 blue, 12em 19.5em 0 blue, 13.5em 19.5em 0 blue, 15em 19.5em 0 blue, 10.5em 21em 0 blue, 12em 21em 0 blue, 13.5em 21em 0 blue, 15em 21em 0 blue, 10.5em 22.5em 0 blue, 12em 22.5em 0 blue;
+}
 /*# sourceMappingURL=style.css.map */

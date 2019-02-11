@@ -5,12 +5,12 @@ let game = {
         [
             ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
             ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
-            ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
+            ["/", "-", "keyred", "-", "-", "-", "keyblu", "-", "/"],
             ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
             ["/", "-", "-", "-", "player", "-", "-", "-", "/"],
             ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
+            ["/", "-", "hkrchp", "-", "-", "-", "keygrn", "-", "/"],
             ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
-            ["/", "-", "hkrchp", "-", "-", "-", "-", "-", "/"],
             ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
         ],
 
@@ -102,11 +102,30 @@ const renderGameBoard = function(array) {
                 .css(`top`, `${5 * indexY}rem`)
                 .appendTo(".game-board")
 
-            } else if (spaceX === "-"){
-                $("<div/>").addClass("game-board-block")
-                .css(`left`, `${5 * indexX}rem`)
-                .css(`top`, `${5 * indexY}rem`)
-                .appendTo(".game-board")
+            } else if (spaceX === "-" || spaceX.includes("key")){
+                if (spaceX.includes("key")){
+                    let $keyDiv = $("<div/>").addClass("hacker-key-container")
+                        .css(`left`, `${5 * indexX}rem`)
+                        .css(`top`, `${5 * indexY}rem`)
+
+                    if (spaceX.includes("red")){
+                        $("<div/>").addClass("hacker-key-red").appendTo($keyDiv);
+
+                    } else if (spaceX.includes("blu")){
+                        $("<div/>").addClass("hacker-key-blue").appendTo($keyDiv);
+                        
+                    }else if (spaceX.includes("grn")){
+                        $("<div/>").addClass("hacker-key-green").appendTo($keyDiv);
+                    }
+
+                $keyDiv.appendTo(".game-board")
+
+                } else {
+                    $("<div/>").addClass("game-board-block")
+                    .css(`left`, `${5 * indexX}rem`)
+                    .css(`top`, `${5 * indexY}rem`)
+                    .appendTo(".game-board")
+                }
 
             } else if (spaceX === "player"){
                 let $playerDiv = $("<div/>").addClass("player-container")
