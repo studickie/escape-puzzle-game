@@ -21,6 +21,10 @@ let game = {
             green: false,
             blue: false
         }
+    },
+
+    gameStatus: {
+        exit: false
     }
 };
 
