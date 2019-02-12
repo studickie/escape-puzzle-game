@@ -121,14 +121,14 @@ const updatePlayerChips = function() {
 };
 
 // render gameGrid to DOM
-const renderGameBoard = function(array) {
+const renderGameBoard = function(gameGrid) {
 
     // empty DOM, otherwise it will contain 1000's of layered elements
     $(".game-board").empty();
 
     // loop through gameGrid, create and append element based on content
-    array.forEach(function(spaceY, indexY){
-         spaceY.forEach(function(spaceX, indexX){
+    gameGrid.forEach(function(spaceY, indexY){
+        spaceY.forEach(function(spaceX, indexX){
             
             if(spaceX === "/"){
                 $("<div/>").addClass("game-board-border")
@@ -143,7 +143,6 @@ const renderGameBoard = function(array) {
                         .css(`top`, `${5 * indexY}rem`)
 
                     if (spaceX.includes("red")){
-
                         $("<div/>").addClass("hacker-key-red").appendTo($keyDiv);
 
                     } else if (spaceX.includes("blu")){
@@ -173,8 +172,8 @@ const renderGameBoard = function(array) {
 
             } else if (spaceX === "hkrchp"){
                 let $hackerChipDiv = $("<div/>").addClass("hacker-chip-container")
-                .css("left", `${5 * indexX}rem`)
-                .css("top", `${5 * indexY}rem`)
+                    .css("left", `${5 * indexX}rem`)
+                    .css("top", `${5 * indexY}rem`)
 
                 $("<div/>").addClass("hacker-chip").appendTo($hackerChipDiv);
 
