@@ -19,7 +19,7 @@ html {
 }
 
 .game-board-border {
-    background-color: #343434;
+    background-color: $hacker-boarder-block;
     border: 1px solid rgb(0,0,0);
     width: 5rem;
     height: 5rem;

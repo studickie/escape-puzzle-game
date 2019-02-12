@@ -4,13 +4,13 @@ let game = {
     gameGrid:
         [
             ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
-            ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
-            ["/", "-", "keyred", "-", "-", "-", "keyblu", "-", "/"],
-            ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
+            ["/", "-", "-", "lockblu", "-", "/", "-", "-", "/"],
+            ["/", "-", "keyred", "/", "-", "lockred", "keyblu", "-", "/"],
+            ["/", "/", "/", "/", "-", "/", "/", "/", "/"],
             ["/", "-", "-", "-", "player", "-", "-", "-", "/"],
-            ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
-            ["/", "-", "hkrchp", "-", "-", "-", "keygrn", "-", "/"],
-            ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
+            ["/", "lockgrn", "/", "/", "-", "-", "-", "-", "/"],
+            ["/", "-", "hkrchp", "/", "-", "-", "keygrn", "-", "/"],
+            ["/", "-", "-", "/", "-", "-", "-", "-", "/"],
             ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
         ],
 
@@ -102,8 +102,7 @@ const updateState = function(gameSpace, keys) {
 
     gameSpace.includes("key") ? updatePlayerKeys(gameSpace, keys) : null;
 
-    gameSpace.includes("hkrchp") ? updatePlayerChips(game["player"]["hackerChips"]) : null;
-        
+    gameSpace.includes("hkrchp") ? updatePlayerChips() : null;
 };
 
 const updatePlayerKeys = function(gameSpace, keys) {
@@ -127,8 +126,9 @@ const updatePlayerChips = function() {
 // render gameGrid to DOM
 const renderGameBoard = function(gameGrid) {
 
+    const $gameBoard = $(".game-board")
     // empty DOM, otherwise it will contain 1000's of layered elements
-    $(".game-board").empty();
+    $gameBoard.empty();
 
     // loop through gameGrid, create and append element based on content
     gameGrid.forEach(function(spaceY, indexY){
@@ -138,32 +138,13 @@ const renderGameBoard = function(gameGrid) {
                 $("<div/>").addClass("game-board-border")
                 .css(`left`, `${5 * indexX}rem`)
                 .css(`top`, `${5 * indexY}rem`)
-                .appendTo(".game-board")
+                .appendTo($gameBoard)
 
-            } else if (spaceX === "-" || spaceX.includes("key")){
-                if (spaceX.includes("key")){
-                    let $keyDiv = $("<div/>").addClass("hacker-key-container")
-                        .css(`left`, `${5 * indexX}rem`)
-                        .css(`top`, `${5 * indexY}rem`)
-
-                    if (spaceX.includes("red")){
-                        $("<div/>").addClass("hacker-key-red").appendTo($keyDiv);
-
-                    } else if (spaceX.includes("blu")){
-                        $("<div/>").addClass("hacker-key-blue").appendTo($keyDiv);
-                        
-                    } else if (spaceX.includes("grn")){
-                        $("<div/>").addClass("hacker-key-green").appendTo($keyDiv);
-                    }
-
-                $keyDiv.appendTo(".game-board")
-
-                } else {
-                    $("<div/>").addClass("game-board-block")
-                    .css(`left`, `${5 * indexX}rem`)
-                    .css(`top`, `${5 * indexY}rem`)
-                    .appendTo(".game-board")
-                }
+            } else if (spaceX === "-"){
+                $("<div/>").addClass("game-board-block")
+                .css(`left`, `${5 * indexX}rem`)
+                .css(`top`, `${5 * indexY}rem`)
+                .appendTo($gameBoard)
 
             } else if (spaceX === "player"){
                 let $playerDiv = $("<div/>").addClass("player-container")
@@ -172,7 +153,7 @@ const renderGameBoard = function(gameGrid) {
 
                 $("<div/>").addClass("player").appendTo($playerDiv);
 
-                $playerDiv.appendTo(".game-board")
+                $playerDiv.appendTo($gameBoard)
 
             } else if (spaceX === "hkrchp"){
                 let $hackerChipDiv = $("<div/>").addClass("hacker-chip-container")
@@ -181,7 +162,41 @@ const renderGameBoard = function(gameGrid) {
 
                 $("<div/>").addClass("hacker-chip").appendTo($hackerChipDiv);
 
-                $hackerChipDiv.appendTo(".game-board")
+                $hackerChipDiv.appendTo($gameBoard)
+
+            } else if (spaceX.includes("key")) {
+                let $keyDiv = $("<div/>").addClass("hacker-key-container")
+                    .css(`left`, `${5 * indexX}rem`)
+                    .css(`top`, `${5 * indexY}rem`)
+
+                if (spaceX.includes("red")) {
+                    $("<div/>").addClass("hacker-key-red").appendTo($keyDiv);
+
+                } else if (spaceX.includes("blu")) {
+                    $("<div/>").addClass("hacker-key-blue").appendTo($keyDiv);
+
+                } else if (spaceX.includes("grn")) {
+                    $("<div/>").addClass("hacker-key-green").appendTo($keyDiv);
+                }
+
+                $keyDiv.appendTo($gameBoard)
+
+            } else if (spaceX.includes("lock")) {
+                let $lockDiv = $("<div/>").addClass("hacker-lock-container")
+                    .css(`left`, `${5 * indexX}rem`)
+                    .css(`top`, `${5 * indexY}rem`)
+
+                if (spaceX.includes("red")) {
+                    $("<div/>").addClass("hacker-lock-red").appendTo($lockDiv);
+
+                } else if (spaceX.includes("blu")) {
+                    $("<div/>").addClass("hacker-lock-blue").appendTo($lockDiv);
+
+                } else if (spaceX.includes("grn")) {
+                    $("<div/>").addClass("hacker-lock-green").appendTo($lockDiv);
+                }
+
+                $lockDiv.appendTo($gameBoard)
             }
         })
     });

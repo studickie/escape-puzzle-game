@@ -1,0 +1,374 @@
+// Pixel art examples explored at https://css-tricks.com/fun-times-css-pixel-art/ -> author credit: Geoff Graham
+
+.hacker-lock-container {
+    // sets proper font size for accurate game piece rendering 
+    // change piece size here if needed
+    font-size: 0.2rem;
+    width: 25em;
+    height: 25em;
+    position: absolute;
+    background-color: $hacker-boarder-block;
+}
+
+.hacker-lock-red {
+    position: absolute;
+    top: 0;
+    // determines dimensions of pixels
+    // percentage based, changes with container dimensions
+    height: 6.25%;
+    width: 6.25%;
+
+    box-shadow:
+    // layers lay horizontal, run left to right, stack top to bottom
+    // values must be "em" for proper piece resizing
+
+    // layer 1
+        9em 3em 0 $hacker-red,
+        10.5em 3em 0 $hacker-red,
+        12em 3em 0 $hacker-red,
+        13.5em 3em 0 $hacker-red,
+
+    // layer 2
+        7.5em 4.5em 0 $hacker-red,
+        15em 4.5em 0 $hacker-red,
+    
+    // layer 3
+        6em 6em 0 $hacker-red,
+        16.5em 6em 0 $hacker-red,
+    
+    // layer 4
+        6em 7.5em 0 $hacker-red,
+        16.5em 7.5em 0 $hacker-red,
+       
+    
+    // layer 5
+        6em 9em 0 $hacker-red,
+        16.5em 9em 0 $hacker-red,
+
+    // layer 6
+        4.5em 10.5em 0 $hacker-red,
+        6em 10.5em 0 $hacker-red,
+        7.5em 10.5em 0 $hacker-red,
+        9em 10.5em 0 $hacker-red,
+        10.5em 10.5em 0 $hacker-red,
+        12em 10.5em 0 $hacker-red,
+        13.5em 10.5em 0 $hacker-red,
+        15em 10.5em 0 $hacker-red,
+        16.5em 10.5em 0 $hacker-red,
+        18em 10.5em 0 $hacker-red,
+
+    // layer 7
+        4.5em 12em 0 $hacker-red,
+        6em 12em 0 $hacker-red,
+        7.5em 12em 0 $hacker-red,
+        9em 12em 0 $hacker-red,
+        10.5em 12em 0 $hacker-black,
+        12em 12em 0 $hacker-black,
+        13.5em 12em 0 $hacker-red,
+        15em 12em 0 $hacker-red,
+        16.5em 12em 0 $hacker-red,
+        18em 12em 0 $hacker-red,
+
+    // layer 8
+        4.5em 13.5em 0 $hacker-red,
+        6em 13.5em 0 $hacker-red,
+        7.5em 13.5em 0 $hacker-red,
+        9em 13.5em 0 $hacker-red,
+        10.5em 13.5em 0 $hacker-black,
+        12em 13.5em 0 $hacker-black,
+        13.5em 13.5em 0 $hacker-red,
+        15em 13.5em 0 $hacker-red,
+        16.5em 13.5em 0 $hacker-red,
+        18em 13.5em 0 $hacker-red,
+
+    // layer 9
+        4.5em 15em 0 $hacker-red,
+        6em 15em 0 $hacker-red,
+        7.5em 15em 0 $hacker-red,
+        9em 15em 0 $hacker-red,
+        10.5em 15em 0 $hacker-black,
+        12em 15em 0 $hacker-black,
+        13.5em 15em 0 $hacker-red,
+        15em 15em 0 $hacker-red,
+        16.5em 15em 0 $hacker-red,
+        18em 15em 0 $hacker-red,
+
+    // layer 10
+        4.5em 16.5em 0 $hacker-red,
+        6em 16.5em 0 $hacker-red,
+        7.5em 16.5em 0 $hacker-red,
+        9em 16.5em 0 $hacker-red,
+        10.5em 16.5em 0 $hacker-red,
+        12em 16.5em 0 $hacker-red,
+        13.5em 16.5em 0 $hacker-red,
+        15em 16.5em 0 $hacker-red,
+        16.5em 16.5em 0 $hacker-red,
+        18em 16.5em 0 $hacker-red,
+    
+    // layer 11
+        4.5em 18em 0 $hacker-red,
+        6em 18em 0 $hacker-red,
+        7.5em 18em 0 $hacker-red,
+        9em 18em 0 $hacker-red,
+        10.5em 18em 0 $hacker-red,
+        12em 18em 0 $hacker-red,
+        13.5em 18em 0 $hacker-red,
+        15em 18em 0 $hacker-red,
+        16.5em 18em 0 $hacker-red,
+        18em 18em 0 $hacker-red,
+    
+    // layer 12
+        4.5em 19.5em 0 $hacker-red,
+        6em 19.5em 0 $hacker-red,
+        7.5em 19.5em 0 $hacker-red,
+        9em 19.5em 0 $hacker-red,
+        10.5em 19.5em 0 $hacker-red,
+        12em 19.5em 0 $hacker-red,
+        13.5em 19.5em 0 $hacker-red,
+        15em 19.5em 0 $hacker-red,
+        16.5em 19.5em 0 $hacker-red,
+        18em 19.5em 0 $hacker-red,
+    ;
+}
+
+.hacker-lock-blue {
+    position: absolute;
+    top: 0;
+    // determines dimensions of pixels
+    // percentage based, changes with container dimensions
+    height: 6.25%;
+    width: 6.25%;
+
+    box-shadow:
+    // layers lay horizontal, run left to right, stack top to bottom
+    // values must be "em" for proper piece resizing
+
+    // layer 1
+        9em 3em 0 $hacker-key-blue,
+        10.5em 3em 0 $hacker-key-blue,
+        12em 3em 0 $hacker-key-blue,
+        13.5em 3em 0 $hacker-key-blue,
+
+    // layer 2
+        7.5em 4.5em 0 $hacker-key-blue,
+        15em 4.5em 0 $hacker-key-blue,
+    
+    // layer 3
+        6em 6em 0 $hacker-key-blue,
+        16.5em 6em 0 $hacker-key-blue,
+    
+    // layer 4
+        6em 7.5em 0 $hacker-key-blue,
+        16.5em 7.5em 0 $hacker-key-blue,
+       
+    
+    // layer 5
+        6em 9em 0 $hacker-key-blue,
+        16.5em 9em 0 $hacker-key-blue,
+
+    // layer 6
+        4.5em 10.5em 0 $hacker-key-blue,
+        6em 10.5em 0 $hacker-key-blue,
+        7.5em 10.5em 0 $hacker-key-blue,
+        9em 10.5em 0 $hacker-key-blue,
+        10.5em 10.5em 0 $hacker-key-blue,
+        12em 10.5em 0 $hacker-key-blue,
+        13.5em 10.5em 0 $hacker-key-blue,
+        15em 10.5em 0 $hacker-key-blue,
+        16.5em 10.5em 0 $hacker-key-blue,
+        18em 10.5em 0 $hacker-key-blue,
+
+    // layer 7
+        4.5em 12em 0 $hacker-key-blue,
+        6em 12em 0 $hacker-key-blue,
+        7.5em 12em 0 $hacker-key-blue,
+        9em 12em 0 $hacker-key-blue,
+        10.5em 12em 0 $hacker-black,
+        12em 12em 0 $hacker-black,
+        13.5em 12em 0 $hacker-key-blue,
+        15em 12em 0 $hacker-key-blue,
+        16.5em 12em 0 $hacker-key-blue,
+        18em 12em 0 $hacker-key-blue,
+
+    // layer 8
+        4.5em 13.5em 0 $hacker-key-blue,
+        6em 13.5em 0 $hacker-key-blue,
+        7.5em 13.5em 0 $hacker-key-blue,
+        9em 13.5em 0 $hacker-key-blue,
+        10.5em 13.5em 0 $hacker-black,
+        12em 13.5em 0 $hacker-black,
+        13.5em 13.5em 0 $hacker-key-blue,
+        15em 13.5em 0 $hacker-key-blue,
+        16.5em 13.5em 0 $hacker-key-blue,
+        18em 13.5em 0 $hacker-key-blue,
+
+    // layer 9
+        4.5em 15em 0 $hacker-key-blue,
+        6em 15em 0 $hacker-key-blue,
+        7.5em 15em 0 $hacker-key-blue,
+        9em 15em 0 $hacker-key-blue,
+        10.5em 15em 0 $hacker-black,
+        12em 15em 0 $hacker-black,
+        13.5em 15em 0 $hacker-key-blue,
+        15em 15em 0 $hacker-key-blue,
+        16.5em 15em 0 $hacker-key-blue,
+        18em 15em 0 $hacker-key-blue,
+
+    // layer 10
+        4.5em 16.5em 0 $hacker-key-blue,
+        6em 16.5em 0 $hacker-key-blue,
+        7.5em 16.5em 0 $hacker-key-blue,
+        9em 16.5em 0 $hacker-key-blue,
+        10.5em 16.5em 0 $hacker-key-blue,
+        12em 16.5em 0 $hacker-key-blue,
+        13.5em 16.5em 0 $hacker-key-blue,
+        15em 16.5em 0 $hacker-key-blue,
+        16.5em 16.5em 0 $hacker-key-blue,
+        18em 16.5em 0 $hacker-key-blue,
+    
+    // layer 11
+        4.5em 18em 0 $hacker-key-blue,
+        6em 18em 0 $hacker-key-blue,
+        7.5em 18em 0 $hacker-key-blue,
+        9em 18em 0 $hacker-key-blue,
+        10.5em 18em 0 $hacker-key-blue,
+        12em 18em 0 $hacker-key-blue,
+        13.5em 18em 0 $hacker-key-blue,
+        15em 18em 0 $hacker-key-blue,
+        16.5em 18em 0 $hacker-key-blue,
+        18em 18em 0 $hacker-key-blue,
+    
+    // layer 12
+        4.5em 19.5em 0 $hacker-key-blue,
+        6em 19.5em 0 $hacker-key-blue,
+        7.5em 19.5em 0 $hacker-key-blue,
+        9em 19.5em 0 $hacker-key-blue,
+        10.5em 19.5em 0 $hacker-key-blue,
+        12em 19.5em 0 $hacker-key-blue,
+        13.5em 19.5em 0 $hacker-key-blue,
+        15em 19.5em 0 $hacker-key-blue,
+        16.5em 19.5em 0 $hacker-key-blue,
+        18em 19.5em 0 $hacker-key-blue,
+    ;
+}
+
+.hacker-lock-green {
+    position: absolute;
+    top: 0;
+    // determines dimensions of pixels
+    // percentage based, changes with container dimensions
+    height: 6.25%;
+    width: 6.25%;
+
+    box-shadow:
+    // layers lay horizontal, run left to right, stack top to bottom
+    // values must be "em" for proper piece resizing
+
+    // layer 1
+        9em 3em 0 $hacker-key-green,
+        10.5em 3em 0 $hacker-key-green,
+        12em 3em 0 $hacker-key-green,
+        13.5em 3em 0 $hacker-key-green,
+
+    // layer 2
+        7.5em 4.5em 0 $hacker-key-green,
+        15em 4.5em 0 $hacker-key-green,
+    
+    // layer 3
+        6em 6em 0 $hacker-key-green,
+        16.5em 6em 0 $hacker-key-green,
+    
+    // layer 4
+        6em 7.5em 0 $hacker-key-green,
+        16.5em 7.5em 0 $hacker-key-green,
+       
+    
+    // layer 5
+        6em 9em 0 $hacker-key-green,
+        16.5em 9em 0 $hacker-key-green,
+
+    // layer 6
+        4.5em 10.5em 0 $hacker-key-green,
+        6em 10.5em 0 $hacker-key-green,
+        7.5em 10.5em 0 $hacker-key-green,
+        9em 10.5em 0 $hacker-key-green,
+        10.5em 10.5em 0 $hacker-key-green,
+        12em 10.5em 0 $hacker-key-green,
+        13.5em 10.5em 0 $hacker-key-green,
+        15em 10.5em 0 $hacker-key-green,
+        16.5em 10.5em 0 $hacker-key-green,
+        18em 10.5em 0 $hacker-key-green,
+
+    // layer 7
+        4.5em 12em 0 $hacker-key-green,
+        6em 12em 0 $hacker-key-green,
+        7.5em 12em 0 $hacker-key-green,
+        9em 12em 0 $hacker-key-green,
+        10.5em 12em 0 $hacker-black,
+        12em 12em 0 $hacker-black,
+        13.5em 12em 0 $hacker-key-green,
+        15em 12em 0 $hacker-key-green,
+        16.5em 12em 0 $hacker-key-green,
+        18em 12em 0 $hacker-key-green,
+
+    // layer 8
+        4.5em 13.5em 0 $hacker-key-green,
+        6em 13.5em 0 $hacker-key-green,
+        7.5em 13.5em 0 $hacker-key-green,
+        9em 13.5em 0 $hacker-key-green,
+        10.5em 13.5em 0 $hacker-black,
+        12em 13.5em 0 $hacker-black,
+        13.5em 13.5em 0 $hacker-key-green,
+        15em 13.5em 0 $hacker-key-green,
+        16.5em 13.5em 0 $hacker-key-green,
+        18em 13.5em 0 $hacker-key-green,
+
+    // layer 9
+        4.5em 15em 0 $hacker-key-green,
+        6em 15em 0 $hacker-key-green,
+        7.5em 15em 0 $hacker-key-green,
+        9em 15em 0 $hacker-key-green,
+        10.5em 15em 0 $hacker-black,
+        12em 15em 0 $hacker-black,
+        13.5em 15em 0 $hacker-key-green,
+        15em 15em 0 $hacker-key-green,
+        16.5em 15em 0 $hacker-key-green,
+        18em 15em 0 $hacker-key-green,
+
+    // layer 10
+        4.5em 16.5em 0 $hacker-key-green,
+        6em 16.5em 0 $hacker-key-green,
+        7.5em 16.5em 0 $hacker-key-green,
+        9em 16.5em 0 $hacker-key-green,
+        10.5em 16.5em 0 $hacker-key-green,
+        12em 16.5em 0 $hacker-key-green,
+        13.5em 16.5em 0 $hacker-key-green,
+        15em 16.5em 0 $hacker-key-green,
+        16.5em 16.5em 0 $hacker-key-green,
+        18em 16.5em 0 $hacker-key-green,
+    
+    // layer 11
+        4.5em 18em 0 $hacker-key-green,
+        6em 18em 0 $hacker-key-green,
+        7.5em 18em 0 $hacker-key-green,
+        9em 18em 0 $hacker-key-green,
+        10.5em 18em 0 $hacker-key-green,
+        12em 18em 0 $hacker-key-green,
+        13.5em 18em 0 $hacker-key-green,
+        15em 18em 0 $hacker-key-green,
+        16.5em 18em 0 $hacker-key-green,
+        18em 18em 0 $hacker-key-green,
+    
+    // layer 12
+        4.5em 19.5em 0 $hacker-key-green,
+        6em 19.5em 0 $hacker-key-green,
+        7.5em 19.5em 0 $hacker-key-green,
+        9em 19.5em 0 $hacker-key-green,
+        10.5em 19.5em 0 $hacker-key-green,
+        12em 19.5em 0 $hacker-key-green,
+        13.5em 19.5em 0 $hacker-key-green,
+        15em 19.5em 0 $hacker-key-green,
+        16.5em 19.5em 0 $hacker-key-green,
+        18em 19.5em 0 $hacker-key-green,
+    ;
+}
