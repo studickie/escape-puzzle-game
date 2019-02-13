@@ -4,27 +4,36 @@ let game = {
     gameGrid:
         [
             ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
-            ["/", "-", "-", "lockblu", "-", "/", "-", "-", "/"],
-            ["/", "-", "keyred", "/", "-", "lockred", "keyblu", "-", "/"],
-            ["/", "/", "/", "/", "-", "/", "/", "/", "/"],
+            ["/", "-", "-", "lockblue", "-", "-", "-", "-", "/"],
+            ["/", "-", "keyred", "-", "-", "-", "keyblue", "-", "/"],
+            ["/", "-", "-", "-", "-", "-", "-", "lockred", "/"],
             ["/", "-", "-", "-", "player", "-", "-", "-", "/"],
-            ["/", "lockgrn", "/", "/", "-", "-", "-", "-", "/"],
-            ["/", "-", "hkrchp", "/", "-", "-", "keygrn", "-", "/"],
-            ["/", "-", "-", "/", "-", "-", "-", "-", "/"],
+            ["/", "lockgreen", "-", "-", "-", "-", "-", "-", "/"],
+            ["/", "-", "chip", "-", "-", "-", "keygreen", "-", "/"],
+            ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
             ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
         ],
 
-    player: {
-        hackerChips: 0,
-        keys: {
-            red: false,
-            green: false,
-            blue: false
-        }
-    },
+    gameItems: {
+        escapeChips: {
+            remaining: 1,
+            acquired: 0,
+            exitOpen: false
+        },
 
-    gameStatus: {
-        exit: false
+        keys: [{
+            id: "keyred",
+            lock: "lockred",
+            acquired: false
+        },{
+            id: "keygreen",
+            lock: "lockgreen",
+            acquired: false
+        },{
+            id: "keyblue",
+            lock: "lockblue",
+            acquired: false
+        }],
     }
 };
 
@@ -40,16 +49,16 @@ const directionSelection = function(direction) {
 
     // pass the direction value to movePlayer() according to keypress
     if(direction === 38){
-        movePlayer("up", game["gameGrid"]);
+        checkMoveToBlock("up", game["gameGrid"]);
 
     } else if (direction === 40){
-        movePlayer("down", game["gameGrid"]);
+        checkMoveToBlock("down", game["gameGrid"]);
 
     } else if (direction === 37){
-        movePlayer("left", game["gameGrid"]);
+        checkMoveToBlock("left", game["gameGrid"]);
             
     } else if (direction === 39){
-        movePlayer("right", game["gameGrid"]);
+        checkMoveToBlock("right", game["gameGrid"]);
     };
 }
 
@@ -64,63 +73,136 @@ const findPlayerPosition = function(gameGrid) {
     return [indexY, indexX];
 };
 
+
+const updateAcquiredKeys = function(newKey, keys) {
+
+    const acquiredKey = keys.find(key => key["id"] === newKey);
+    
+    acquiredKey["acquired"] = true;
+};
+
+
+const checkKeyStatus = function(lock, keys) {
+
+    const keyQuery = keys.find(key => key["lock"] === lock);
+
+    return keyQuery["acquired"];
+};
+
+
+const updateChipCount = function(chipCount) {
+
+    chipCount["remaining"] -= 1;
+    chipCount["acquired"] += 1;
+
+    chipCount["remaining"] === 0 ? chipCount["exitOpen"] = true : null;
+};
+
+
+const movePlayer = function(gameGrid, index, direction) {
+
+    const indexY = index[0];
+    const indexX = index[1];
+
+    if (direction === "up") {
+        gameGrid[indexY].splice(indexX, 1, "-");
+        gameGrid[indexY - 1].splice(indexX, 1, "player");
+
+    } else if (direction === "down") {
+        gameGrid[indexY].splice(indexX, 1, "-");
+        gameGrid[indexY + 1].splice(indexX, 1, "player");
+
+    } else if (direction ==="left") {
+        gameGrid[indexY].splice(indexX, 1, "-");
+        gameGrid[indexY].splice(indexX - 1, 1, "player");
+
+    } else if (direction === "right") {
+        gameGrid[indexY].splice(indexX, 1, "-");
+        gameGrid[indexY].splice(indexX + 1, 1, "player");
+
+    }
+};
+
 // move player value in gameGrid 
-const movePlayer = function(direction, gameGrid) {
+const checkMoveToBlock = function(direction, gameGrid) {
 
     const index = findPlayerPosition(gameGrid);
 
     const indexY = index[0];
     const indexX = index[1];
+            
+    if (direction === "up" && gameGrid[indexY - 1][indexX] != "/") {
+        if (gameGrid[indexY - 1][indexX].includes("key")){
+            updateAcquiredKeys(gameGrid[indexY - 1][indexX], game["gameItems"]["keys"]);
+            movePlayer(gameGrid, index, "up")
 
-    if (direction === "up" && gameGrid[indexY - 1][indexX] != "/"){
-        updateState(gameGrid[indexY - 1][indexX], game["player"]["keys"])
+        } else if (gameGrid[indexY - 1][indexX].includes("chip")){
+            updateChipCount(game["gameItems"]["escapeChips"]);
+            movePlayer(gameGrid, index, "up")
 
-        gameGrid[indexY].splice(indexX, 1, "-");
-        gameGrid[indexY - 1].splice(indexX, 1, "player");
+        } else if (gameGrid[indexY - 1][indexX].includes("lock")){
+            checkKeyStatus(gameGrid[indexY - 1][indexX], game["gameItems"]["keys"]) 
+                ? movePlayer(gameGrid, index, "up") : null;
 
-    } else if (direction === "down" && gameGrid[indexY + 1][indexX] != "/"){
-        updateState(gameGrid[indexY + 1][indexX], game["player"]["keys"])
+        } else {
+            movePlayer(gameGrid, index, "up")
 
-        gameGrid[indexY].splice(indexX, 1, "-");
-        gameGrid[indexY + 1].splice(indexX, 1, "player");
+        }
 
-    } else if (direction === "left" && gameGrid[indexY][indexX - 1] != "/"){
-        updateState(gameGrid[indexY][indexX - 1], game["player"]["keys"])
+    } else if (direction === "down" && gameGrid[indexY + 1][indexX] != "/") {
+        if (gameGrid[indexY + 1][indexX].includes("key")) {
+            updateAcquiredKeys(gameGrid[indexY + 1][indexX], game["gameItems"]["keys"]);
+            movePlayer(gameGrid, index, "down")
 
-        gameGrid[indexY].splice(indexX, 1, "-");
-        gameGrid[indexY].splice(indexX - 1, 1, "player");
+        } else if (gameGrid[indexY + 1][indexX].includes("chip")) {
+            updateChipCount(game["gameItems"]["escapeChips"]);
+            movePlayer(gameGrid, index, "down")
 
-    } else if (direction === "right" && gameGrid[indexY][indexX + 1] != "/"){
-        updateState(gameGrid[indexY][indexX + 1], game["player"]["keys"])
+        } else if (gameGrid[indexY + 1][indexX].includes("lock")) {
+            checkKeyStatus(gameGrid[indexY + 1][indexX], game["gameItems"]["keys"])
+                ? movePlayer(gameGrid, index, "down") : null;
 
-        gameGrid[indexY].splice(indexX, 1, "-");
-        gameGrid[indexY].splice(indexX + 1, 1, "player");
-    };
-};
+        } else {
+            movePlayer(gameGrid, index, "down")
 
-const updateState = function(gameSpace, keys) {
+        }
 
-    gameSpace.includes("key") ? updatePlayerKeys(gameSpace, keys) : null;
+    } else if (direction === "left" && gameGrid[indexY][indexX - 1] != "/") {
+        if (gameGrid[indexY][indexX - 1].includes("key")) {
+            updateAcquiredKeys(gameGrid[indexY][indexX - 1], game["gameItems"]["keys"]);
+            movePlayer(gameGrid, index, "left")
 
-    gameSpace.includes("hkrchp") ? updatePlayerChips() : null;
-};
+        } else if (gameGrid[indexY][indexX - 1].includes("chip")) {
+            updateChipCount(game["gameItems"]["escapeChips"]);
+            movePlayer(gameGrid, index, "left")
 
-const updatePlayerKeys = function(gameSpace, keys) {
+        } else if (gameGrid[indexY][indexX - 1].includes("lock")) {
+            checkKeyStatus(gameGrid[indexY][indexX - 1], game["gameItems"]["keys"])
+                ? movePlayer(gameGrid, index, "left") : null;
 
-    if (gameSpace.includes("red")) {
-        keys["red"] = true;
+        } else {
+            movePlayer(gameGrid, index, "left")
 
-    } else if (gameSpace.includes("grn")) {
-        keys["green"] = true
+        }
 
-    } else if (gameSpace.includes("blu")) {
-        keys["blue"] = true
+    } else if (direction === "right" && gameGrid[indexY][indexX + 1] != "/") {
+        if (gameGrid[indexY][indexX + 1].includes("key")) {
+            updateAcquiredKeys(gameGrid[indexY][indexX + 1], game["gameItems"]["keys"]);
+            movePlayer(gameGrid, index, "right")
+
+        } else if (gameGrid[indexY][indexX + 1].includes("chip")) {
+            updateChipCount(game["gameItems"]["escapeChips"]);
+            movePlayer(gameGrid, index, "right")
+
+        } else if (gameGrid[indexY][indexX + 1].includes("lock")) {
+            checkKeyStatus(gameGrid[indexY][indexX + 1], game["gameItems"]["keys"])
+                ? movePlayer(gameGrid, index, "right") : null;
+
+        } else {
+             movePlayer(gameGrid, index, "right")
+             
+        } 
     }
-};
-
-const updatePlayerChips = function() {
-
-    game["player"]["hackerChips"] += 1;
 };
 
 // render gameGrid to DOM
@@ -134,7 +216,7 @@ const renderGameBoard = function(gameGrid) {
     gameGrid.forEach(function(spaceY, indexY){
         spaceY.forEach(function(spaceX, indexX){
             
-            if(spaceX === "/"){
+            if (spaceX === "/"){
                 $("<div/>").addClass("game-board-border")
                 .css(`left`, `${5 * indexX}rem`)
                 .css(`top`, `${5 * indexY}rem`)
@@ -155,7 +237,7 @@ const renderGameBoard = function(gameGrid) {
 
                 $playerDiv.appendTo($gameBoard)
 
-            } else if (spaceX === "hkrchp"){
+            } else if (spaceX === "chip"){
                 let $hackerChipDiv = $("<div/>").addClass("hacker-chip-container")
                     .css("left", `${5 * indexX}rem`)
                     .css("top", `${5 * indexY}rem`)
@@ -172,10 +254,10 @@ const renderGameBoard = function(gameGrid) {
                 if (spaceX.includes("red")) {
                     $("<div/>").addClass("hacker-key-red").appendTo($keyDiv);
 
-                } else if (spaceX.includes("blu")) {
+                } else if (spaceX.includes("blue")) {
                     $("<div/>").addClass("hacker-key-blue").appendTo($keyDiv);
 
-                } else if (spaceX.includes("grn")) {
+                } else if (spaceX.includes("green")) {
                     $("<div/>").addClass("hacker-key-green").appendTo($keyDiv);
                 }
 
@@ -189,10 +271,10 @@ const renderGameBoard = function(gameGrid) {
                 if (spaceX.includes("red")) {
                     $("<div/>").addClass("hacker-lock-red").appendTo($lockDiv);
 
-                } else if (spaceX.includes("blu")) {
+                } else if (spaceX.includes("blue")) {
                     $("<div/>").addClass("hacker-lock-blue").appendTo($lockDiv);
 
-                } else if (spaceX.includes("grn")) {
+                } else if (spaceX.includes("green")) {
                     $("<div/>").addClass("hacker-lock-green").appendTo($lockDiv);
                 }
 
