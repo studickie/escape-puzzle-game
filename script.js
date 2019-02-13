@@ -16,61 +16,61 @@ let game = {
 
     // for more abstracted DOM appending
     boardValues: [{
-        parentChild: false,
+        parent: false,
         value: "/",
         class: "game-boarder-block"
     }, {
-        parentChild: false,
+        parent: false,
         value: "-",
         class: "game-empty-block"
     }, {
-        parentChild: true,
+        parent: true,
         value: "player",
         class: "player",
         parentClass: "player-container"
     }, {
-        parentChild: true,
+        parent: true,
         value: "keyred",
         class: "hacker-key-red",
         parentClass: "hacker-key-container"
     }, {
-        parentChild: true,
+        parent: true,
         value: "keygreen",
         class: "hacker-key-green",
         parentClass: "hacker-key-container"
     }, {
-        parentChild: true,
+        parent: true,
         value: "keyblue",
         class: "hacker-key-blue",
         parentClass: "hacker-key-container"
     }, {
-        parentChild: true,
+        parent: true,
         value: "lockred",
-        class: "hacker-lock",
+        class: "hacker-lock-red",
         parentClass: "hacker-lock-container"
     }, {
-        parentChild: true,
+        parent: true,
         value: "lockgreen",
-        class: "hacker-lock",
+        class: "hacker-lock-green",
         parentClass: "hacker-lock-container"
     }, {
-        parentChild: true,
+        parent: true,
         value: "lockblue",
-        class: "hacker-lock",
+        class: "hacker-lock-blue",
         parentClass: "hacker-lock-container"
     },{
-        parentChild: true,
+        parent: true,
         value: "chip",
         class: "hacker-chip",
         parentClass: "hacker-chip-container"
     },{
-        parentChild: true,
+        parent: true,
         value: "exit",
         // value to change based on chips remaining to be collected
         class: "hacker-exit-closed",
         parentClass: "hacker-exit-container"
     },{
-        parentChild: true,
+        parent: true,
         value: "x",
         class: "hacker-pillon",
         parentClass: "hacker-pillon-container"
@@ -308,6 +308,7 @@ const movementRules = function(direction, gameGrid) {
 const renderGameBoard = function(gameGrid) {
 
     const $gameBoard = $(".game-board")
+    const boardValues = game["boardValues"]
     // empty DOM, otherwise it will contain 1000's of layered elements
     $gameBoard.empty();
 
@@ -315,69 +316,22 @@ const renderGameBoard = function(gameGrid) {
     gameGrid.forEach(function(spaceY, indexY){
         spaceY.forEach(function(spaceX, indexX){
             
-            if (spaceX === "/"){
-                $("<div/>").addClass("game-boarder-block")
-                .css(`left`, `${5 * indexX}rem`)
-                .css(`top`, `${5 * indexY}rem`)
-                .appendTo($gameBoard)
+            const gamePiece = boardValues.find(piece => piece["value"] === spaceX)
 
-            } else if (spaceX === "-"){
-                $("<div/>").addClass("game-empty-block")
-                .css(`left`, `${5 * indexX}rem`)
-                .css(`top`, `${5 * indexY}rem`)
-                .appendTo($gameBoard)
-
-            } else if (spaceX === "player"){
-                let $playerDiv = $("<div/>").addClass("player-container")
+            if (gamePiece["parent"] === false) {
+                $("<div/>").addClass(`${gamePiece["class"]}`)
                     .css(`left`, `${5 * indexX}rem`)
                     .css(`top`, `${5 * indexY}rem`)
+                    .appendTo($gameBoard);
 
-                $("<div/>").addClass("player").appendTo($playerDiv);
-
-                $playerDiv.appendTo($gameBoard)
-
-            } else if (spaceX === "chip"){
-                let $hackerChipDiv = $("<div/>").addClass("hacker-chip-container")
-                    .css("left", `${5 * indexX}rem`)
-                    .css("top", `${5 * indexY}rem`)
-
-                $("<div/>").addClass("hacker-chip").appendTo($hackerChipDiv);
-
-                $hackerChipDiv.appendTo($gameBoard)
-
-            } else if (spaceX.includes("key")) {
-                let $keyDiv = $("<div/>").addClass("hacker-key-container")
+            } else if (gamePiece["parent"] === true) {
+                let $newDiv = $("<div/>").addClass(`${gamePiece["parentClass"]}`)
                     .css(`left`, `${5 * indexX}rem`)
-                    .css(`top`, `${5 * indexY}rem`)
+                    .css(`top`, `${5 * indexY}rem`);
 
-                if (spaceX.includes("red")) {
-                    $("<div/>").addClass("hacker-key-red").appendTo($keyDiv);
+                $("<div/>").addClass(`${gamePiece["class"]}`).appendTo($newDiv);
 
-                } else if (spaceX.includes("blue")) {
-                    $("<div/>").addClass("hacker-key-blue").appendTo($keyDiv);
-
-                } else if (spaceX.includes("green")) {
-                    $("<div/>").addClass("hacker-key-green").appendTo($keyDiv);
-                }
-
-                $keyDiv.appendTo($gameBoard)
-
-            } else if (spaceX.includes("lock")) {
-                let $lockDiv = $("<div/>").addClass("hacker-lock-container")
-                    .css(`left`, `${5 * indexX}rem`)
-                    .css(`top`, `${5 * indexY}rem`)
-
-                if (spaceX.includes("red")) {
-                    $("<div/>").addClass("hacker-lock-red").appendTo($lockDiv);
-
-                } else if (spaceX.includes("blue")) {
-                    $("<div/>").addClass("hacker-lock-blue").appendTo($lockDiv);
-
-                } else if (spaceX.includes("green")) {
-                    $("<div/>").addClass("hacker-lock-green").appendTo($lockDiv);
-                }
-
-                $lockDiv.appendTo($gameBoard)
+                $newDiv.appendTo($gameBoard);
             }
         })
     });

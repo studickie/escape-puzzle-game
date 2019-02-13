@@ -331,7 +331,7 @@ html {
   font-size: 0.2rem;
   width: 25em;
   height: 25em;
-  position: relative;
+  position: absolute;
   background-color: #DDD;
 }
 
