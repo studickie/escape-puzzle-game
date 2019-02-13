@@ -7,13 +7,13 @@ let game = {
             ["/", "-", "-", "lockblue", "-", "-", "-", "-", "/"],
             ["/", "-", "keyred", "-", "-", "-", "keyblue", "-", "/"],
             ["/", "-", "-", "-", "-", "-", "-", "lockred", "/"],
-            ["/", "-", "-", "-", "player", "-", "-", "-", "/"],
+            ["exit", "-", "-", "-", "player", "-", "-", "-", "/"],
             ["/", "lockgreen", "-", "-", "-", "-", "-", "-", "/"],
             ["/", "-", "chip", "-", "-", "-", "keygreen", "-", "/"],
             ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
             ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
         ],
-        
+
     // for more abstracted DOM appending
     boardValues: [{
         parentChild: false,
@@ -66,8 +66,8 @@ let game = {
     },{
         parentChild: true,
         value: "exit",
-        // value given based on chips remaining to be collected
-        class: "",
+        // value to change based on chips remaining to be collected
+        class: "hacker-exit-closed",
         parentClass: "hacker-exit-container"
     },{
         parentChild: true,
@@ -95,7 +95,7 @@ let game = {
             id: "keyblue",
             lock: "lockblue",
             acquired: false
-        }],
+        }]
     }
 };
 
@@ -157,7 +157,32 @@ const updateChipCount = function(chipCount) {
     chipCount["remaining"] -= 1;
     chipCount["acquired"] += 1;
 
-    chipCount["remaining"] === 0 ? chipCount["exitOpen"] = true : null;
+    chipCount["remaining"] === 0 ? openExit(chipCount, game["boardValues"]) : null;
+};
+
+
+const openExit = function(exit, boardValues) {
+
+    exit["exitOpen"] = true;
+
+    const changeExitClass = boardValues.find(piece => piece["value"] === "exit");
+
+    changeExitClass["class"] = "hacker-exit-open";
+
+    renderGameBoard(game["gameGrid"]);
+};
+
+// player escapes map
+const escapeMap = function(gameGrid, index) {
+
+    const indexY = index[0];
+    const indexX = index[1];
+
+    gameGrid[indexY].splice(indexX, 1, "-");
+
+    renderGameBoard(gameGrid);
+
+    alert("Level Complete!");
 };
 
 // receives parameters, moves player accordingly
@@ -188,10 +213,11 @@ const movePlayer = function(gameGrid, index, direction) {
 const movementRules = function(direction, gameGrid) {
 
     const index = findPlayerPosition(gameGrid);
-
+    // player value location as co-ordinates
     const indexY = index[0];
     const indexX = index[1];
-            
+    
+    // move player up rules
     if (direction === "up" && gameGrid[indexY - 1][indexX] != "/") {
         if (gameGrid[indexY - 1][indexX].includes("key")){
             updateAcquiredKeys(gameGrid[indexY - 1][indexX], game["gameItems"]["keys"]);
@@ -205,11 +231,14 @@ const movementRules = function(direction, gameGrid) {
             checkKeyStatus(gameGrid[indexY - 1][indexX], game["gameItems"]["keys"]) 
                 ? movePlayer(gameGrid, index, "up") : null;
 
+        } else if (gameGrid[indexY - 1][indexX] === "exit") {
+            game["gameItems"]["escapeChips"]["exitOpen"] === true 
+                ? escapeMap(gameGrid, index) : null;
+
         } else {
             movePlayer(gameGrid, index, "up")
-
         }
-
+    // move player down rules
     } else if (direction === "down" && gameGrid[indexY + 1][indexX] != "/") {
         if (gameGrid[indexY + 1][indexX].includes("key")) {
             updateAcquiredKeys(gameGrid[indexY + 1][indexX], game["gameItems"]["keys"]);
@@ -223,11 +252,14 @@ const movementRules = function(direction, gameGrid) {
             checkKeyStatus(gameGrid[indexY + 1][indexX], game["gameItems"]["keys"])
                 ? movePlayer(gameGrid, index, "down") : null;
 
+        } else if (gameGrid[indexY + 1][indexX] === "exit") {
+            game["gameItems"]["escapeChips"]["exitOpen"] === true
+                ? escapeMap(gameGrid, index) : null;
+
         } else {
             movePlayer(gameGrid, index, "down")
-
         }
-
+    // move player left rules
     } else if (direction === "left" && gameGrid[indexY][indexX - 1] != "/") {
         if (gameGrid[indexY][indexX - 1].includes("key")) {
             updateAcquiredKeys(gameGrid[indexY][indexX - 1], game["gameItems"]["keys"]);
@@ -240,12 +272,15 @@ const movementRules = function(direction, gameGrid) {
         } else if (gameGrid[indexY][indexX - 1].includes("lock")) {
             checkKeyStatus(gameGrid[indexY][indexX - 1], game["gameItems"]["keys"])
                 ? movePlayer(gameGrid, index, "left") : null;
+            
+        } else if (gameGrid[indexY][indexX - 1] === "exit") {
+            game["gameItems"]["escapeChips"]["exitOpen"] === true
+                ? escapeMap(gameGrid, index) : null;
 
         } else {
             movePlayer(gameGrid, index, "left")
-
         }
-
+    // move player right rules
     } else if (direction === "right" && gameGrid[indexY][indexX + 1] != "/") {
         if (gameGrid[indexY][indexX + 1].includes("key")) {
             updateAcquiredKeys(gameGrid[indexY][indexX + 1], game["gameItems"]["keys"]);
@@ -259,9 +294,12 @@ const movementRules = function(direction, gameGrid) {
             checkKeyStatus(gameGrid[indexY][indexX + 1], game["gameItems"]["keys"])
                 ? movePlayer(gameGrid, index, "right") : null;
 
+        } else if (gameGrid[indexY][indexX + 1] === "exit") {
+            game["gameItems"]["escapeChips"]["exitOpen"] === true
+                ? escapeMap(gameGrid, index) : null;
+
         } else {
-             movePlayer(gameGrid, index, "right")
-             
+             movePlayer(gameGrid, index, "right")  
         } 
     }
 };
@@ -278,13 +316,13 @@ const renderGameBoard = function(gameGrid) {
         spaceY.forEach(function(spaceX, indexX){
             
             if (spaceX === "/"){
-                $("<div/>").addClass("game-empty-block")
+                $("<div/>").addClass("game-boarder-block")
                 .css(`left`, `${5 * indexX}rem`)
                 .css(`top`, `${5 * indexY}rem`)
                 .appendTo($gameBoard)
 
             } else if (spaceX === "-"){
-                $("<div/>").addClass("game-board-block")
+                $("<div/>").addClass("game-empty-block")
                 .css(`left`, `${5 * indexX}rem`)
                 .css(`top`, `${5 * indexY}rem`)
                 .appendTo($gameBoard)
