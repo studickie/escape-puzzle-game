@@ -13,6 +13,68 @@ let game = {
             ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
             ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
         ],
+        
+    // for more abstracted DOM appending
+    boardValues: [{
+        parentChild: false,
+        value: "/",
+        class: "game-boarder-block"
+    }, {
+        parentChild: false,
+        value: "-",
+        class: "game-empty-block"
+    }, {
+        parentChild: true,
+        value: "player",
+        class: "player",
+        parentClass: "player-container"
+    }, {
+        parentChild: true,
+        value: "keyred",
+        class: "hacker-key-red",
+        parentClass: "hacker-key-container"
+    }, {
+        parentChild: true,
+        value: "keygreen",
+        class: "hacker-key-green",
+        parentClass: "hacker-key-container"
+    }, {
+        parentChild: true,
+        value: "keyblue",
+        class: "hacker-key-blue",
+        parentClass: "hacker-key-container"
+    }, {
+        parentChild: true,
+        value: "lockred",
+        class: "hacker-lock",
+        parentClass: "hacker-lock-container"
+    }, {
+        parentChild: true,
+        value: "lockgreen",
+        class: "hacker-lock",
+        parentClass: "hacker-lock-container"
+    }, {
+        parentChild: true,
+        value: "lockblue",
+        class: "hacker-lock",
+        parentClass: "hacker-lock-container"
+    },{
+        parentChild: true,
+        value: "chip",
+        class: "hacker-chip",
+        parentClass: "hacker-chip-container"
+    },{
+        parentChild: true,
+        value: "exit",
+        // value given based on chips remaining to be collected
+        class: "",
+        parentClass: "hacker-exit-container"
+    },{
+        parentChild: true,
+        value: "x",
+        class: "hacker-pillon",
+        parentClass: "hacker-pillon-container"
+    }],
 
     gameItems: {
         escapeChips: {
@@ -49,16 +111,16 @@ const directionSelection = function(direction) {
 
     // pass the direction value to movePlayer() according to keypress
     if(direction === 38){
-        checkMoveToBlock("up", game["gameGrid"]);
+        movementRules("up", game["gameGrid"]);
 
     } else if (direction === 40){
-        checkMoveToBlock("down", game["gameGrid"]);
+        movementRules("down", game["gameGrid"]);
 
     } else if (direction === 37){
-        checkMoveToBlock("left", game["gameGrid"]);
+        movementRules("left", game["gameGrid"]);
             
     } else if (direction === 39){
-        checkMoveToBlock("right", game["gameGrid"]);
+        movementRules("right", game["gameGrid"]);
     };
 }
 
@@ -73,7 +135,7 @@ const findPlayerPosition = function(gameGrid) {
     return [indexY, indexX];
 };
 
-
+// find key object that matches gameGrid value, change acquired status to true
 const updateAcquiredKeys = function(newKey, keys) {
 
     const acquiredKey = keys.find(key => key["id"] === newKey);
@@ -81,7 +143,7 @@ const updateAcquiredKeys = function(newKey, keys) {
     acquiredKey["acquired"] = true;
 };
 
-
+// determins if locked blocks open based on key acquired status
 const checkKeyStatus = function(lock, keys) {
 
     const keyQuery = keys.find(key => key["lock"] === lock);
@@ -89,7 +151,7 @@ const checkKeyStatus = function(lock, keys) {
     return keyQuery["acquired"];
 };
 
-
+// updates chip count
 const updateChipCount = function(chipCount) {
 
     chipCount["remaining"] -= 1;
@@ -98,7 +160,7 @@ const updateChipCount = function(chipCount) {
     chipCount["remaining"] === 0 ? chipCount["exitOpen"] = true : null;
 };
 
-
+// receives parameters, moves player accordingly
 const movePlayer = function(gameGrid, index, direction) {
 
     const indexY = index[0];
@@ -119,12 +181,11 @@ const movePlayer = function(gameGrid, index, direction) {
     } else if (direction === "right") {
         gameGrid[indexY].splice(indexX, 1, "-");
         gameGrid[indexY].splice(indexX + 1, 1, "player");
-
     }
 };
 
-// move player value in gameGrid 
-const checkMoveToBlock = function(direction, gameGrid) {
+// set the rules for player movement
+const movementRules = function(direction, gameGrid) {
 
     const index = findPlayerPosition(gameGrid);
 
@@ -217,7 +278,7 @@ const renderGameBoard = function(gameGrid) {
         spaceY.forEach(function(spaceX, indexX){
             
             if (spaceX === "/"){
-                $("<div/>").addClass("game-board-border")
+                $("<div/>").addClass("game-empty-block")
                 .css(`left`, `${5 * indexX}rem`)
                 .css(`top`, `${5 * indexY}rem`)
                 .appendTo($gameBoard)

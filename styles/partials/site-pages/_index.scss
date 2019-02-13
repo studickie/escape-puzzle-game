@@ -10,7 +10,7 @@ html {
     position: relative;
 }
 
-.game-board-block {
+.game-empty-block {
     background-color: #DDD;
     border: 1px dashed rgba(0,0,0,0.25);
     width: 5rem;
@@ -18,7 +18,7 @@ html {
     position: absolute;
 }
 
-.game-board-border {
+.game-boarder-block {
     background-color: $hacker-boarder-block;
     border: 1px solid rgb(0,0,0);
     width: 5rem;
