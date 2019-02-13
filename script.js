@@ -307,8 +307,8 @@ const movementRules = function(direction, gameGrid) {
 // render gameGrid to DOM
 const renderGameBoard = function(gameGrid) {
 
-    const $gameBoard = $(".game-board")
-    const boardValues = game["boardValues"]
+    const $gameBoard = $(".game-board");
+    const boardValues = game["boardValues"];
     // empty DOM, otherwise it will contain 1000's of layered elements
     $gameBoard.empty();
 
@@ -335,5 +335,4 @@ const renderGameBoard = function(gameGrid) {
             }
         })
     });
-}
-
+};
