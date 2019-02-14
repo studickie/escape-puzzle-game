@@ -4,13 +4,13 @@ let game = {
     gameGrid:
         [
             ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
-            ["/", "-", "-", "lockblue", "-", "lockred", "-", "-", "/"],
-            ["/", "-", "keygreen", "/", "-", "/", "keyblue", "-", "/"],
+            ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
+            ["/", "-", "-", "/", "-", "/", "-", "-", "/"],
             ["/", "/", "/", "/", "-", "/", "/", "/", "/"],
-            ["exit", "-", "-", "-", "player", "-", "-", "-", "/"],
+            ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
             ["/", "/", "/", "/", "-", "/", "/", "/", "/"],
-            ["/", "-", "chip", "/", "-", "-", "keyred", "-", "/"],
-            ["/", "-", "-", "lockgreen", "-", "/", "-", "-", "/"],
+            ["/", "-", "-", "/", "-", "-", "-", "-", "/"],
+            ["/", "-", "-", "-", "-", "/", "-", "-", "/"],
             ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
         ],
 
@@ -19,7 +19,7 @@ let game = {
         parent: false,
         value: "/",
         class: "game-boarder-block"
-    }, {
+    }, {    
         parent: false,
         value: "-",
         class: "game-empty-block"
@@ -69,11 +69,6 @@ let game = {
         // value to change based on chips remaining to be collected
         class: "hacker-exit-closed",
         parentClass: "hacker-exit-container"
-    },{
-        parent: true,
-        value: "x",
-        class: "hacker-pillon",
-        parentClass: "hacker-pillon-container"
     }],
 
     gameItems: {
@@ -99,12 +94,14 @@ let game = {
     }
 };
 
-$(document).keydown(function(event){
-    // pass event to directionSelection() whcih determines movement direction
-    directionSelection(event.which);
-    // after player position value has been modified, render gameGrid in DOM
-    renderGameBoard(game["gameGrid"]);
-});
+const handleInput = function(){
+    $(document).keydown(function(event){
+        // pass event to directionSelection() whcih determines movement direction
+        directionSelection(event.which);
+        // after player position value has been modified, render gameGrid in DOM
+        renderGameBoard(game["gameGrid"]);
+    });
+};
 
 // receive event.which, route direction value accordingly
 const directionSelection = function(direction) {
@@ -308,6 +305,7 @@ const movementRules = function(direction, gameGrid) {
 const renderGameBoard = function(gameGrid) {
 
     const $gameBoard = $(".game-board");
+    const blockSize = $gameBoard.outerWidth()/ gameGrid[0].length
     const boardValues = game["boardValues"];
     // empty DOM, otherwise it will contain 1000's of layered elements
     $gameBoard.empty();
@@ -322,14 +320,16 @@ const renderGameBoard = function(gameGrid) {
             // two options are needed to accomodate a design mistake made early in the process -> fix if time allows!!
             if (gamePiece["parent"] === false) {
                 $("<div/>").addClass(`${gamePiece["class"]}`)
-                    .css(`left`, `${5 * indexX}rem`)
-                    .css(`top`, `${5 * indexY}rem`)
+                    .css(`width`, `${blockSize}px`)
+                    .css(`height`, `${blockSize}px`)
+                    .css(`left`, `${blockSize * indexX}px`)
+                    .css(`top`, `${blockSize * indexY}px`)
                     .appendTo($gameBoard);
 
             } else if (gamePiece["parent"] === true) {
                 let $newDiv = $("<div/>").addClass(`${gamePiece["parentClass"]}`)
-                    .css(`left`, `${5 * indexX}rem`)
-                    .css(`top`, `${5 * indexY}rem`);
+                    .css(`left`, `${blockSize * indexY}%`)
+                    .css(`top`, `${blockSize * indexY}%`);
 
                 $("<div/>").addClass(`${gamePiece["class"]}`).appendTo($newDiv);
 
@@ -338,3 +338,14 @@ const renderGameBoard = function(gameGrid) {
         })
     });
 };
+
+game.init = function () {
+    renderGameBoard(this.gameGrid);
+
+    handleInput();
+}
+
+$(function(){
+
+    game.init()
+})

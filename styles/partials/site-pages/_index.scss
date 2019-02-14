@@ -1,27 +1,25 @@
-html {
-    font-size: 125%;
-    // 1rem = 20px
-}
-
 .game-board {
-    width: 45rem;
-    height: 45rem;
+    max-width: 768px;
+    width: 90vw;
+    max-height: 768px;
+    height: 52.5vh;
+    margin: 0 5%;
     border: 2px solid red;
     position: relative;
 }
 
 .game-empty-block {
     background-color: #DDD;
-    border: 1px dashed rgba(0,0,0,0.25);
-    width: 5rem;
-    height: 5rem;
+    // border: 1px dashed rgba(0,0,0,0.25);
+    // width: 5rem;
+    // height: 5rem;
     position: absolute;
 }
 
 .game-boarder-block {
     background-color: $hacker-boarder-block;
-    border: 1px solid rgb(0,0,0);
-    width: 5rem;
-    height: 5rem;
+    // border: 1px solid rgb(0,0,0);
+    // width: 5rem;
+    // height: 5rem;
     position: absolute;
 }
