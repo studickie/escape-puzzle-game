@@ -328,7 +328,7 @@ const renderGameBoard = function(gameGrid) {
 
             } else if (gamePiece["parent"] === true) {
                 let $newDiv = $("<div/>").addClass(`${gamePiece["parentClass"]}`)
-                    .css("fontSize", `${blockSize * 0.025}rem`)
+                    // .css("fontSize", `${blockSize * 0.025}rem`)
                     .css(`width`, `${blockSize}px`)
                     .css(`height`, `${blockSize}px`)
                     .css(`left`, `${blockSize * indexX}px`)
