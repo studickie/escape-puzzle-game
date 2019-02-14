@@ -7,7 +7,7 @@ let game = {
             ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
             ["/", "-", "-", "/", "-", "/", "-", "-", "/"],
             ["/", "/", "/", "/", "-", "/", "/", "/", "/"],
-            ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
+            ["/", "-", "-", "-", "player", "-", "-", "-", "/"],
             ["/", "/", "/", "/", "-", "/", "/", "/", "/"],
             ["/", "-", "-", "/", "-", "-", "-", "-", "/"],
             ["/", "-", "-", "-", "-", "/", "-", "-", "/"],
@@ -328,8 +328,11 @@ const renderGameBoard = function(gameGrid) {
 
             } else if (gamePiece["parent"] === true) {
                 let $newDiv = $("<div/>").addClass(`${gamePiece["parentClass"]}`)
-                    .css(`left`, `${blockSize * indexY}%`)
-                    .css(`top`, `${blockSize * indexY}%`);
+                    .css("fontSize", `${blockSize * 0.025}rem`)
+                    .css(`width`, `${blockSize}px`)
+                    .css(`height`, `${blockSize}px`)
+                    .css(`left`, `${blockSize * indexX}px`)
+                    .css(`top`, `${blockSize * indexY}px`)
 
                 $("<div/>").addClass(`${gamePiece["class"]}`).appendTo($newDiv);
 
