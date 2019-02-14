@@ -116,16 +116,16 @@ game.directionSelection = function(direction) {
 
     // pass the direction value to movePlayer() according to keypress
     if(direction === 38){
-        game.movementRules("up", game["grid"]);
+        this.movementRules("up", game["grid"]);
 
     } else if (direction === 40){
-        game.movementRules("down", game["grid"]);
+        this.movementRules("down", game["grid"]);
 
     } else if (direction === 37){
-        game.movementRules("left", game["grid"]);
+        this.movementRules("left", game["grid"]);
             
     } else if (direction === 39){
-        game.movementRules("right", game["grid"]);
+        this.movementRules("right", game["grid"]);
     };
 };
 
@@ -174,7 +174,7 @@ game.openExit = function(exit, boardValues) {
 
     changeExitClass["class"] = "hacker-exit-open";
 
-    game.renderGameBoard(game["grid"]);
+    this.renderGameBoard(game["grid"]);
 };
 
 // player escapes map
@@ -185,7 +185,7 @@ game.escapeMap = function(gameGrid, index) {
 
     gameGrid[indexY].splice(indexX, 1, "-");
 
-    game.renderGameBoard(gameGrid);
+    this.renderGameBoard(gameGrid);
 
     alert("Level Complete!");
 };
@@ -215,9 +215,9 @@ game.movePlayer = function(gameGrid, index, direction) {
 };
 
 // set the rules for player movement
-game.movementRules = function(direction, gameGrid) {
+game.movementRules = function(direction, gameGrid){
 
-    const index = game.findPlayerPosition(gameGrid);
+    const index = this.findPlayerPosition(gameGrid);
     // player value location as co-ordinates
     const indexY = index[0];
     const indexX = index[1];
@@ -225,86 +225,86 @@ game.movementRules = function(direction, gameGrid) {
     // move player up rules
     if (direction === "up" && gameGrid[indexY - 1][indexX] != "/") {
         if (gameGrid[indexY - 1][indexX].includes("key")){
-            game.updateAcquiredKeys(gameGrid[indexY - 1][indexX], game["items"]["keys"]);
-            game.movePlayer(gameGrid, index, "up")
+            this.updateAcquiredKeys(gameGrid[indexY - 1][indexX], this["items"]["keys"]);
+            this.movePlayer(gameGrid, index, "up")
 
         } else if (gameGrid[indexY - 1][indexX].includes("chip")){
-            game.updateChipCount(game["items"]["escapeChips"]);
-            game.movePlayer(gameGrid, index, "up")
+            this.updateChipCount(this["items"]["escapeChips"]);
+            this.movePlayer(gameGrid, index, "up")
 
         } else if (gameGrid[indexY - 1][indexX].includes("lock")){
-            game.checkKeyStatus(gameGrid[indexY - 1][indexX], game["items"]["keys"]) 
-                ? game.movePlayer(gameGrid, index, "up") : null;
+            this.checkKeyStatus(gameGrid[indexY - 1][indexX], this["items"]["keys"]) 
+                ? this.movePlayer(gameGrid, index, "up") : null;
 
         } else if (gameGrid[indexY - 1][indexX] === "exit") {
-            game["items"]["escapeChips"]["exitOpen"] === true 
-                ? game.escapeMap(gameGrid, index) : null;
+            this["items"]["escapeChips"]["exitOpen"] === true 
+                ? this.escapeMap(gameGrid, index) : null;
 
         } else {
-            game.movePlayer(gameGrid, index, "up")
+            this.movePlayer(gameGrid, index, "up")
         }
     // move player down rules
     } else if (direction === "down" && gameGrid[indexY + 1][indexX] != "/") {
         if (gameGrid[indexY + 1][indexX].includes("key")) {
-            game.updateAcquiredKeys(gameGrid[indexY + 1][indexX], game["items"]["keys"]);
-            game.movePlayer(gameGrid, index, "down")
+            this.updateAcquiredKeys(gameGrid[indexY + 1][indexX], this["items"]["keys"]);
+            this.movePlayer(gameGrid, index, "down")
 
         } else if (gameGrid[indexY + 1][indexX].includes("chip")) {
-            game.updateChipCount(game["items"]["escapeChips"]);
-            game.movePlayer(gameGrid, index, "down")
+            this.updateChipCount(this["items"]["escapeChips"]);
+            this.movePlayer(gameGrid, index, "down")
 
         } else if (gameGrid[indexY + 1][indexX].includes("lock")) {
-            game.checkKeyStatus(gameGrid[indexY + 1][indexX], game["items"]["keys"])
-                ? game.movePlayer(gameGrid, index, "down") : null;
+            this.checkKeyStatus(gameGrid[indexY + 1][indexX], this["items"]["keys"])
+                ? this.movePlayer(gameGrid, index, "down") : null;
 
         } else if (gameGrid[indexY + 1][indexX] === "exit") {
-            game["Items"]["escapeChips"]["exitOpen"] === true
-                ? game.escapeMap(gameGrid, index) : null;
+            this["Items"]["escapeChips"]["exitOpen"] === true
+                ? this.escapeMap(gameGrid, index) : null;
 
         } else {
-            game.movePlayer(gameGrid, index, "down")
+            this.movePlayer(gameGrid, index, "down")
         }
     // move player left rules
     } else if (direction === "left" && gameGrid[indexY][indexX - 1] != "/") {
         if (gameGrid[indexY][indexX - 1].includes("key")) {
-            game.updateAcquiredKeys(gameGrid[indexY][indexX - 1], game["items"]["keys"]);
-            game.movePlayer(gameGrid, index, "left")
+            this.updateAcquiredKeys(gameGrid[indexY][indexX - 1], this["items"]["keys"]);
+            this.movePlayer(gameGrid, index, "left")
 
         } else if (gameGrid[indexY][indexX - 1].includes("chip")) {
-            game.updateChipCount(game["items"]["escapeChips"]);
-            game.movePlayer(gameGrid, index, "left")
+            this.updateChipCount(this["items"]["escapeChips"]);
+            this.movePlayer(gameGrid, index, "left")
 
         } else if (gameGrid[indexY][indexX - 1].includes("lock")) {
-            game.checkKeyStatus(gameGrid[indexY][indexX - 1], game["items"]["keys"])
-                ? game.movePlayer(gameGrid, index, "left") : null;
+            this.checkKeyStatus(gameGrid[indexY][indexX - 1], this["items"]["keys"])
+                ? this.movePlayer(gameGrid, index, "left") : null;
             
         } else if (gameGrid[indexY][indexX - 1] === "exit") {
-            game["items"]["escapeChips"]["exitOpen"] === true
-                ? game.escapeMap(gameGrid, index) : null;
+            this["items"]["escapeChips"]["exitOpen"] === true
+                ? this.escapeMap(gameGrid, index) : null;
 
         } else {
-            game.movePlayer(gameGrid, index, "left")
+            this.movePlayer(gameGrid, index, "left")
         }
     // move player right rules
     } else if (direction === "right" && gameGrid[indexY][indexX + 1] != "/") {
         if (gameGrid[indexY][indexX + 1].includes("key")) {
-            game.updateAcquiredKeys(gameGrid[indexY][indexX + 1], game["items"]["keys"]);
-            game.movePlayer(gameGrid, index, "right")
+            this.updateAcquiredKeys(gameGrid[indexY][indexX + 1], this["items"]["keys"]);
+            this.movePlayer(gameGrid, index, "right")
 
         } else if (gameGrid[indexY][indexX + 1].includes("chip")) {
-            game.updateChipCount(game["items"]["escapeChips"]);
-            game.movePlayer(gameGrid, index, "right")
+            this.updateChipCount(this["items"]["escapeChips"]);
+            this.movePlayer(gameGrid, index, "right")
 
         } else if (gameGrid[indexY][indexX + 1].includes("lock")) {
-            game.checkKeyStatus(gameGrid[indexY][indexX + 1], game["items"]["keys"])
-                ? game.movePlayer(gameGrid, index, "right") : null;
+            this.checkKeyStatus(gameGrid[indexY][indexX + 1], this["items"]["keys"])
+                ? this.movePlayer(gameGrid, index, "right") : null;
 
         } else if (gameGrid[indexY][indexX + 1] === "exit") {
-            game["items"]["escapeChips"]["exitOpen"] === true
-                ? game.escapeMap(gameGrid, index) : null;
+            this["items"]["escapeChips"]["exitOpen"] === true
+                ? this.escapeMap(gameGrid, index) : null;
 
         } else {
-             game.movePlayer(gameGrid, index, "right")  
+             this.movePlayer(gameGrid, index, "right")  
         } 
     }
 };
