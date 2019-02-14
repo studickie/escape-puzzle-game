@@ -313,10 +313,10 @@ game.movementRules = function(direction, gameGrid){
 game.renderGameBoard = function(gameGrid) {
 
     const $gameBoard = $(".game-board");
+    const $blockSize = $gameBoard.outerWidth() / game["grid"][0].length;
     const boardValues = game["values"];
     // empty DOM, otherwise it will contain 1000's of layered elements
     $gameBoard.empty();
-
     // loop through gameGrid, create and append element based on content
     gameGrid.forEach(function(spaceY, indexY){
         spaceY.forEach(function(spaceX, indexX){
@@ -333,6 +333,7 @@ game.renderGameBoard = function(gameGrid) {
 
             } else if (gamePiece["parent"] === true) {
                 let $newDiv = $("<div/>").addClass(`${gamePiece["parentClass"]}`)
+                    .css(`fontSize`, `${$blockSize / 500}rem`)
                     .css(`left`, `${5 * indexX}rem`)
                     .css(`top`, `${5 * indexY}rem`);
 
