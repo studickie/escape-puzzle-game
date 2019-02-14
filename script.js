@@ -4,13 +4,13 @@ let game = {
     gameGrid:
         [
             ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
-            ["/", "-", "-", "lockblue", "-", "-", "-", "-", "/"],
-            ["/", "-", "keyred", "-", "-", "-", "keyblue", "-", "/"],
-            ["/", "-", "-", "-", "-", "-", "-", "lockred", "/"],
+            ["/", "-", "-", "lockblue", "-", "lockred", "-", "-", "/"],
+            ["/", "-", "keygreen", "/", "-", "/", "keyblue", "-", "/"],
+            ["/", "/", "/", "/", "-", "/", "/", "/", "/"],
             ["exit", "-", "-", "-", "player", "-", "-", "-", "/"],
-            ["/", "lockgreen", "-", "-", "-", "-", "-", "-", "/"],
-            ["/", "-", "chip", "-", "-", "-", "keygreen", "-", "/"],
-            ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
+            ["/", "/", "/", "/", "-", "/", "/", "/", "/"],
+            ["/", "-", "chip", "/", "-", "-", "keyred", "-", "/"],
+            ["/", "-", "-", "lockgreen", "-", "/", "-", "-", "/"],
             ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
         ],
 
@@ -160,7 +160,7 @@ const updateChipCount = function(chipCount) {
     chipCount["remaining"] === 0 ? openExit(chipCount, game["boardValues"]) : null;
 };
 
-
+// set exitOpen to true, change append class; re-apprend board to reflect changes
 const openExit = function(exit, boardValues) {
 
     exit["exitOpen"] = true;
@@ -315,9 +315,11 @@ const renderGameBoard = function(gameGrid) {
     // loop through gameGrid, create and append element based on content
     gameGrid.forEach(function(spaceY, indexY){
         spaceY.forEach(function(spaceX, indexX){
-            
+             
+            // get appropriate object for gameGrid value
             const gamePiece = boardValues.find(piece => piece["value"] === spaceX)
 
+            // two options are needed to accomodate a design mistake made early in the process -> fix if time allows!!
             if (gamePiece["parent"] === false) {
                 $("<div/>").addClass(`${gamePiece["class"]}`)
                     .css(`left`, `${5 * indexX}rem`)
