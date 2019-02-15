@@ -169,15 +169,9 @@ html {
   font-size: 125%;
 }
 
-html {
-  font-size: 125%;
-}
-
 .game-board {
   width: 90%;
   max-width: 768px;
-  max-height: 768px;
-  border: 2px solid red;
   position: relative;
 }
 

@@ -2,6 +2,8 @@
 
 let game = {};
 
+// game.grid can be changed to create any map without altering other JS values
+// --> !!MUST HAVE straight verticle edges; fill blank space with boarder blocks
 game.grid = 
     [
         ["/", "/", "/", "/", "exit", "/", "/", "/", "/"],
@@ -68,7 +70,7 @@ game.values = [{
     },{
         parent: true,
         value: "exit",
-        // value to change based on chips remaining to be collected
+        // value to change based on chips remaining to be collected; see function updateChipCount
         class: "hacker-exit-closed",
         parentClass: "hacker-exit-container"
     }
@@ -76,6 +78,7 @@ game.values = [{
 
 game.items = {
     escapeChips: {
+        // value to be set at page initilization; see function getChipCount
         remaining: 0,
         acquired: 0,
         exitOpen: false
@@ -135,8 +138,9 @@ game.findPlayerPosition = function(gameGrid) {
     return [indexY, indexX];
 };
 
+// get chip count at start of game; allows any amount to be entered wihout altering game object values
 game.getChipCount = function(gameGrid) {
-    
+
     let count = 0;
 
     gameGrid.forEach((itemY) => {itemY.forEach((itemX) => {itemX === "chip" ? count += 1 : null})})
@@ -315,9 +319,10 @@ game.movementRules = function(direction, gameGrid){
 game.renderGameBoard = function(gameGrid) {
 
     const $gameBoard = $(".game-board");
+    // width of board used to render game blocks at appropriate size for screen
     const $blockSize = $gameBoard.outerWidth() / game["grid"][0].length;
     const boardValues = game["values"];
-    // empty DOM, otherwise it will contain 1000's of layered elements
+    
     $gameBoard.empty();
     // loop through gameGrid, create and append element based on content
     gameGrid.forEach(function(spaceY, indexY){
@@ -326,7 +331,7 @@ game.renderGameBoard = function(gameGrid) {
             // get appropriate object for gameGrid value
             const gamePiece = boardValues.find(piece => piece["value"] === spaceX)
 
-            // two options are needed to accomodate a design mistake made early in the process -> fix if time allows!!
+            // two options are needed to accomodate a design mistake made early on -> fix if time allows!!
             if (gamePiece["parent"] === false) {
                 $("<div/>").addClass(`${gamePiece["class"]}`)
                     .css(`width`, $blockSize)
