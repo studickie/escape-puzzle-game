@@ -14,8 +14,40 @@
         all game elements appended via JavaScript 
         allows for any map to be created by changing the values in game.grid array 
     -->
-    <div class="game-board"></div>
+    <main class="index-main">
 
+        <section class="game-status-bar">
+            <div class="status-chips">
+                <ul>
+                    <li>HackerChips:</li>
+                    <li class="total-chips"></li>
+                </ul>
+                <ul>
+                    <li>Collected:</li>
+                    <li class="collected-chips"></li>
+                </ul>
+            </div>
+
+            <div class="status-keys">
+                <ul>
+                    <li>Keys:</li>
+                    <li>
+                        <div class="red-dot false"></div>
+                    </li>
+                    <li>
+                        <div class="green-dot false"></div>
+                    </li>
+                    <li>
+                        <div class="blue-dot false"></div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="game-board-container">
+            <div class="game-board"></div>
+        </section>
+    </main>
     <!-- JavaScript scripts -->
     <script src='https://code.jquery.com/jquery-3.3.1.js' integrity='sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=' crossorigin='anonymous'></script>
     <script src="script.js"></script>

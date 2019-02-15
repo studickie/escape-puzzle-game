@@ -154,6 +154,8 @@ game.updateAcquiredKeys = function(newKey, keys) {
     const acquiredKey = keys.find(key => key["id"] === newKey);
     
     acquiredKey["acquired"] = true;
+
+    this.setStatusBarKeys(aquiredKey)
 };
 
 // determins if locked blocks open based on key acquired status
@@ -164,12 +166,13 @@ game.checkKeyStatus = function(lock, keys) {
     return keyQuery["acquired"];
 };
 
-// updates chip count
+// updates chip count when one is acquired
 game.updateChipCount = function(chipCount) {
 
     chipCount["remaining"] -= 1;
     chipCount["acquired"] += 1;
 
+    game.setStatusBarChipCount(chipCount);
     chipCount["remaining"] === 0 ? game.openExit(chipCount, game["values"]) : null;
 };
 
@@ -194,6 +197,20 @@ game.escapeMap = function(gameGrid, index) {
     gameGrid[indexY].splice(indexX, 1, "-");
 
     this.renderGameBoard(gameGrid);
+};
+
+game.setStatusBarChipCount = function(chips) {
+
+    const $totalChips = $(".total-chips");
+    const $collectedChips = $(".collected-chips");
+
+    $totalChips.text(chips["remaining"]);
+    $collectedChips.text(chips["acquired"]);
+};
+
+game.setStatusBarKeys = function() {
+
+
 };
 
 // receives parameters, moves player accordingly
@@ -358,6 +375,7 @@ game.init = function() {
 
     game.renderGameBoard(game["grid"]);
     game.getChipCount(game["grid"]);
+    game.setStatusBarChipCount(game["items"]["escapeChips"]);
     game.handleEvent();
 };
 
