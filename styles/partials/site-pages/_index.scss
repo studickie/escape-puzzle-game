@@ -29,7 +29,6 @@
 }
 
 .game-status-bar {
-    grid-area: statusbar;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
@@ -37,7 +36,6 @@
     padding: 0 3%;
     width: 90%;
     max-width: 768px;
-    height: 5vh;
     background-color: $hacker-black;
     color: $hacker-white;
     border-radius: 15px 15px 0 0;
@@ -51,7 +49,7 @@
 }
 
 .status-chips {
-    flex-basis: 45%;
+    flex-basis: 50%;
     justify-content: space-between;
 }
 
