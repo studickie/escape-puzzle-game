@@ -136,6 +136,7 @@ game.findPlayerPosition = function(gameGrid) {
 };
 
 game.getChipCount = function(gameGrid) {
+    
     let count = 0;
 
     gameGrid.forEach((itemY) => {itemY.forEach((itemX) => {itemX === "chip" ? count += 1 : null})})
