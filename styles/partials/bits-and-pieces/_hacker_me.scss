@@ -1,9 +1,7 @@
 // Pixel art examples explored at https://css-tricks.com/fun-times-css-pixel-art/ -> author credit: Geoff Graham
 
 .player-container {
-    // sets proper font size for accurate game piece rendering 
-    // change piece size here if needed
-    // font-size: 0.2rem;
+    // change parent font-size to re-size all aspects of element
     width: 25em;
     height: 25em;
     position: relative;

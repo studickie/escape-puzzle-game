@@ -1,8 +1,7 @@
 // Pixel art examples explored at https://css-tricks.com/fun-times-css-pixel-art/ -> author credit: Geoff Graham
 
 .hacker-chip-container {
-    // change font-size property for total piece re-sizing
-    // font-size: 1.2rem;
+    // change parent font-size to re-size all aspects of element
     width: 25em;
     height: 25em;
     background-color: $hacker-empty-block;
