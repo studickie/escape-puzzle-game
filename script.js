@@ -87,14 +87,17 @@ game.items = {
     keys: [{
         id: "keyred",
         lock: "lockred",
+        statusClass: "red-dot",
         acquired: false
     },{
         id: "keygreen",
         lock: "lockgreen",
+        statusClass: "green-dot",
         acquired: false
     },{
         id: "keyblue",
         lock: "lockblue",
+        statusClass: "blue-dot",
         acquired: false
     }]
 };
@@ -155,7 +158,7 @@ game.updateAcquiredKeys = function(newKey, keys) {
     
     acquiredKey["acquired"] = true;
 
-    this.setStatusBarKeys(aquiredKey)
+    this.setStatusBarKeys(acquiredKey)
 };
 
 // determins if locked blocks open based on key acquired status
@@ -208,9 +211,10 @@ game.setStatusBarChipCount = function(chips) {
     $collectedChips.text(chips["acquired"]);
 };
 
-game.setStatusBarKeys = function() {
-
-
+game.setStatusBarKeys = function(key) {
+    
+    $(`.${key["statusClass"]}`).toggleClass("false");
+    $(`.${key["statusClass"]}`).toggleClass("true");
 };
 
 // receives parameters, moves player accordingly
