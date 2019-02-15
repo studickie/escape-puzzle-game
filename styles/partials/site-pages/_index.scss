@@ -4,8 +4,9 @@ html {
 }
 
 .game-board {
-    width: 45rem;
-    height: 45rem;
+    width: 90%;
+    max-width: 768px;
+    max-height: 768px;
     border: 2px solid red;
     position: relative;
 }
@@ -13,15 +14,15 @@ html {
 .game-empty-block {
     background-color: #DDD;
     border: 1px dashed rgba(0,0,0,0.25);
-    width: 5rem;
-    height: 5rem;
+    // width: 5rem;
+    // height: 5rem;
     position: absolute;
 }
 
 .game-boarder-block {
     background-color: $hacker-boarder-block;
     border: 1px solid rgb(0,0,0);
-    width: 5rem;
-    height: 5rem;
+    // width: 5rem;
+    // height: 5rem;
     position: absolute;
 }

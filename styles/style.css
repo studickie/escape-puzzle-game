@@ -174,8 +174,9 @@ html {
 }
 
 .game-board {
-  width: 45rem;
-  height: 45rem;
+  width: 90%;
+  max-width: 768px;
+  max-height: 768px;
   border: 2px solid red;
   position: relative;
 }
@@ -183,21 +184,16 @@ html {
 .game-empty-block {
   background-color: #DDD;
   border: 1px dashed rgba(0, 0, 0, 0.25);
-  width: 5rem;
-  height: 5rem;
   position: absolute;
 }
 
 .game-boarder-block {
   background-color: #343434;
   border: 1px solid black;
-  width: 5rem;
-  height: 5rem;
   position: absolute;
 }
 
 .player-container {
-  font-size: 0.2rem;
   width: 25em;
   height: 25em;
   position: relative;
@@ -214,69 +210,22 @@ html {
 }
 
 .hacker-chip-container {
-  font-size: 0.1rem;
   width: 25em;
   height: 25em;
-  background-color: #E20016;
+  background-color: #DDD;
   position: absolute;
-  margin: 2.75%;
-  -webkit-box-shadow: -1.25rem 1.25rem 0 #DDD, 1.25rem 1.25rem 0 #DDD, 1.25rem -1.25rem 0 #DDD, -1.25rem -1.25rem 0 #DDD;
-          box-shadow: -1.25rem 1.25rem 0 #DDD, 1.25rem 1.25rem 0 #DDD, 1.25rem -1.25rem 0 #DDD, -1.25rem -1.25rem 0 #DDD;
 }
 
 .hacker-chip {
   position: absolute;
   top: 0;
-  height: 12.5%;
-  width: 12.5%;
-  -webkit-box-shadow: 4.5em 4.5em 0 #FCFCFC, 7.5em 7.5em 0 #FCFCFC, 10.5em 10.5em 0 #FCFCFC, 7.5em 13.5em 0 #FCFCFC, 4.5em 16.5em 0 #FCFCFC, 10.5em 14em 0 #E20016, 13.5em 14em 0 #E20016, 16.5em 14em 0 #E20016, 10.5em 16.5em 0 #FCFCFC, 13.5em 16.5em 0 #FCFCFC, 16.5em 16.5em 0 #FCFCFC;
-          box-shadow: 4.5em 4.5em 0 #FCFCFC, 7.5em 7.5em 0 #FCFCFC, 10.5em 10.5em 0 #FCFCFC, 7.5em 13.5em 0 #FCFCFC, 4.5em 16.5em 0 #FCFCFC, 10.5em 14em 0 #E20016, 13.5em 14em 0 #E20016, 16.5em 14em 0 #E20016, 10.5em 16.5em 0 #FCFCFC, 13.5em 16.5em 0 #FCFCFC, 16.5em 16.5em 0 #FCFCFC;
-}
-
-@-webkit-keyframes hacker-chip-bounce {
-  0% {
-    -webkit-transform: translateY(0rem);
-            transform: translateY(0rem);
-    -webkit-box-shadow: 0 0 1.5rem 1rem #eee;
-            box-shadow: 0 0 1.5rem 1rem #eee;
-  }
-  50% {
-    -webkit-transform: translateY(-1rem);
-            transform: translateY(-1rem);
-    -webkit-box-shadow: 0 0 2rem 1.5rem #eee;
-            box-shadow: 0 0 2rem 1.5rem #eee;
-  }
-  100% {
-    -webkit-transform: translateY(0rem);
-            transform: translateY(0rem);
-    -webkit-box-shadow: 0 0 1.5rem 1rem #eee;
-            box-shadow: 0 0 1.5rem 1rem #eee;
-  }
-}
-
-@keyframes hacker-chip-bounce {
-  0% {
-    -webkit-transform: translateY(0rem);
-            transform: translateY(0rem);
-    -webkit-box-shadow: 0 0 1.5rem 1rem #eee;
-            box-shadow: 0 0 1.5rem 1rem #eee;
-  }
-  50% {
-    -webkit-transform: translateY(-1rem);
-            transform: translateY(-1rem);
-    -webkit-box-shadow: 0 0 2rem 1.5rem #eee;
-            box-shadow: 0 0 2rem 1.5rem #eee;
-  }
-  100% {
-    -webkit-transform: translateY(0rem);
-            transform: translateY(0rem);
-    -webkit-box-shadow: 0 0 1.5rem 1rem #eee;
-            box-shadow: 0 0 1.5rem 1rem #eee;
-  }
+  height: 6.25%;
+  width: 6.25%;
+  -webkit-box-shadow: 5.5em 5.5em 0 #E20016, 7em 5.5em 0 #E20016, 8.5em 5.5em 0 #E20016, 10em 5.5em 0 #E20016, 11.5em 5.5em 0 #E20016, 13em 5.5em 0 #E20016, 14.5em 5.5em 0 #E20016, 16em 5.5em 0 #E20016, 17.5em 5.5em 0 #E20016, 5.5em 7em 0 #E20016, 7em 7em 0 #FCFCFC, 8.5em 7em 0 #E20016, 10em 7em 0 #E20016, 11.5em 7em 0 #E20016, 13em 7em 0 #E20016, 14.5em 7em 0 #E20016, 16em 7em 0 #E20016, 17.5em 7em 0 #E20016, 5.5em 8.5em 0 #E20016, 7em 8.5em 0 #E20016, 8.5em 8.5em 0 #FCFCFC, 10em 8.5em 0 #E20016, 11.5em 8.5em 0 #E20016, 13em 8.5em 0 #E20016, 14.5em 8.5em 0 #E20016, 16em 8.5em 0 #E20016, 17.5em 8.5em 0 #E20016, 5.5em 10em 0 #E20016, 7em 10em 0 #E20016, 8.5em 10em 0 #E20016, 10em 10em 0 #FCFCFC, 11.5em 10em 0 #E20016, 13em 10em 0 #E20016, 14.5em 10em 0 #E20016, 16em 10em 0 #E20016, 17.5em 10em 0 #E20016, 5.5em 11.5em 0 #E20016, 7em 11.5em 0 #E20016, 8.5em 11.5em 0 #E20016, 10em 11.5em 0 #E20016, 11.5em 11.5em 0 #FCFCFC, 13em 11.5em 0 #E20016, 14.5em 11.5em 0 #E20016, 16em 11.5em 0 #E20016, 17.5em 11.5em 0 #E20016, 5.5em 13em 0 #E20016, 7em 13em 0 #E20016, 8.5em 13em 0 #E20016, 10em 13em 0 #FCFCFC, 11.5em 13em 0 #E20016, 13em 13em 0 #E20016, 14.5em 13em 0 #E20016, 16em 13em 0 #E20016, 17.5em 13em 0 #E20016, 5.5em 14.5em 0 #E20016, 7em 14.5em 0 #E20016, 8.5em 14.5em 0 #FCFCFC, 10em 14.5em 0 #E20016, 11.5em 14.5em 0 #E20016, 13em 14.5em 0 #E20016, 14.5em 14.5em 0 #E20016, 16em 14.5em 0 #E20016, 17.5em 14.5em 0 #E20016, 5.5em 16em 0 #E20016, 7em 16em 0 #FCFCFC, 8.5em 16em 0 #E20016, 10em 16em 0 #E20016, 11.5em 16em 0 #FCFCFC, 13em 16em 0 #FCFCFC, 14.5em 16em 0 #FCFCFC, 16em 16em 0 #FCFCFC, 17.5em 16em 0 #E20016, 5.5em 17.5em 0 #E20016, 7em 17.5em 0 #E20016, 8.5em 17.5em 0 #E20016, 10em 17.5em 0 #E20016, 11.5em 17.5em 0 #E20016, 13em 17.5em 0 #E20016, 14.5em 17.5em 0 #E20016, 16em 17.5em 0 #E20016, 17.5em 17.5em 0 #E20016;
+          box-shadow: 5.5em 5.5em 0 #E20016, 7em 5.5em 0 #E20016, 8.5em 5.5em 0 #E20016, 10em 5.5em 0 #E20016, 11.5em 5.5em 0 #E20016, 13em 5.5em 0 #E20016, 14.5em 5.5em 0 #E20016, 16em 5.5em 0 #E20016, 17.5em 5.5em 0 #E20016, 5.5em 7em 0 #E20016, 7em 7em 0 #FCFCFC, 8.5em 7em 0 #E20016, 10em 7em 0 #E20016, 11.5em 7em 0 #E20016, 13em 7em 0 #E20016, 14.5em 7em 0 #E20016, 16em 7em 0 #E20016, 17.5em 7em 0 #E20016, 5.5em 8.5em 0 #E20016, 7em 8.5em 0 #E20016, 8.5em 8.5em 0 #FCFCFC, 10em 8.5em 0 #E20016, 11.5em 8.5em 0 #E20016, 13em 8.5em 0 #E20016, 14.5em 8.5em 0 #E20016, 16em 8.5em 0 #E20016, 17.5em 8.5em 0 #E20016, 5.5em 10em 0 #E20016, 7em 10em 0 #E20016, 8.5em 10em 0 #E20016, 10em 10em 0 #FCFCFC, 11.5em 10em 0 #E20016, 13em 10em 0 #E20016, 14.5em 10em 0 #E20016, 16em 10em 0 #E20016, 17.5em 10em 0 #E20016, 5.5em 11.5em 0 #E20016, 7em 11.5em 0 #E20016, 8.5em 11.5em 0 #E20016, 10em 11.5em 0 #E20016, 11.5em 11.5em 0 #FCFCFC, 13em 11.5em 0 #E20016, 14.5em 11.5em 0 #E20016, 16em 11.5em 0 #E20016, 17.5em 11.5em 0 #E20016, 5.5em 13em 0 #E20016, 7em 13em 0 #E20016, 8.5em 13em 0 #E20016, 10em 13em 0 #FCFCFC, 11.5em 13em 0 #E20016, 13em 13em 0 #E20016, 14.5em 13em 0 #E20016, 16em 13em 0 #E20016, 17.5em 13em 0 #E20016, 5.5em 14.5em 0 #E20016, 7em 14.5em 0 #E20016, 8.5em 14.5em 0 #FCFCFC, 10em 14.5em 0 #E20016, 11.5em 14.5em 0 #E20016, 13em 14.5em 0 #E20016, 14.5em 14.5em 0 #E20016, 16em 14.5em 0 #E20016, 17.5em 14.5em 0 #E20016, 5.5em 16em 0 #E20016, 7em 16em 0 #FCFCFC, 8.5em 16em 0 #E20016, 10em 16em 0 #E20016, 11.5em 16em 0 #FCFCFC, 13em 16em 0 #FCFCFC, 14.5em 16em 0 #FCFCFC, 16em 16em 0 #FCFCFC, 17.5em 16em 0 #E20016, 5.5em 17.5em 0 #E20016, 7em 17.5em 0 #E20016, 8.5em 17.5em 0 #E20016, 10em 17.5em 0 #E20016, 11.5em 17.5em 0 #E20016, 13em 17.5em 0 #E20016, 14.5em 17.5em 0 #E20016, 16em 17.5em 0 #E20016, 17.5em 17.5em 0 #E20016;
 }
 
 .hacker-key-container {
-  font-size: 0.2rem;
   background-color: #DDD;
   width: 25em;
   height: 25em;
@@ -311,7 +260,6 @@ html {
 }
 
 .hacker-pillon-container {
-  font-size: 0.2rem;
   background-color: #DDD;
   width: 25em;
   height: 25em;
@@ -328,7 +276,6 @@ html {
 }
 
 .hacker-exit-container {
-  font-size: 0.2rem;
   width: 25em;
   height: 25em;
   position: absolute;
@@ -354,7 +301,6 @@ html {
 }
 
 .hacker-lock-container {
-  font-size: 0.2rem;
   width: 25em;
   height: 25em;
   position: absolute;

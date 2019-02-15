@@ -4,14 +4,14 @@ let game = {};
 
 game.grid = 
     [
-        ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
-        ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
-        ["/", "-", "lockred", "-", "lockgreen", "-", "lockblue", "-", "/"],
-        ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
-        ["exit", "-", "-", "-", "player", "-", "-", "-", "/"],
-        ["/", "-", "chip", "-", "-", "-", "chip", "-", "/"],
-        ["/", "-", "-", "-", "-", "-", "-", "-", "/"],
-        ["/", "-", "keyred", "-", "keygreen", "-", "keyblue", "-", "/"],
+        ["/", "/", "/", "/", "exit", "/", "/", "/", "/"],
+        ["/", "chip", "-", "/", "-", "/", "-", "chip", "/"],
+        ["/", "-", "keyred", "/", "-", "lockgreen", "-", "-", "/"],
+        ["/", "lockblue", "/", "/", "-", "/", "/", "/", "/"],
+        ["/", "-", "-", "-", "-", "-", "-", "keygreen", "/"],
+        ["/", "-", "/", "/", "/", "/", "/", "/", "/"],
+        ["/", "-", "/", "keyblue", "-", "lockred", "-", "-", "/"],
+        ["/", "player", "lockgreen", "-", "-", "/", "-", "chip", "/"],
         ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
     ];
     
@@ -71,17 +71,12 @@ game.values = [{
         // value to change based on chips remaining to be collected
         class: "hacker-exit-closed",
         parentClass: "hacker-exit-container"
-    },{
-        parent: true,
-        value: "x",
-        class: "hacker-pillon",
-        parentClass: "hacker-pillon-container"
     }
 ];
 
 game.items = {
     escapeChips: {
-        remaining: 2,
+        remaining: 0,
         acquired: 0,
         exitOpen: false
     },
@@ -140,6 +135,14 @@ game.findPlayerPosition = function(gameGrid) {
     return [indexY, indexX];
 };
 
+game.getChipCount = function(gameGrid) {
+    let count = 0;
+
+    gameGrid.forEach((itemY) => {itemY.forEach((itemX) => {itemX === "chip" ? count += 1 : null})})
+
+    this["items"]["escapeChips"]["remaining"] = count;
+};
+
 // find key object that matches gameGrid value, change acquired status to true
 game.updateAcquiredKeys = function(newKey, keys) {
 
@@ -186,8 +189,6 @@ game.escapeMap = function(gameGrid, index) {
     gameGrid[indexY].splice(indexX, 1, "-");
 
     this.renderGameBoard(gameGrid);
-
-    alert("Level Complete!");
 };
 
 // receives parameters, moves player accordingly
@@ -327,15 +328,17 @@ game.renderGameBoard = function(gameGrid) {
             // two options are needed to accomodate a design mistake made early in the process -> fix if time allows!!
             if (gamePiece["parent"] === false) {
                 $("<div/>").addClass(`${gamePiece["class"]}`)
-                    .css(`left`, `${5 * indexX}rem`)
-                    .css(`top`, `${5 * indexY}rem`)
+                    .css(`width`, $blockSize)
+                    .css(`height`, $blockSize)
+                    .css(`left`, `${$blockSize * indexX}px`)
+                    .css(`top`, `${$blockSize * indexY}px`)
                     .appendTo($gameBoard);
 
             } else if (gamePiece["parent"] === true) {
                 let $newDiv = $("<div/>").addClass(`${gamePiece["parentClass"]}`)
                     .css(`fontSize`, `${$blockSize / 500}rem`)
-                    .css(`left`, `${5 * indexX}rem`)
-                    .css(`top`, `${5 * indexY}rem`);
+                    .css(`left`, `${$blockSize * indexX}px`)
+                    .css(`top`, `${$blockSize * indexY}px`);
 
                 $("<div/>").addClass(`${gamePiece["class"]}`).appendTo($newDiv);
 
@@ -348,6 +351,7 @@ game.renderGameBoard = function(gameGrid) {
 game.init = function() {
 
     game.renderGameBoard(game["grid"]);
+    game.getChipCount(game["grid"]);
     game.handleEvent();
 };
 

@@ -1,19 +1,12 @@
 // Pixel art examples explored at https://css-tricks.com/fun-times-css-pixel-art/ -> author credit: Geoff Graham
 
 .hacker-chip-container {
-    // sets proper font size for accurate game piece rendering 
-    // change piece size here if needed
-    font-size: 0.1rem;
+    // change font-size property for total piece re-sizing
+    // font-size: 1.2rem;
     width: 25em;
     height: 25em;
-    background-color: $hacker-red;
+    background-color: $hacker-empty-block;
     position: absolute;
-    // animation: hacker-chip-bounce 1.6s ease-in-out infinite;
-    margin: 2.75%; 
-    box-shadow: -1.25rem 1.25rem 0 $hacker-empty-block,
-        1.25rem 1.25rem 0 $hacker-empty-block,
-        1.25rem -1.25rem 0 $hacker-empty-block,
-        -1.25rem -1.25rem 0 $hacker-empty-block;
 }
 
 .hacker-chip {
@@ -21,37 +14,110 @@
     top: 0;
     // determins dimensions of pixels
     // percentage based, changes with container dimensions
-    height: 12.5%;
-    width: 12.5%;
+    height: 6.25%;
+    width: 6.25%;
 
     box-shadow: 
     // layers lay horizontal, run left to right, stack top to bottom
     // values must be "em" for proper piece resizing
 
-    // arrow head
-        4.5em 4.5em 0 $hacker-white,
-        7.5em 7.5em 0 $hacker-white,
-        10.5em 10.5em 0 $hacker-white,
-        7.5em 13.5em 0 $hacker-white,
-        4.5em 16.5em 0 $hacker-white,
+    // layer 1
+        5.5em 5.5em 0 $hacker-red,
+        7em 5.5em 0 $hacker-red,
+        8.5em 5.5em 0 $hacker-red,
+        10em 5.5em 0 $hacker-red,
+        11.5em 5.5em 0 $hacker-red,
+        13em 5.5em 0 $hacker-red,
+        14.5em 5.5em 0 $hacker-red,
+        16em 5.5em 0 $hacker-red,
+        17.5em 5.5em 0 $hacker-red,
 
-    // bottom line mask
-        10.5em 14em 0 $hacker-red,
-        13.5em 14em 0 $hacker-red,
-        16.5em 14em 0 $hacker-red,
+    // layer 2
+        5.5em 7em 0 $hacker-red,
+        7em 7em 0 $hacker-white,
+        8.5em 7em 0 $hacker-red,
+        10em 7em 0 $hacker-red,
+        11.5em 7em 0 $hacker-red,
+        13em 7em 0 $hacker-red,
+        14.5em 7em 0 $hacker-red,
+        16em 7em 0 $hacker-red,
+        17.5em 7em 0 $hacker-red,
 
-    // bottom line
-        10.5em 16.5em 0 $hacker-white,
-        13.5em 16.5em 0 $hacker-white,
-        16.5em 16.5em 0 $hacker-white;
-}
+    //  layer 3
+        5.5em 8.5em 0 $hacker-red,
+        7em 8.5em 0 $hacker-red,
+        8.5em 8.5em 0 $hacker-white,
+        10em 8.5em 0 $hacker-red,
+        11.5em 8.5em 0 $hacker-red,
+        13em 8.5em 0 $hacker-red,
+        14.5em 8.5em 0 $hacker-red,
+        16em 8.5em 0 $hacker-red,
+        17.5em 8.5em 0 $hacker-red,
+    
+    // layer 4
+        5.5em 10em 0 $hacker-red,
+        7em 10em 0 $hacker-red,
+        8.5em 10em 0 $hacker-red,
+        10em 10em 0 $hacker-white,
+        11.5em 10em 0 $hacker-red,
+        13em 10em 0 $hacker-red,
+        14.5em 10em 0 $hacker-red,
+        16em 10em 0 $hacker-red,
+        17.5em 10em 0 $hacker-red,
+    
+    // layer 5
+        5.5em 11.5em 0 $hacker-red,
+        7em 11.5em 0 $hacker-red,
+        8.5em 11.5em 0 $hacker-red,
+        10em 11.5em 0 $hacker-red,
+        11.5em 11.5em 0 $hacker-white,
+        13em 11.5em 0 $hacker-red,
+        14.5em 11.5em 0 $hacker-red,
+        16em 11.5em 0 $hacker-red,
+        17.5em 11.5em 0 $hacker-red,
+    
+    // layer 6
+        5.5em 13em 0 $hacker-red,
+        7em 13em 0 $hacker-red,
+        8.5em 13em 0 $hacker-red,
+        10em 13em 0 $hacker-white,
+        11.5em 13em 0 $hacker-red,
+        13em 13em 0 $hacker-red,
+        14.5em 13em 0 $hacker-red,
+        16em 13em 0 $hacker-red,
+        17.5em 13em 0 $hacker-red,
 
-// hacker-chip animation
-@keyframes hacker-chip-bounce {
-    0%{ transform: translateY(0rem);
-        box-shadow: 0 0 1.5rem 1rem #eee}
-    50%{ transform: translateY(-1rem);
-        box-shadow: 0 0 2rem 1.5rem #eee}
-    100%{ transform: translateY(0rem);
-        box-shadow: 0 0 1.5rem 1rem #eee}
+    // layer 7
+        5.5em 14.5em 0 $hacker-red,
+        7em 14.5em 0 $hacker-red,
+        8.5em 14.5em 0 $hacker-white,
+        10em 14.5em 0 $hacker-red,
+        11.5em 14.5em 0 $hacker-red,
+        13em 14.5em 0 $hacker-red,
+        14.5em 14.5em 0 $hacker-red,
+        16em 14.5em 0 $hacker-red,
+        17.5em 14.5em 0 $hacker-red,
+    
+    // layer 8
+        5.5em 16em 0 $hacker-red,
+        7em 16em 0 $hacker-white,
+        8.5em 16em 0 $hacker-red,
+        10em 16em 0 $hacker-red,
+        11.5em 16em 0 $hacker-white,
+        13em 16em 0 $hacker-white,
+        14.5em 16em 0 $hacker-white,
+        16em 16em 0 $hacker-white,
+        17.5em 16em 0 $hacker-red,
+
+    // layer 9
+        5.5em 17.5em 0 $hacker-red,
+        7em 17.5em 0 $hacker-red,
+        8.5em 17.5em 0 $hacker-red,
+        10em 17.5em 0 $hacker-red,
+        11.5em 17.5em 0 $hacker-red,
+        13em 17.5em 0 $hacker-red,
+        14.5em 17.5em 0 $hacker-red,
+        16em 17.5em 0 $hacker-red,
+        17.5em 17.5em 0 $hacker-red,
+    ;   
 }
