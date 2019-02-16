@@ -1,9 +1,14 @@
 html {
     font-size: 125%;
+    line-height: 1.6;
 }
 
-ul {
+ul:not(.start-instructions-list) {
   list-style: none;
   margin: 0;
   padding: 0;  
+}
+
+.hidden {
+    display: none;
 }

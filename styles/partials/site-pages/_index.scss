@@ -3,7 +3,6 @@
     flex-flow: column wrap;
     align-items: center;
     justify-content: center;
-
 }
 
 .game-board-container {
@@ -28,12 +27,42 @@
     position: absolute;
 }
 
+
+// Pop-up message styling
+.start-instructions, 
+.completion-popup {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-top: 5%;
+    background: beige;
+    width: 100%;
+    padding: 4%;
+    margin: 0 auto;
+    border-right: 0.25em solid gray;
+    border-left: 0.25em solid gray;
+    border-bottom: 0.25em solid gray;
+    border-radius: 0 0 15px 15px;
+
+    h1,
+    p,
+    button {
+        text-align: center;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+
+// Game status bar styling
 .game-status-bar {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 0 3%;
+    padding: 0.75% 3%;
     width: 90%;
     max-width: 768px;
     background-color: $hacker-black;
@@ -50,7 +79,7 @@
 
 .status-chips {
     flex-basis: 50%;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .status-keys {

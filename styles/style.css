@@ -167,12 +167,17 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 
 html {
   font-size: 125%;
+  line-height: 1.6;
 }
 
-ul {
+ul:not(.start-instructions-list) {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.hidden {
+  display: none;
 }
 
 .index-main {
@@ -213,8 +218,43 @@ ul {
   position: absolute;
 }
 
+.start-instructions,
+.completion-popup {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 5%;
+  background: beige;
+  width: 100%;
+  padding: 4%;
+  margin: 0 auto;
+  border-right: 0.25em solid gray;
+  border-left: 0.25em solid gray;
+  border-bottom: 0.25em solid gray;
+  border-radius: 0 0 15px 15px;
+}
+
+.start-instructions h1,
+.start-instructions p,
+.start-instructions button,
+.completion-popup h1,
+.completion-popup p,
+.completion-popup button {
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
 .game-status-bar {
-  grid-area: statusbar;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -228,10 +268,9 @@ ul {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 0 3%;
+  padding: 0.75% 3%;
   width: 90%;
   max-width: 768px;
-  height: 5vh;
   background-color: #040404;
   color: #FCFCFC;
   border-radius: 15px 15px 0 0;
@@ -250,11 +289,10 @@ ul {
 }
 
 .status-chips {
-  -ms-flex-preferred-size: 45%;
-      flex-basis: 45%;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .status-keys {
@@ -356,22 +394,6 @@ ul {
   width: 6.25%;
   -webkit-box-shadow: 9em 1.5em 0 blue, 10.5em 1.5em 0 blue, 12em 1.5em 0 blue, 13.5em 1.5em 0 blue, 7.5em 3em 0 blue, 9em 3em 0 blue, 10.5em 3em 0 blue, 12em 3em 0 blue, 13.5em 3em 0 blue, 15em 3em 0 blue, 6em 4.5em 0 blue, 7.5em 4.5em 0 blue, 15em 4.5em 0 blue, 16.5em 4.5em 0 blue, 6em 6em 0 blue, 7.5em 6em 0 blue, 15em 6em 0 blue, 16.5em 6em 0 blue, 6em 7.5em 0 blue, 7.5em 7.5em 0 blue, 15em 7.5em 0 blue, 16.5em 7.5em 0 blue, 7.5em 9em 0 blue, 9em 9em 0 blue, 10.5em 9em 0 blue, 12em 9em 0 blue, 13.5em 9em 0 blue, 15em 9em 0 blue, 9em 10.5em 0 blue, 10.5em 10.5em 0 blue, 12em 10.5em 0 blue, 13.5em 10.5em 0 blue, 10.5em 12em 0 blue, 12em 12em 0 blue, 10.5em 13.5em 0 blue, 12em 13.5em 0 blue, 10.5em 15em 0 blue, 12em 15em 0 blue, 13.5em 15em 0 blue, 10.5em 16.5em 0 blue, 12em 16.5em 0 blue, 13.5em 16.5em 0 blue, 10.5em 18em 0 blue, 12em 18em 0 blue, 10.5em 19.5em 0 blue, 12em 19.5em 0 blue, 13.5em 19.5em 0 blue, 15em 19.5em 0 blue, 10.5em 21em 0 blue, 12em 21em 0 blue, 13.5em 21em 0 blue, 15em 21em 0 blue, 10.5em 22.5em 0 blue, 12em 22.5em 0 blue;
           box-shadow: 9em 1.5em 0 blue, 10.5em 1.5em 0 blue, 12em 1.5em 0 blue, 13.5em 1.5em 0 blue, 7.5em 3em 0 blue, 9em 3em 0 blue, 10.5em 3em 0 blue, 12em 3em 0 blue, 13.5em 3em 0 blue, 15em 3em 0 blue, 6em 4.5em 0 blue, 7.5em 4.5em 0 blue, 15em 4.5em 0 blue, 16.5em 4.5em 0 blue, 6em 6em 0 blue, 7.5em 6em 0 blue, 15em 6em 0 blue, 16.5em 6em 0 blue, 6em 7.5em 0 blue, 7.5em 7.5em 0 blue, 15em 7.5em 0 blue, 16.5em 7.5em 0 blue, 7.5em 9em 0 blue, 9em 9em 0 blue, 10.5em 9em 0 blue, 12em 9em 0 blue, 13.5em 9em 0 blue, 15em 9em 0 blue, 9em 10.5em 0 blue, 10.5em 10.5em 0 blue, 12em 10.5em 0 blue, 13.5em 10.5em 0 blue, 10.5em 12em 0 blue, 12em 12em 0 blue, 10.5em 13.5em 0 blue, 12em 13.5em 0 blue, 10.5em 15em 0 blue, 12em 15em 0 blue, 13.5em 15em 0 blue, 10.5em 16.5em 0 blue, 12em 16.5em 0 blue, 13.5em 16.5em 0 blue, 10.5em 18em 0 blue, 12em 18em 0 blue, 10.5em 19.5em 0 blue, 12em 19.5em 0 blue, 13.5em 19.5em 0 blue, 15em 19.5em 0 blue, 10.5em 21em 0 blue, 12em 21em 0 blue, 13.5em 21em 0 blue, 15em 21em 0 blue, 10.5em 22.5em 0 blue, 12em 22.5em 0 blue;
-}
-
-.hacker-pillon-container {
-  background-color: #DDD;
-  width: 25em;
-  height: 25em;
-  position: absolute;
-}
-
-.hacker-pillon {
-  position: absolute;
-  top: 0;
-  height: 6.25%;
-  width: 6.25%;
-  -webkit-box-shadow: 10.5em 7.5em 0 orange, 12em 7.5em 0 orange, 9.75em 9em 0 #FCFCFC, 10.5em 9em 0 #FCFCFC, 12em 9em 0 #FCFCFC, 12.75em 9em 0 #FCFCFC, 9em 10.5em 0 orange, 10.5em 10.5em 0 orange, 12em 10.5em 0 orange, 13.5em 10.5em 0 orange, 8.25em 12em 0 #FCFCFC, 9em 12em 0 #FCFCFC, 10.5em 12em 0 #FCFCFC, 12em 12em 0 #FCFCFC, 13.5em 12em 0 #FCFCFC, 14.25em 12em 0 #FCFCFC, 7.5em 13.5em 0 orange, 9em 13.5em 0 orange, 10.5em 13.5em 0 orange, 12em 13.5em 0 orange, 13.5em 13.5em 0 orange, 15em 13.5em 0 orange, 6.75em 15em 0 orange, 7.5em 15em 0 orange, 9em 15em 0 orange, 10.5em 15em 0 orange, 12em 15em 0 orange, 13.5em 15em 0 orange, 15em 15em 0 orange, 15.75em 15em 0 orange, 6em 16.5em 0 orange, 7.5em 16.5em 0 orange, 9em 16.5em 0 orange, 10.5em 16.5em 0 orange, 12em 16.5em 0 orange, 13.5em 16.5em 0 orange, 15em 16.5em 0 orange, 16.5em 16.5em 0 orange, 4.5em 17.25em 0 #454545, 18em 17.25em 0 #454545, 3.75em 18em 0 #454545, 4.5em 18em 0 #454545, 6em 18em 0 #454545, 7.5em 18em 0 #454545, 9em 18em 0 #454545, 10.5em 18em 0 #454545, 12em 18em 0 #454545, 13.5em 18em 0 #454545, 15em 18em 0 #454545, 16.5em 18em 0 #454545, 18em 18em 0 #454545, 18.75em 18em 0 #454545;
-          box-shadow: 10.5em 7.5em 0 orange, 12em 7.5em 0 orange, 9.75em 9em 0 #FCFCFC, 10.5em 9em 0 #FCFCFC, 12em 9em 0 #FCFCFC, 12.75em 9em 0 #FCFCFC, 9em 10.5em 0 orange, 10.5em 10.5em 0 orange, 12em 10.5em 0 orange, 13.5em 10.5em 0 orange, 8.25em 12em 0 #FCFCFC, 9em 12em 0 #FCFCFC, 10.5em 12em 0 #FCFCFC, 12em 12em 0 #FCFCFC, 13.5em 12em 0 #FCFCFC, 14.25em 12em 0 #FCFCFC, 7.5em 13.5em 0 orange, 9em 13.5em 0 orange, 10.5em 13.5em 0 orange, 12em 13.5em 0 orange, 13.5em 13.5em 0 orange, 15em 13.5em 0 orange, 6.75em 15em 0 orange, 7.5em 15em 0 orange, 9em 15em 0 orange, 10.5em 15em 0 orange, 12em 15em 0 orange, 13.5em 15em 0 orange, 15em 15em 0 orange, 15.75em 15em 0 orange, 6em 16.5em 0 orange, 7.5em 16.5em 0 orange, 9em 16.5em 0 orange, 10.5em 16.5em 0 orange, 12em 16.5em 0 orange, 13.5em 16.5em 0 orange, 15em 16.5em 0 orange, 16.5em 16.5em 0 orange, 4.5em 17.25em 0 #454545, 18em 17.25em 0 #454545, 3.75em 18em 0 #454545, 4.5em 18em 0 #454545, 6em 18em 0 #454545, 7.5em 18em 0 #454545, 9em 18em 0 #454545, 10.5em 18em 0 #454545, 12em 18em 0 #454545, 13.5em 18em 0 #454545, 15em 18em 0 #454545, 16.5em 18em 0 #454545, 18em 18em 0 #454545, 18.75em 18em 0 #454545;
 }
 
 .hacker-exit-container {

@@ -4,7 +4,7 @@ let game = {};
 
 // game.grid can be changed to create any map without altering other JS values
 // --> !!MUST HAVE straight verticle edges; fill blank space with boarder blocks
-game.grid = 
+game.grid =
     [
         ["/", "/", "/", "/", "exit", "/", "/", "/", "/"],
         ["/", "chip", "-", "/", "-", "/", "-", "chip", "/"],
@@ -16,7 +16,6 @@ game.grid =
         ["/", "player", "lockgreen", "-", "-", "/", "-", "chip", "/"],
         ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
     ];
-    
 
 // for more abstracted DOM appending
 game.values = [{
@@ -102,7 +101,23 @@ game.items = {
     }]
 };
 
-game.handleEvent = function() {
+game.handleEvents = function() {
+    
+    const $start = $(".button-start");
+    const $restart = $(".button-restart")
+    const $startMessage = $(".start-instructions");
+    const $endMessage = $(".completion-popup");
+    const $gameBoard = $(".game-board");
+
+    $start.on("click", function(){
+
+        $startMessage.toggleClass("hidden");
+        $gameBoard.toggleClass("hidden");
+
+        game.getChipCount(game["grid"]);
+        game.setStatusBarChipCount(game["items"]["escapeChips"]);
+        game.renderGameBoard(game["grid"]);
+    });
 
     $(document).keydown(function(event){
         // pass event to directionSelection() whcih determines movement direction
@@ -110,6 +125,15 @@ game.handleEvent = function() {
         // after player position value has been modified, render gameGrid in DOM
         game.renderGameBoard(game["grid"]);
     });
+
+    $restart.on("click", function() {
+        
+        $endMessage.toggleClass("hidden");
+        $gameBoard.toggleClass("hidden");
+        game.getChipCount(game["grid"]);
+        game.setStatusBarChipCount(game["items"]["escapeChips"]);
+        game.renderGameBoard(game["grid"]);
+    })
 };
 
 // receive event.which, route direction value accordingly
@@ -141,7 +165,7 @@ game.findPlayerPosition = function(gameGrid) {
     return [indexY, indexX];
 };
 
-// get chip count at start of game; allows any amount to be entered wihout altering game object values
+// get chip count at start of game; allows any amount to be placed wihout altering game object item values
 game.getChipCount = function(gameGrid) {
 
     let count = 0;
@@ -169,7 +193,7 @@ game.checkKeyStatus = function(lock, keys) {
     return keyQuery["acquired"];
 };
 
-// updates chip count when one is acquired
+// updates chip count when one is acquired, checks if all chips are collected, opens exit if true
 game.updateChipCount = function(chipCount) {
 
     chipCount["remaining"] -= 1;
@@ -179,7 +203,7 @@ game.updateChipCount = function(chipCount) {
     chipCount["remaining"] === 0 ? game.openExit(chipCount, game["values"]) : null;
 };
 
-// set exitOpen to true, change append class; re-apprend board to reflect changes
+// set exitOpen to true, change append class
 game.openExit = function(exit, boardValues) {
 
     exit["exitOpen"] = true;
@@ -187,19 +211,26 @@ game.openExit = function(exit, boardValues) {
     const changeExitClass = boardValues.find(piece => piece["value"] === "exit");
 
     changeExitClass["class"] = "hacker-exit-open";
-
-    this.renderGameBoard(game["grid"]);
 };
 
 // player escapes map
 game.escapeMap = function(gameGrid, index) {
 
+    const $gameBoard = $(".game-board");
+    const $endMessage = $(".completion-popup");
     const indexY = index[0];
     const indexX = index[1];
 
     gameGrid[indexY].splice(indexX, 1, "-");
 
     this.renderGameBoard(gameGrid);
+
+    setTimeout(function(){
+
+        $gameBoard.toggleClass("hidden");
+        $endMessage.toggleClass("hidden");
+
+    }, 50)
 };
 
 game.setStatusBarChipCount = function(chips) {
@@ -216,6 +247,13 @@ game.setStatusBarKeys = function(key) {
     $(`.${key["statusClass"]}`).toggleClass("false");
     $(`.${key["statusClass"]}`).toggleClass("true");
 };
+
+// without there is no variable height set on game-board-container, elements below are placed incorrectly
+game.setGameBoardContainerHeight = function() {
+
+    const $blockHeight = $gameBoard.outerWidth() / game["grid"].length;
+
+}
 
 // receives parameters, moves player accordingly
 game.movePlayer = function(gameGrid, index, direction) {
@@ -260,11 +298,11 @@ game.movementRules = function(direction, gameGrid){
             this.movePlayer(gameGrid, index, "up")
 
         } else if (gameGrid[indexY - 1][indexX].includes("lock")){
-            this.checkKeyStatus(gameGrid[indexY - 1][indexX], this["items"]["keys"]) 
+            this.checkKeyStatus(gameGrid[indexY - 1][indexX], this["items"]["keys"])
                 ? this.movePlayer(gameGrid, index, "up") : null;
 
         } else if (gameGrid[indexY - 1][indexX] === "exit") {
-            this["items"]["escapeChips"]["exitOpen"] === true 
+            this["items"]["escapeChips"]["exitOpen"] 
                 ? this.escapeMap(gameGrid, index) : null;
 
         } else {
@@ -285,7 +323,7 @@ game.movementRules = function(direction, gameGrid){
                 ? this.movePlayer(gameGrid, index, "down") : null;
 
         } else if (gameGrid[indexY + 1][indexX] === "exit") {
-            this["Items"]["escapeChips"]["exitOpen"] === true
+            this["Items"]["escapeChips"]["exitOpen"]
                 ? this.escapeMap(gameGrid, index) : null;
 
         } else {
@@ -306,7 +344,7 @@ game.movementRules = function(direction, gameGrid){
                 ? this.movePlayer(gameGrid, index, "left") : null;
             
         } else if (gameGrid[indexY][indexX - 1] === "exit") {
-            this["items"]["escapeChips"]["exitOpen"] === true
+            this["items"]["escapeChips"]["exitOpen"]
                 ? this.escapeMap(gameGrid, index) : null;
 
         } else {
@@ -327,7 +365,7 @@ game.movementRules = function(direction, gameGrid){
                 ? this.movePlayer(gameGrid, index, "right") : null;
 
         } else if (gameGrid[indexY][indexX + 1] === "exit") {
-            this["items"]["escapeChips"]["exitOpen"] === true
+            this["items"]["escapeChips"]["exitOpen"]
                 ? this.escapeMap(gameGrid, index) : null;
 
         } else {
@@ -346,8 +384,8 @@ game.renderGameBoard = function(gameGrid) {
     
     $gameBoard.empty();
     // loop through gameGrid, create and append element based on content
-    gameGrid.forEach(function(spaceY, indexY){
-        spaceY.forEach(function(spaceX, indexX){
+    gameGrid.forEach((spaceY, indexY) => {
+        spaceY.forEach((spaceX, indexX) => {
              
             // get appropriate object for gameGrid value
             const gamePiece = boardValues.find(piece => piece["value"] === spaceX)
@@ -355,8 +393,8 @@ game.renderGameBoard = function(gameGrid) {
             // two options are needed to accomodate a design mistake made early on -> fix if time allows!!
             if (gamePiece["parent"] === false) {
                 $("<div/>").addClass(`${gamePiece["class"]}`)
-                    .css(`width`, $blockSize)
-                    .css(`height`, $blockSize)
+                    .css(`width`, `${$blockSize}px`)
+                    .css(`height`, `${$blockSize}px`)
                     .css(`left`, `${$blockSize * indexX}px`)
                     .css(`top`, `${$blockSize * indexY}px`)
                     .appendTo($gameBoard);
@@ -377,10 +415,7 @@ game.renderGameBoard = function(gameGrid) {
 
 game.init = function() {
 
-    game.renderGameBoard(game["grid"]);
-    game.getChipCount(game["grid"]);
-    game.setStatusBarChipCount(game["items"]["escapeChips"]);
-    game.handleEvent();
+    game.handleEvents(); 
 };
 
 $(function(){
