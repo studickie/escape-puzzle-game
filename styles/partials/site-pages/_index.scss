@@ -7,7 +7,6 @@
 
 .game-board-container {
     width: 90%;
-    height: 75vh;
     max-width: 768px;
 }
 
@@ -48,6 +47,13 @@
     p,
     button {
         text-align: center;
+    }
+
+    button {
+        padding: 2% 10%;
+        background-color: $hacker-red;
+        border-color: $hacker-red;
+        color: $hacker-white;
     }
 }
 
@@ -114,4 +120,40 @@
 
 .blue-dot.true {
     background-color: $hacker-key-blue;
+}
+
+
+//action arrows styling
+.action-arrows-container {
+    grid-template-areas: 
+        "left up right"
+        "left down right";
+    justify-content: center;
+    align-items: center;
+    width: 12rem;
+    margin-top: 5%;
+    display: none;
+}
+
+.arrow-container:hover {
+    cursor: pointer;
+}
+
+.arrow-container.up {
+    grid-area: up;
+}
+
+.arrow-container.left {
+    grid-area: left;
+    transform: rotate(270deg);
+}
+
+.arrow-container.right {
+    grid-area: right;
+    transform: rotate(90deg);
+}
+
+.arrow-container.down {
+    grid-area: down;
+    transform: rotate(180deg);
 }

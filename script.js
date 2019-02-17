@@ -104,10 +104,9 @@ game.items = {
 game.handleEvents = function() {
     
     const $start = $(".button-start");
-    const $restart = $(".button-restart")
     const $startMessage = $(".start-instructions");
-    const $endMessage = $(".completion-popup");
     const $gameBoard = $(".game-board");
+    const $arrowKeys = $(".arrow-container");
 
     $start.on("click", function(){
 
@@ -117,6 +116,9 @@ game.handleEvents = function() {
         game.getChipCount(game["grid"]);
         game.setStatusBarChipCount(game["items"]["escapeChips"]);
         game.renderGameBoard(game["grid"]);
+        game.setGameBoardContainerHeight();
+
+        $(".action-arrows-container").css("display", "grid");
     });
 
     $(document).keydown(function(event){
@@ -126,30 +128,30 @@ game.handleEvents = function() {
         game.renderGameBoard(game["grid"]);
     });
 
-    $restart.on("click", function() {
-        
-        $endMessage.toggleClass("hidden");
-        $gameBoard.toggleClass("hidden");
-        game.getChipCount(game["grid"]);
-        game.setStatusBarChipCount(game["items"]["escapeChips"]);
+    $arrowKeys.on("click", function(){
+
+        const $click = $(this).attr("id");
+
+        game.directionSelection($click);
+
         game.renderGameBoard(game["grid"]);
-    })
+    });
 };
 
 // receive event.which, route direction value accordingly
 game.directionSelection = function(direction) {
 
     // pass the direction value to movePlayer() according to keypress
-    if(direction === 38){
+    if(direction === 38 || direction === "up"){
         this.movementRules("up", game["grid"]);
 
-    } else if (direction === 40){
+    } else if (direction === 40 || direction === "down"){
         this.movementRules("down", game["grid"]);
 
-    } else if (direction === 37){
+    } else if (direction === 37 || direction === "left"){
         this.movementRules("left", game["grid"]);
             
-    } else if (direction === 39){
+    } else if (direction === 39 || direction === "right"){
         this.movementRules("right", game["grid"]);
     };
 };
@@ -251,9 +253,12 @@ game.setStatusBarKeys = function(key) {
 // without there is no variable height set on game-board-container, elements below are placed incorrectly
 game.setGameBoardContainerHeight = function() {
 
-    const $blockHeight = $gameBoard.outerWidth() / game["grid"].length;
+    const $gameBoard = $(".game-board");
+    const $boardContainer = $(".game-board-container");
+    const $blockSize = $gameBoard.outerWidth() / game["grid"][0].length;
 
-}
+    $boardContainer.css("height", `${$blockSize * game["grid"].length}px`);
+};
 
 // receives parameters, moves player accordingly
 game.movePlayer = function(gameGrid, index, direction) {

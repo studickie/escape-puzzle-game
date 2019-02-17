@@ -166,7 +166,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
 }
 
 html {
-  font-size: 125%;
+  font-size: 20px;
   line-height: 1.6;
 }
 
@@ -174,10 +174,6 @@ ul:not(.start-instructions-list) {
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-.hidden {
-  display: none;
 }
 
 .index-main {
@@ -198,7 +194,6 @@ ul:not(.start-instructions-list) {
 
 .game-board-container {
   width: 90%;
-  height: 75vh;
   max-width: 768px;
 }
 
@@ -248,6 +243,14 @@ ul:not(.start-instructions-list) {
 .completion-popup p,
 .completion-popup button {
   text-align: center;
+}
+
+.start-instructions button,
+.completion-popup button {
+  padding: 2% 10%;
+  background-color: #E20016;
+  border-color: #E20016;
+  color: #FCFCFC;
 }
 
 .hidden {
@@ -328,6 +331,55 @@ ul:not(.start-instructions-list) {
 
 .blue-dot.true {
   background-color: blue;
+}
+
+.action-arrows-container {
+      grid-template-areas: "left up right" "left down right";
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 12rem;
+  margin-top: 5%;
+  display: none;
+}
+
+.arrow-container:hover {
+  cursor: pointer;
+}
+
+.arrow-container.up {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: up;
+}
+
+.arrow-container.left {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  grid-area: left;
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg);
+}
+
+.arrow-container.right {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 3;
+  grid-area: right;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.arrow-container.down {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: down;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
 }
 
 .player-container {
@@ -453,5 +505,21 @@ ul:not(.start-instructions-list) {
   width: 6.25%;
   -webkit-box-shadow: 9em 3em 0 green, 10.5em 3em 0 green, 12em 3em 0 green, 13.5em 3em 0 green, 7.5em 4.5em 0 green, 15em 4.5em 0 green, 6em 6em 0 green, 16.5em 6em 0 green, 6em 7.5em 0 green, 16.5em 7.5em 0 green, 6em 9em 0 green, 16.5em 9em 0 green, 4.5em 10.5em 0 green, 6em 10.5em 0 green, 7.5em 10.5em 0 green, 9em 10.5em 0 green, 10.5em 10.5em 0 green, 12em 10.5em 0 green, 13.5em 10.5em 0 green, 15em 10.5em 0 green, 16.5em 10.5em 0 green, 18em 10.5em 0 green, 4.5em 12em 0 green, 6em 12em 0 green, 7.5em 12em 0 green, 9em 12em 0 green, 10.5em 12em 0 #040404, 12em 12em 0 #040404, 13.5em 12em 0 green, 15em 12em 0 green, 16.5em 12em 0 green, 18em 12em 0 green, 4.5em 13.5em 0 green, 6em 13.5em 0 green, 7.5em 13.5em 0 green, 9em 13.5em 0 green, 10.5em 13.5em 0 #040404, 12em 13.5em 0 #040404, 13.5em 13.5em 0 green, 15em 13.5em 0 green, 16.5em 13.5em 0 green, 18em 13.5em 0 green, 4.5em 15em 0 green, 6em 15em 0 green, 7.5em 15em 0 green, 9em 15em 0 green, 10.5em 15em 0 #040404, 12em 15em 0 #040404, 13.5em 15em 0 green, 15em 15em 0 green, 16.5em 15em 0 green, 18em 15em 0 green, 4.5em 16.5em 0 green, 6em 16.5em 0 green, 7.5em 16.5em 0 green, 9em 16.5em 0 green, 10.5em 16.5em 0 green, 12em 16.5em 0 green, 13.5em 16.5em 0 green, 15em 16.5em 0 green, 16.5em 16.5em 0 green, 18em 16.5em 0 green, 4.5em 18em 0 green, 6em 18em 0 green, 7.5em 18em 0 green, 9em 18em 0 green, 10.5em 18em 0 green, 12em 18em 0 green, 13.5em 18em 0 green, 15em 18em 0 green, 16.5em 18em 0 green, 18em 18em 0 green, 4.5em 19.5em 0 green, 6em 19.5em 0 green, 7.5em 19.5em 0 green, 9em 19.5em 0 green, 10.5em 19.5em 0 green, 12em 19.5em 0 green, 13.5em 19.5em 0 green, 15em 19.5em 0 green, 16.5em 19.5em 0 green, 18em 19.5em 0 green;
           box-shadow: 9em 3em 0 green, 10.5em 3em 0 green, 12em 3em 0 green, 13.5em 3em 0 green, 7.5em 4.5em 0 green, 15em 4.5em 0 green, 6em 6em 0 green, 16.5em 6em 0 green, 6em 7.5em 0 green, 16.5em 7.5em 0 green, 6em 9em 0 green, 16.5em 9em 0 green, 4.5em 10.5em 0 green, 6em 10.5em 0 green, 7.5em 10.5em 0 green, 9em 10.5em 0 green, 10.5em 10.5em 0 green, 12em 10.5em 0 green, 13.5em 10.5em 0 green, 15em 10.5em 0 green, 16.5em 10.5em 0 green, 18em 10.5em 0 green, 4.5em 12em 0 green, 6em 12em 0 green, 7.5em 12em 0 green, 9em 12em 0 green, 10.5em 12em 0 #040404, 12em 12em 0 #040404, 13.5em 12em 0 green, 15em 12em 0 green, 16.5em 12em 0 green, 18em 12em 0 green, 4.5em 13.5em 0 green, 6em 13.5em 0 green, 7.5em 13.5em 0 green, 9em 13.5em 0 green, 10.5em 13.5em 0 #040404, 12em 13.5em 0 #040404, 13.5em 13.5em 0 green, 15em 13.5em 0 green, 16.5em 13.5em 0 green, 18em 13.5em 0 green, 4.5em 15em 0 green, 6em 15em 0 green, 7.5em 15em 0 green, 9em 15em 0 green, 10.5em 15em 0 #040404, 12em 15em 0 #040404, 13.5em 15em 0 green, 15em 15em 0 green, 16.5em 15em 0 green, 18em 15em 0 green, 4.5em 16.5em 0 green, 6em 16.5em 0 green, 7.5em 16.5em 0 green, 9em 16.5em 0 green, 10.5em 16.5em 0 green, 12em 16.5em 0 green, 13.5em 16.5em 0 green, 15em 16.5em 0 green, 16.5em 16.5em 0 green, 18em 16.5em 0 green, 4.5em 18em 0 green, 6em 18em 0 green, 7.5em 18em 0 green, 9em 18em 0 green, 10.5em 18em 0 green, 12em 18em 0 green, 13.5em 18em 0 green, 15em 18em 0 green, 16.5em 18em 0 green, 18em 18em 0 green, 4.5em 19.5em 0 green, 6em 19.5em 0 green, 7.5em 19.5em 0 green, 9em 19.5em 0 green, 10.5em 19.5em 0 green, 12em 19.5em 0 green, 13.5em 19.5em 0 green, 15em 19.5em 0 green, 16.5em 19.5em 0 green, 18em 19.5em 0 green;
+}
+
+.arrow-container {
+  font-size: 0.3rem;
+  height: 12.25em;
+  width: 13.75em;
+  position: relative;
+}
+
+.arrow {
+  position: absolute;
+  top: 0;
+  height: 12.5%;
+  width: 12.5%;
+  -webkit-box-shadow: 6em 0em 0 #040404, 4.5em 1.5em 0 #040404, 6em 1.5em 0 #E20016, 7.5em 1.5em 0 #040404, 3em 3em 0 #040404, 4.5em 3em 0 #E20016, 6em 3em 0 #E20016, 7.5em 3em 0 #E20016, 9em 3em 0 #040404, 1.5em 4.5em 0 #040404, 3em 4.5em 0 #E20016, 4.5em 4.5em 0 #E20016, 6em 4.5em 0 #E20016, 7.5em 4.5em 0 #E20016, 9em 4.5em 0 #E20016, 10.5em 4.5em 0 #040404, 0em 6em 0 #040404, 1.5em 6em 0 #E20016, 3em 6em 0 #E20016, 4.5em 6em 0 #E20016, 6em 6em 0 #E20016, 7.5em 6em 0 #E20016, 9em 6em 0 #E20016, 10.5em 6em 0 #E20016, 12em 6em 0 #040404, 3em 7.5em 0 #040404, 4.5em 7.5em 0 #E20016, 6em 7.5em 0 #E20016, 7.5em 7.5em 0 #E20016, 9em 7.5em 0 #040404, 3em 9em 0 #040404, 4.5em 9em 0 #E20016, 6em 9em 0 #E20016, 7.5em 9em 0 #E20016, 9em 9em 0 #040404, 3em 10.5em 0 #040404, 4.5em 10.5em 0 #040404, 6em 10.5em 0 #040404, 7.5em 10.5em 0 #040404, 9em 10.5em 0 #040404;
+          box-shadow: 6em 0em 0 #040404, 4.5em 1.5em 0 #040404, 6em 1.5em 0 #E20016, 7.5em 1.5em 0 #040404, 3em 3em 0 #040404, 4.5em 3em 0 #E20016, 6em 3em 0 #E20016, 7.5em 3em 0 #E20016, 9em 3em 0 #040404, 1.5em 4.5em 0 #040404, 3em 4.5em 0 #E20016, 4.5em 4.5em 0 #E20016, 6em 4.5em 0 #E20016, 7.5em 4.5em 0 #E20016, 9em 4.5em 0 #E20016, 10.5em 4.5em 0 #040404, 0em 6em 0 #040404, 1.5em 6em 0 #E20016, 3em 6em 0 #E20016, 4.5em 6em 0 #E20016, 6em 6em 0 #E20016, 7.5em 6em 0 #E20016, 9em 6em 0 #E20016, 10.5em 6em 0 #E20016, 12em 6em 0 #040404, 3em 7.5em 0 #040404, 4.5em 7.5em 0 #E20016, 6em 7.5em 0 #E20016, 7.5em 7.5em 0 #E20016, 9em 7.5em 0 #040404, 3em 9em 0 #040404, 4.5em 9em 0 #E20016, 6em 9em 0 #E20016, 7.5em 9em 0 #E20016, 9em 9em 0 #040404, 3em 10.5em 0 #040404, 4.5em 10.5em 0 #040404, 6em 10.5em 0 #040404, 7.5em 10.5em 0 #040404, 9em 10.5em 0 #040404;
 }
 /*# sourceMappingURL=style.css.map */
