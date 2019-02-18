@@ -101,13 +101,12 @@ game.items = {
     }]
 };
 
-game.handleEvents = function() {
+game.handleStart = function() {
     
     const $start = $(".button-start");
-    const $restart = $(".button-restart")
     const $startMessage = $(".start-instructions");
-    const $endMessage = $(".completion-popup");
     const $gameBoard = $(".game-board");
+    const $arrowContainer = $(".action-arrows-container ");
 
     $start.on("click", function(){
 
@@ -115,41 +114,50 @@ game.handleEvents = function() {
         $gameBoard.toggleClass("hidden");
 
         game.getChipCount(game["grid"]);
-        game.setStatusBarChipCount(game["items"]["escapeChips"]);
+        game.setStatusBarChipCount(game["items"]["escapeChips"]); game.setGameBoardContainerHeight();
+        game.setArrowButtonDisplay($arrowContainer);
         game.renderGameBoard(game["grid"]);
-    });
 
-    $(document).keydown(function(event){
+    });
+};
+
+game.handleMoveEvents = function() {
+
+    const $arrowButton = $(".arrow-container");
+
+    // keyboard arrow key events
+    $(document).keydown(function (event) {
         // pass event to directionSelection() whcih determines movement direction
         game.directionSelection(event.which);
         // after player position value has been modified, render gameGrid in DOM
         game.renderGameBoard(game["grid"]);
     });
 
-    $restart.on("click", function() {
-        
-        $endMessage.toggleClass("hidden");
-        $gameBoard.toggleClass("hidden");
-        game.getChipCount(game["grid"]);
-        game.setStatusBarChipCount(game["items"]["escapeChips"]);
+    // on-screen arrow button events
+    // can be slow --> too much going on? arrow keys work fine
+    $arrowButton.on("click", function () {
+
+        const direction = $(this).attr("id");
+
+        game.directionSelection(direction);
         game.renderGameBoard(game["grid"]);
-    })
-};
+    });
+}
 
 // receive event.which, route direction value accordingly
 game.directionSelection = function(direction) {
-
+   
     // pass the direction value to movePlayer() according to keypress
-    if(direction === 38){
+    if(direction === 38 || direction === "up"){
         this.movementRules("up", game["grid"]);
 
-    } else if (direction === 40){
+    } else if (direction === 40 || direction === "down"){
         this.movementRules("down", game["grid"]);
 
-    } else if (direction === 37){
+    } else if (direction === 37 || direction === "left"){
         this.movementRules("left", game["grid"]);
             
-    } else if (direction === 39){
+    } else if (direction === 39 || direction === "right"){
         this.movementRules("right", game["grid"]);
     };
 };
@@ -170,7 +178,7 @@ game.getChipCount = function(gameGrid) {
 
     let count = 0;
 
-    gameGrid.forEach((itemY) => {itemY.forEach((itemX) => {itemX === "chip" ? count += 1 : null})})
+    gameGrid.forEach((itemY) => {itemY.forEach((itemX) => {itemX === "chip" ? count += 1 : null})});
 
     this["items"]["escapeChips"]["remaining"] = count;
 };
@@ -250,9 +258,21 @@ game.setStatusBarKeys = function(key) {
 
 // without there is no variable height set on game-board-container, elements below are placed incorrectly
 game.setGameBoardContainerHeight = function() {
+    const $gameBoard = $(".game-board-container")
 
-    const $blockHeight = $gameBoard.outerWidth() / game["grid"].length;
+    const $boardHeight = ($gameBoard.outerWidth() / game["grid"][0].length) 
+        * game["grid"].length;
+    
+    $gameBoard.css("height", $boardHeight);
 }
+
+game.setArrowButtonDisplay= function(arrowContainer) {
+
+    const width = $(window).outerWidth()
+
+    width < 1024 ? arrowContainer.css("display", "grid") 
+        : arrowContainer.css("display", "none");
+};
 
 // receives parameters, moves player accordingly
 game.movePlayer = function(gameGrid, index, direction) {
@@ -414,7 +434,8 @@ game.renderGameBoard = function(gameGrid) {
 
 game.init = function() {
 
-    game.handleEvents(); 
+    game.handleStart(); 
+    game.handleMoveEvents();
 };
 
 $(function(){
