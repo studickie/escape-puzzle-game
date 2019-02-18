@@ -114,7 +114,8 @@ game.handleStart = function() {
         $gameBoard.toggleClass("hidden");
 
         game.getChipCount(game["grid"]);
-        game.setStatusBarChipCount(game["items"]["escapeChips"]); game.setGameBoardContainerHeight();
+        game.setStatusBarChipCount(game["items"]["escapeChips"]); 
+        game.setGameBoardContainerHeight();
         game.setArrowButtonDisplay($arrowContainer);
         game.renderGameBoard(game["grid"]);
 
@@ -244,6 +245,7 @@ game.escapeMap = function(gameGrid, index) {
     }, 50)
 };
 
+// sets number of chip updates to the status bar
 game.setStatusBarChipCount = function(chips) {
 
     const $totalChips = $(".total-chips");
@@ -253,13 +255,14 @@ game.setStatusBarChipCount = function(chips) {
     $collectedChips.text(chips["acquired"]);
 };
 
+// sets key status on the status bar
 game.setStatusBarKeys = function(key) {
     
     $(`.${key["statusClass"]}`).toggleClass("false");
     $(`.${key["statusClass"]}`).toggleClass("true");
 };
 
-// without there is no variable height set on game-board-container, elements below are placed incorrectly
+// without there is no variable height set on game-board-container, as it could be any size depending on gmae["grid"]; results in elements below placed incorrectly
 game.setGameBoardContainerHeight = function() {
     const $gameBoard = $(".game-board-container")
 
@@ -273,11 +276,10 @@ game.setArrowButtonDisplay= function(arrowContainer) {
 
     const width = $(window).outerWidth()
 
-    width < 1024 ? arrowContainer.css("display", "grid") 
-        : arrowContainer.css("display", "none");
+    width < 1024 ? arrowContainer.css("display", "grid") : arrowContainer.css("display", "none");
 };
 
-// receives parameters, moves player accordingly
+// receives parameters, moves player value accordingly within game["grid"]
 game.movePlayer = function(gameGrid, index, direction) {
 
     const indexY = index[0];
@@ -423,6 +425,8 @@ game.renderGameBoard = function(gameGrid) {
 
             } else if (gamePiece["parent"] === true) {
                 let $newDiv = $("<div/>").addClass(`${gamePiece["parentClass"]}`)
+                    // resize font-size of parent to affect all individual box-shadow pixel sizes in child element
+                    // did some math.. still not 100% sure why 500 seems relativley static; still problems at small sizes
                     .css(`fontSize`, `${$blockSize / 500}rem`)
                     .css(`left`, `${$blockSize * indexX}px`)
                     .css(`top`, `${$blockSize * indexY}px`);

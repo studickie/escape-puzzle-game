@@ -248,9 +248,15 @@ ul:not(.start-instructions-list) {
 .start-instructions button,
 .completion-popup button {
   padding: 2% 10%;
+  margin: 3% 0;
   background-color: #E20016;
   border-color: #E20016;
   color: #FCFCFC;
+}
+
+.start-instructions button:focus-within,
+.completion-popup button:focus-within {
+  border: 0.2rem solid #040404;
 }
 
 .hidden {
@@ -281,6 +287,7 @@ ul:not(.start-instructions-list) {
 
 .status-chips,
 .status-chips ul,
+.status-keys,
 .status-keys ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -292,19 +299,45 @@ ul:not(.start-instructions-list) {
 }
 
 .status-chips {
-  -ms-flex-preferred-size: 50%;
-      flex-basis: 50%;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 30%;
+          flex: 1 0 30%;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.status-chips ul {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 50%;
+          flex: 1 0 50%;
+}
+
+.status-chips li:nth-child(2) {
+  padding-left: 5%;
 }
 
 .status-keys {
-  -ms-flex-preferred-size: 25%;
-      flex-basis: 25%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 3%;
+          flex: 1 0 3%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.status-keys p {
+  margin: 0;
+}
+
+.status-keys ul {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 70%;
+          flex: 1 0 70%;
 }
 
 .status-keys li {
-  padding-left: 3%;
+  padding-left: 5%;
 }
 
 .red-dot,

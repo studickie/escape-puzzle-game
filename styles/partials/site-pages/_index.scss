@@ -51,9 +51,14 @@
 
     button {
         padding: 2% 10%;
+        margin: 3% 0;
         background-color: $hacker-red;
         border-color: $hacker-red;
         color: $hacker-white;
+    }
+
+    button:focus-within {
+        border: 0.2rem solid $hacker-black;
     }
 }
 
@@ -78,21 +83,39 @@
 
 .status-chips,
 .status-chips ul,
+.status-keys,
 .status-keys ul {
     display: flex;
     flex-flow: row wrap;
 }
 
 .status-chips {
-    flex-basis: 50%;
-    justify-content: space-around;
+    flex: 1 0 30%;
+    justify-content: flex-start;
+
+    ul {
+        flex: 1 0 50%;
+    }
+
+    li:nth-child(2) {
+        padding-left: 5%;
+    }
 }
 
 .status-keys {
-    flex-basis: 25%;
+    flex: 1 0 3%;
+    align-items: center;
+
+    p {
+        margin: 0;
+    }
+
+    ul {
+        flex: 1 0 70%;
+    }
 
     li {
-        padding-left: 3%;
+        padding-left: 5%;
     }
 }
 
