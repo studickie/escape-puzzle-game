@@ -226,7 +226,7 @@ game.escapeMap = function(gameGrid, index) {
 
     const $gameBoard = $(".game-board");
     const $endMessage = $(".completion-popup");
-    const $arrowButtons = $(".arrow-buttons-container");
+    const $arrowButtons = $(".action-arrows-container");
 
     const indexY = index[0];
     const indexX = index[1];
