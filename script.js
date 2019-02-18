@@ -226,6 +226,8 @@ game.escapeMap = function(gameGrid, index) {
 
     const $gameBoard = $(".game-board");
     const $endMessage = $(".completion-popup");
+    const $arrowButtons = $(".arrow-buttons-container");
+
     const indexY = index[0];
     const indexX = index[1];
 
@@ -237,6 +239,7 @@ game.escapeMap = function(gameGrid, index) {
 
         $gameBoard.toggleClass("hidden");
         $endMessage.toggleClass("hidden");
+        $arrowButtons.css("display", "none");
 
     }, 50)
 };
