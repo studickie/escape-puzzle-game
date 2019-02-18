@@ -4,6 +4,12 @@ html {
     line-height: 1.6;
 }
 
+.wrapper {
+  // perhaps to change later; further testing with different map designs needed
+  max-width: 768px;
+  margin: 0 auto;
+}
+
 ul:not(.start-instructions-list) {
   list-style: none;
   margin: 0;
