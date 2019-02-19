@@ -242,7 +242,7 @@ game.escapeMap = function(gameGrid, index) {
         $endMessage.toggleClass("hidden");
         $arrowButtons.css("display", "none");
 
-    }, 50)
+    }, 500)
 };
 
 // sets number of chip updates to the status bar
