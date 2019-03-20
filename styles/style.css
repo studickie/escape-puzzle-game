@@ -144,6 +144,8 @@ table {
 
 body, figure {
   margin: 0;
+  /* here ----------- */
+  background-image: url("./prism/prism.png");
 }
 
 legend, button::-moz-focus-inner, input::-moz-focus-inner {

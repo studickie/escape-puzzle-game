@@ -4,6 +4,10 @@ html {
     line-height: 1.6;
 }
 
+body {
+  background-image: url("./../prism/prism.png");
+}
+
 .wrapper {
   // perhaps to change later; further testing with different map designs needed
   max-width: 1280px;
