@@ -19,59 +19,38 @@ game.grid =
 
 // for more abstracted DOM appending
 game.values = [{
-        parent: false,
         value: "/",
-        class: "game-boarder-block"
+        image: ""
     },{
-        parent: false,
         value: "-",
-        class: "game-empty-block"
+        image: ""
     },{
-        parent: true,
         value: "player",
-        class: "player",
-        parentClass: "player-container"
+        image: "Player.svg"
     },{
-        parent: true,
         value: "keyred",
-        class: "hacker-key-red",
-        parentClass: "hacker-key-container"
+        image: "Key-Red.svg"
     },{
-        parent: true,
         value: "keygreen",
-        class: "hacker-key-green",
-        parentClass: "hacker-key-container"
+        image: "Key-Green.svg"
     },{
-        parent: true,
         value: "keyblue",
-        class: "hacker-key-blue",
-        parentClass: "hacker-key-container"
+        image: "Key-Blue.svg"
     },{
-        parent: true,
         value: "lockred",
-        class: "hacker-lock-red",
-        parentClass: "hacker-lock-container"
+        image: "Lock-Red.svg"
     },{
-        parent: true,
         value: "lockgreen",
-        class: "hacker-lock-green",
-        parentClass: "hacker-lock-container"
+        image: "Lock-Green.svg"   
     },{
-        parent: true,
         value: "lockblue",
-        class: "hacker-lock-blue",
-        parentClass: "hacker-lock-container"
+        image: "Lock-Blue.svg"
     },{
-        parent: true,
         value: "chip",
-        class: "hacker-chip",
-        parentClass: "hacker-chip-container"
+        image: "Chip.svg"
     },{
-        parent: true,
         value: "exit",
-        // value to change based on chips remaining to be collected; see function updateChipCount
-        class: "hacker-exit-closed",
-        parentClass: "hacker-exit-container"
+        image: "Exit-Closed.svg"
     }
 ];
 
@@ -100,6 +79,25 @@ game.items = {
         acquired: false
     }]
 };
+
+game.coordinates = {
+    up: {
+        x: 0,
+        y: -1
+    },
+    down: {
+        x: 0,
+        y: 1
+    },
+    left: {
+        x: -1,
+        y: 0
+    },
+    right: {
+        x: 1,
+        y: 0
+    }
+}
 
 game.handleStart = function() {
     
@@ -284,23 +282,11 @@ game.movePlayer = function(gameGrid, index, direction) {
 
     const indexY = index[0];
     const indexX = index[1];
+    const valueY = game.coordinates[direction].y;
+    const valueX = game.coordinates[direction].x;
 
-    if (direction === "up") {
-        gameGrid[indexY].splice(indexX, 1, "-");
-        gameGrid[indexY - 1].splice(indexX, 1, "player");
-
-    } else if (direction === "down") {
-        gameGrid[indexY].splice(indexX, 1, "-");
-        gameGrid[indexY + 1].splice(indexX, 1, "player");
-
-    } else if (direction ==="left") {
-        gameGrid[indexY].splice(indexX, 1, "-");
-        gameGrid[indexY].splice(indexX - 1, 1, "player");
-
-    } else if (direction === "right") {
-        gameGrid[indexY].splice(indexX, 1, "-");
-        gameGrid[indexY].splice(indexX + 1, 1, "player");
-    }
+    gameGrid[indexY].splice(indexX, 1, "-");
+    gameGrid[`${indexY + valueY}`].splice(`${indexX + valueX}`, 1, "player");
 };
 
 // set the rules for player movement
@@ -310,91 +296,30 @@ game.movementRules = function(direction, gameGrid){
     // player value location as co-ordinates
     const indexY = index[0];
     const indexX = index[1];
-    
-    // move player up rules
-    if (direction === "up" && gameGrid[indexY - 1][indexX] != "/") {
-        if (gameGrid[indexY - 1][indexX].includes("key")){
-            this.updateAcquiredKeys(gameGrid[indexY - 1][indexX], this["items"]["keys"]);
-            this.movePlayer(gameGrid, index, "up")
+    const valueY = game.coordinates[direction].y;
+    const valueX = game.coordinates[direction].x;
+    const moveSpace = gameGrid[`${indexY + valueY}`][`${indexX + valueX}`]
 
-        } else if (gameGrid[indexY - 1][indexX].includes("chip")){
+    if(moveSpace !== "/") {
+        if (moveSpace.includes("key")) {
+            this.updateAcquiredKeys(moveSpace, this["items"]["keys"]);
+            this.movePlayer(gameGrid, index, direction)
+
+        } else if (moveSpace.includes("chip")) {
             this.updateChipCount(this["items"]["escapeChips"]);
-            this.movePlayer(gameGrid, index, "up")
+            this.movePlayer(gameGrid, index, direction)
 
-        } else if (gameGrid[indexY - 1][indexX].includes("lock")){
-            this.checkKeyStatus(gameGrid[indexY - 1][indexX], this["items"]["keys"])
-                ? this.movePlayer(gameGrid, index, "up") : null;
+        } else if (moveSpace.includes("lock")) {
+            this.checkKeyStatus(moveSpace, this["items"]["keys"])
+                ? this.movePlayer(gameGrid, index, direction) : null;
 
-        } else if (gameGrid[indexY - 1][indexX] === "exit") {
-            this["items"]["escapeChips"]["exitOpen"] 
-                ? this.escapeMap(gameGrid, index) : null;
-
-        } else {
-            this.movePlayer(gameGrid, index, "up")
-        }
-    // move player down rules
-    } else if (direction === "down" && gameGrid[indexY + 1][indexX] != "/") {
-        if (gameGrid[indexY + 1][indexX].includes("key")) {
-            this.updateAcquiredKeys(gameGrid[indexY + 1][indexX], this["items"]["keys"]);
-            this.movePlayer(gameGrid, index, "down")
-
-        } else if (gameGrid[indexY + 1][indexX].includes("chip")) {
-            this.updateChipCount(this["items"]["escapeChips"]);
-            this.movePlayer(gameGrid, index, "down")
-
-        } else if (gameGrid[indexY + 1][indexX].includes("lock")) {
-            this.checkKeyStatus(gameGrid[indexY + 1][indexX], this["items"]["keys"])
-                ? this.movePlayer(gameGrid, index, "down") : null;
-
-        } else if (gameGrid[indexY + 1][indexX] === "exit") {
-            this["Items"]["escapeChips"]["exitOpen"]
-                ? this.escapeMap(gameGrid, index) : null;
-
-        } else {
-            this.movePlayer(gameGrid, index, "down")
-        }
-    // move player left rules
-    } else if (direction === "left" && gameGrid[indexY][indexX - 1] != "/") {
-        if (gameGrid[indexY][indexX - 1].includes("key")) {
-            this.updateAcquiredKeys(gameGrid[indexY][indexX - 1], this["items"]["keys"]);
-            this.movePlayer(gameGrid, index, "left")
-
-        } else if (gameGrid[indexY][indexX - 1].includes("chip")) {
-            this.updateChipCount(this["items"]["escapeChips"]);
-            this.movePlayer(gameGrid, index, "left")
-
-        } else if (gameGrid[indexY][indexX - 1].includes("lock")) {
-            this.checkKeyStatus(gameGrid[indexY][indexX - 1], this["items"]["keys"])
-                ? this.movePlayer(gameGrid, index, "left") : null;
-            
-        } else if (gameGrid[indexY][indexX - 1] === "exit") {
+        } else if (moveSpace === "exit") {
             this["items"]["escapeChips"]["exitOpen"]
                 ? this.escapeMap(gameGrid, index) : null;
 
         } else {
-            this.movePlayer(gameGrid, index, "left")
+            this.movePlayer(gameGrid, index, direction)
         }
-    // move player right rules
-    } else if (direction === "right" && gameGrid[indexY][indexX + 1] != "/") {
-        if (gameGrid[indexY][indexX + 1].includes("key")) {
-            this.updateAcquiredKeys(gameGrid[indexY][indexX + 1], this["items"]["keys"]);
-            this.movePlayer(gameGrid, index, "right")
-
-        } else if (gameGrid[indexY][indexX + 1].includes("chip")) {
-            this.updateChipCount(this["items"]["escapeChips"]);
-            this.movePlayer(gameGrid, index, "right")
-
-        } else if (gameGrid[indexY][indexX + 1].includes("lock")) {
-            this.checkKeyStatus(gameGrid[indexY][indexX + 1], this["items"]["keys"])
-                ? this.movePlayer(gameGrid, index, "right") : null;
-
-        } else if (gameGrid[indexY][indexX + 1] === "exit") {
-            this["items"]["escapeChips"]["exitOpen"]
-                ? this.escapeMap(gameGrid, index) : null;
-
-        } else {
-             this.movePlayer(gameGrid, index, "right")  
-        } 
     }
 };
 
@@ -407,36 +332,23 @@ game.renderGameBoard = function(gameGrid) {
     const boardValues = game["values"];
     
     $gameBoard.empty();
-    // loop through gameGrid, create and append element based on content
+
     gameGrid.forEach((spaceY, indexY) => {
         spaceY.forEach((spaceX, indexX) => {
              
             // get appropriate object for gameGrid value
             const gamePiece = boardValues.find(piece => piece["value"] === spaceX)
 
-            // two options are needed to accomodate a design mistake made early on -> fix if time allows!!
-            if (gamePiece["parent"] === false) {
-                $("<div/>").addClass(`${gamePiece["class"]}`)
-                    .css(`width`, `${$blockSize}px`)
-                    .css(`height`, `${$blockSize}px`)
-                    .css(`left`, `${$blockSize * indexX}px`)
-                    .css(`top`, `${$blockSize * indexY}px`)
-                    .appendTo($gameBoard);
+            let $newDiv = $("<div/>").addClass("gamepiece")
+                // resize font-size of parent to affect all individual box-shadow pixel sizes in child element
+                .css(`fontSize`, `${$blockSize / 500}rem`)
+                .css(`left`, `${$blockSize * indexX}px`)
+                .css(`top`, `${$blockSize * indexY}px`)
+                .css("backgroundImage", `url("./assets/${gamePiece['image']}")`);
+            
+            $newDiv.appendTo($gameBoard);
+    })});
 
-            } else if (gamePiece["parent"] === true) {
-                let $newDiv = $("<div/>").addClass(`${gamePiece["parentClass"]}`)
-                    // resize font-size of parent to affect all individual box-shadow pixel sizes in child element
-                    // did some math.. still not 100% sure why 500 seems relativley static; still problems at small sizes
-                    .css(`fontSize`, `${$blockSize / 500}rem`)
-                    .css(`left`, `${$blockSize * indexX}px`)
-                    .css(`top`, `${$blockSize * indexY}px`);
-
-                $("<div/>").addClass(`${gamePiece["class"]}`).appendTo($newDiv);
-
-                $newDiv.appendTo($gameBoard);
-            }
-        })
-    });
 };
 
 game.init = function() {
