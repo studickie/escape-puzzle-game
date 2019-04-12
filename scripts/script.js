@@ -17,13 +17,39 @@ game.grid =
         ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
     ];
 
+game.items = {
+    escapeChips: {
+        // value to be set at page initilization; see function getChipCount
+        remaining: 0,
+        acquired: 0,
+        exitOpen: false
+    },
+
+    keys: [{
+        id: "keyred",
+        lock: "lockred",
+        statusClass: "red-dot",
+        acquired: false
+    }, {
+        id: "keygreen",
+        lock: "lockgreen",
+        statusClass: "green-dot",
+        acquired: false
+    }, {
+        id: "keyblue",
+        lock: "lockblue",
+        statusClass: "blue-dot",
+        acquired: false
+    }]
+};
+
 // for more abstracted DOM appending
 game.values = [{
         value: "/",
-        image: ""
+        image: "Wall-Brick.svg"
     },{
         value: "-",
-        image: ""
+        image: "Floor-Wood.svg"
     },{
         value: "player",
         image: "Player.svg"
@@ -53,32 +79,6 @@ game.values = [{
         image: "Exit-Closed.svg"
     }
 ];
-
-game.items = {
-    escapeChips: {
-        // value to be set at page initilization; see function getChipCount
-        remaining: 0,
-        acquired: 0,
-        exitOpen: false
-    },
-
-    keys: [{
-        id: "keyred",
-        lock: "lockred",
-        statusClass: "red-dot",
-        acquired: false
-    },{
-        id: "keygreen",
-        lock: "lockgreen",
-        statusClass: "green-dot",
-        acquired: false
-    },{
-        id: "keyblue",
-        lock: "lockblue",
-        statusClass: "blue-dot",
-        acquired: false
-    }]
-};
 
 game.coordinates = {
     up: {
@@ -207,7 +207,7 @@ game.updateChipCount = function(chipCount) {
     chipCount["acquired"] += 1;
 
     game.setStatusBarChipCount(chipCount);
-    chipCount["remaining"] === 0 ? game.openExit(chipCount, game["values"]) : null;
+    chipCount["remaining"] === 0 && game.openExit(chipCount, game["values"]);
 };
 
 // set exitOpen to true, change append class
@@ -311,11 +311,11 @@ game.movementRules = function(direction, gameGrid){
 
         } else if (moveSpace.includes("lock")) {
             this.checkKeyStatus(moveSpace, this["items"]["keys"])
-                ? this.movePlayer(gameGrid, index, direction) : null;
+                && this.movePlayer(gameGrid, index, direction);
 
         } else if (moveSpace === "exit") {
             this["items"]["escapeChips"]["exitOpen"]
-                ? this.escapeMap(gameGrid, index) : null;
+                && this.escapeMap(gameGrid, index);
 
         } else {
             this.movePlayer(gameGrid, index, direction)
