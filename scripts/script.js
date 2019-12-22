@@ -4,18 +4,33 @@ let game = {};
 
 // game.grid can be changed to create any map without altering other JS values
 // --> !!MUST HAVE straight verticle edges; fill blank space with boarder blocks
-game.grid =
+// game.grid = 
+//     [
+//         ["/", "/", "/", "/", "exit", "/", "/", "/", "/"],
+//         ["/", "chip", "-", "/", "-", "/", "-", "chip", "/"],
+//         ["/", "-", "keyred", "/", "-", "lockgreen", "-", "-", "/"],
+//         ["/", "lockblue", "/", "/", "-", "/", "/", "/", "/"],
+//         ["/", "-", "-", "-", "-", "-", "-", "keygreen", "/"],
+//         ["/", "-", "/", "/", "/", "/", "/", "/", "/"],
+//         ["/", "-", "/", "keyblue", "-", "lockred", "-", "-", "/"],
+//         ["/", "player", "lockgreen", "-", "-", "/", "-", "chip", "/"],
+//         ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
+//     ];
+
+game.grid = 
     [
+        ["/", "/", "/", "/", "/", "/", "/", "exit", "/"],
+        ["/", "-", "chip", "/", "-", "lockblue", "-", "-", "/"],
+        ["/", "-", "keyred", "/", "-", "/", "-", "-", "/"],
+        ["/", "lockgreen", "/", "/", "-", "/", "/", "/", "/"],
+        ["/", "-", "keygreen", "-", "-", "-", "-", "-", "/" ],
+        ["/", "/", "/", "/", "-", "/", "/", "lockred", "/"],
+        ["/", "-", "-", "lockgreen", "-", "/", "-", "-", "/"],
+        ["/", "chip", "-", "/", "player", "/", "keyblue", "-", "/"],
         ["/", "/", "/", "/", "exit", "/", "/", "/", "/"],
-        ["/", "chip", "-", "/", "-", "/", "-", "chip", "/"],
-        ["/", "-", "keyred", "/", "-", "lockgreen", "-", "-", "/"],
-        ["/", "lockblue", "/", "/", "-", "/", "/", "/", "/"],
-        ["/", "-", "-", "-", "-", "-", "-", "keygreen", "/"],
-        ["/", "-", "/", "/", "/", "/", "/", "/", "/"],
-        ["/", "-", "/", "keyblue", "-", "lockred", "-", "-", "/"],
-        ["/", "player", "lockgreen", "-", "-", "/", "-", "chip", "/"],
-        ["/", "/", "/", "/", "/", "/", "/", "/", "/"],
     ];
+
+game.level = 1;
 
 // for more abstracted DOM appending
 game.values = [{
@@ -30,7 +45,7 @@ game.values = [{
         parent: true,
         value: "player",
         class: "player",
-        parentClass: "player-container"
+        parentClass: "player-container"    
     },{
         parent: true,
         value: "keyred",
@@ -66,6 +81,12 @@ game.values = [{
         value: "chip",
         class: "hacker-chip",
         parentClass: "hacker-chip-container"
+    },{
+        parent: true,
+        value: "exit",
+        // value to change based on chips remaining to be collected; see function updateChipCount
+        class: "hacker-exit-closed",
+        parentClass: "hacker-exit-container"
     },{
         parent: true,
         value: "exit",
